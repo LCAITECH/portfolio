@@ -259,3 +259,24 @@ a.shot:hover{border-color:var(--acc)}
 .cert__verify{margin-top:auto;align-self:flex-start}
 .cert .cert__courses{margin-bottom:12px}
 @media (max-width:820px){.cert__verify{align-self:stretch}}
+
+/* ===== Certs: 5 verified + in progress ===== */
+.grid--certs{grid-template-columns:repeat(6,1fr)}
+.grid--certs>.cert{grid-column:span 2}
+.grid--certs>.cert:nth-child(4){grid-column:2/span 2}
+.cert__note{font-size:.8rem!important;color:var(--dim)!important;line-height:1.45}
+.certs__sub{margin:46px 0 16px;font:600 .8rem var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--acc2)}
+.certs__progress{max-width:820px}
+.cert--progress{border:1px dashed rgba(167,139,250,.45);background:repeating-linear-gradient(135deg,rgba(167,139,250,.035) 0 12px,transparent 12px 24px),var(--card)}
+.cert--progress:hover{transform:none}
+.cert__badge{align-self:flex-start;margin-bottom:6px}
+.cert__program{margin-top:auto;padding-top:8px;font-size:.88rem}
+@media (max-width:1000px){
+  .grid--certs{grid-template-columns:repeat(4,1fr)}
+  .grid--certs>.cert:nth-child(4){grid-column:auto/span 2}
+  .grid--certs>.cert:nth-child(5){grid-column:2/span 2}
+}
+@media (max-width:640px){
+  .grid--certs{grid-template-columns:1fr}
+  .grid--certs>.cert,.grid--certs>.cert:nth-child(4),.grid--certs>.cert:nth-child(5){grid-column:auto}
+}
