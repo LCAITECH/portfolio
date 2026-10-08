@@ -280,3 +280,44 @@ a.shot:hover{border-color:var(--acc)}
   .grid--certs{grid-template-columns:1fr}
   .grid--certs>.cert,.grid--certs>.cert:nth-child(4),.grid--certs>.cert:nth-child(5){grid-column:auto}
 }
+
+
+/* ===== FX: motion only. Layout and palette stay. ===== */
+.aurora{position:fixed;inset:-18%;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(42% 42% at 18% 22%,rgba(34,211,238,.28),transparent 62%),
+    radial-gradient(36% 40% at 82% 8%,rgba(167,139,250,.34),transparent 60%),
+    radial-gradient(34% 34% at 70% 78%,rgba(34,211,238,.16),transparent 64%);
+  animation:aurora 12s ease-in-out infinite alternate;filter:blur(2px)}
+@keyframes aurora{from{transform:translate3d(-3%,-2%,0) scale(1)}to{transform:translate3d(4%,3%,0) scale(1.1)}}
+body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(420px 420px at var(--mx,70%) var(--my,20%),rgba(34,211,238,.18),transparent 60%)}
+.fx-bar{position:fixed;top:0;left:0;height:3px;width:0;z-index:80;pointer-events:none;
+  background:linear-gradient(90deg,var(--acc),var(--acc2));box-shadow:0 0 16px var(--acc)}
+.brand__logo{width:42px;height:42px;border-radius:50%;object-fit:cover;flex:none;
+  box-shadow:0 0 0 1px rgba(255,255,255,.14),0 0 18px rgba(34,211,238,.45);
+  animation:logoPulse 2.8s ease-in-out infinite}
+@keyframes logoPulse{
+  0%,100%{box-shadow:0 0 0 1px rgba(255,255,255,.14),0 0 12px rgba(34,211,238,.35)}
+  50%{box-shadow:0 0 0 2px rgba(167,139,250,.7),0 0 28px rgba(167,139,250,.75)}
+}
+.card,.svc,.project{overflow:hidden}
+.card::after,.svc::after,.project::after,.btn--primary::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(115deg,transparent 32%,rgba(255,255,255,.16) 48%,transparent 64%);
+  transform:translateX(-130%)}
+.card:hover::after,.svc:hover::after,.project:hover::after,.btn--primary:hover::after{transform:translateX(130%);transition:transform .65s ease}
+.btn--primary{position:relative;overflow:hidden}
+.card:hover,.svc:hover,.project:hover{
+  transform:translateY(-8px);
+  border-color:rgba(34,211,238,.55);
+  box-shadow:0 28px 60px -28px rgba(34,211,238,.65),0 0 0 1px rgba(167,139,250,.28)}
+.term{animation:floaty 5.5s ease-in-out infinite}
+@keyframes floaty{50%{transform:translateY(-10px)}}
+.footer__brand{display:flex;align-items:center;gap:14px}
+.footer__contact{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:6px;align-items:center}
+.footer__contact a{color:var(--txt)}
+@media (prefers-reduced-motion:reduce){
+  .aurora,.brand__logo,.term{animation:none}
+  .card::after,.svc::after,.project::after,.btn--primary::after,body::after{display:none}
+}

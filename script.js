@@ -48,4 +48,25 @@
 
   var y = document.getElementById('year');
   if (y) y.textContent = new Date().getFullYear();
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce) {
+    var bar = document.createElement('div');
+    bar.className = 'fx-bar';
+    bar.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(bar);
+    var onScroll = function () {
+      var doc = document.documentElement;
+      var h = doc.scrollHeight - window.innerHeight;
+      bar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    if (window.matchMedia('(pointer: fine)').matches) {
+      window.addEventListener('pointermove', function (e) {
+        root.style.setProperty('--mx', e.clientX + 'px');
+        root.style.setProperty('--my', e.clientY + 'px');
+      }, { passive: true });
+    }
+  }
 })();
