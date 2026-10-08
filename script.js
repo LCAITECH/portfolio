@@ -49,104 +49,219 @@
   var y = document.getElementById('year');
   if (y) y.textContent = new Date().getFullYear();
 
+  // ---- Modo "una sección por pantalla": solo desktop con mouse/trackpad.
+  // En mobile/tablet/touch y sin JS: scroll normal con todas las secciones visibles.
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var deckMQ = window.matchMedia('(min-width: 1025px) and (hover: hover) and (pointer: fine)');
   var sections = Array.prototype.slice.call(document.querySelectorAll('main > section'));
   var main = document.getElementById('main');
   var idx = 0;
-  var lock = false;
+  var deck = false;
+  var QUIET = 250;          // ms sin eventos de rueda = gesto nuevo
+  var lastWheel = 0;
+  var wheelBlocked = false; // tras un salto, bloquear hasta que la rueda quede quieta
+  var gesture = { dir: 0, edge: false };
+  var bar = null;
+
+  function indexOf(id) {
+    if (!id || id === 'top') return 0;
+    for (var i = 0; i < sections.length; i++) if (sections[i].id === id) return i;
+    return -1;
+  }
+  function atEdge(el, dir) {
+    if (dir > 0) return el.scrollTop + el.clientHeight >= el.scrollHeight - 4;
+    return el.scrollTop <= 0;
+  }
+
   var dots = document.createElement('nav');
   dots.className = 'deck-dots';
   dots.setAttribute('aria-label', 'Sections');
   sections.forEach(function (section, i) {
     var b = document.createElement('button');
     b.type = 'button';
-    b.addEventListener('click', function () { show(i); });
+    b.addEventListener('click', function () { go(i); });
     dots.appendChild(b);
   });
   document.body.appendChild(dots);
+
   function labelDots() {
+    var lang = root.getAttribute('data-lang') || 'en';
     var buttons = dots.querySelectorAll('button');
+    dots.setAttribute('aria-label', lang === 'es' ? 'Secciones' : 'Sections');
     sections.forEach(function (section, i) {
       var head = section.querySelector('h1, h2');
-      buttons[i].setAttribute('aria-label', head ? head.innerText.replace(/\s+/g, ' ').trim() : 'Section');
+      var text = '';
+      if (head) {
+        var parts = head.querySelectorAll('[lang="' + lang + '"]');
+        text = parts.length ? Array.prototype.map.call(parts, function (n) { return n.textContent; }).join(' ') : head.textContent;
+      }
+      buttons[i].setAttribute('aria-label', text.replace(/\s+/g, ' ').trim() || (lang === 'es' ? 'Sección' : 'Section'));
     });
   }
-  function show(i) {
+
+  function mark() {
+    var id = sections[idx] ? sections[idx].id : '';
+    document.querySelectorAll('.nav__links a').forEach(function (a) {
+      a.classList.toggle('is-on', !!id && a.getAttribute('href') === '#' + id);
+    });
+    dots.querySelectorAll('button').forEach(function (b, n) {
+      b.classList.toggle('is-on', n === idx);
+      if (n === idx) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current');
+    });
+  }
+
+  // Muestra la sección i (solo modo deck). fromBottom: al volver hacia atrás, abrir desde abajo.
+  function show(i, fromBottom) {
     if (!sections.length) return;
     idx = Math.max(0, Math.min(sections.length - 1, i));
     sections.forEach(function (section, n) { section.classList.toggle('is-on', n === idx); });
-    sections[idx].scrollTop = 0;
-    var id = sections[idx].id || 'top';
-    var hash = '#' + id;
+    var cur = sections[idx];
+    cur.scrollTop = fromBottom ? cur.scrollHeight : 0;
+    var hash = '#' + (cur.id || 'top');
     if (location.hash !== hash) history.replaceState(null, '', hash);
-    document.querySelectorAll('.nav__links a').forEach(function (a) {
-      a.classList.toggle('is-on', a.getAttribute('href') === '#' + sections[idx].id);
-    });
-    dots.querySelectorAll('button').forEach(function (b, n) { b.classList.toggle('is-on', n === idx); });
-    var bar = document.querySelector('.fx-bar');
+    mark();
     if (bar) bar.style.width = ((idx + 1) / sections.length * 100) + '%';
   }
-  function atEdge(el, dir) {
-    if (dir > 0) return el.scrollTop + el.clientHeight >= el.scrollHeight - 4;
-    return el.scrollTop <= 0;
+  // Navegación explícita (menú, puntos, hash): en deck muestra; en scroll normal, scrollea.
+  function go(i) {
+    if (i < 0) return;
+    if (deck) { show(i); return; }
+    idx = i;
+    var target = i === 0 ? document.getElementById('top') : sections[i];
+    if (target) target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    var hash = '#' + (sections[i].id || 'top');
+    if (location.hash !== hash) history.replaceState(null, '', hash);
   }
   function step(dir) {
-    if (lock) return;
-    if (!atEdge(sections[idx], dir)) return;
-    if (idx + dir < 0 || idx + dir >= sections.length) return;
-    lock = true;
-    window.setTimeout(function () { lock = false; }, 650);
-    show(idx + dir);
+    var n = idx + dir;
+    if (n < 0 || n >= sections.length) return false;
+    show(n, dir < 0);
+    return true;
   }
+
+  // Sección más cercana al tope de la ventana (para pasar de scroll normal a deck).
+  function nearest() {
+    var best = 0, bestD = Infinity;
+    sections.forEach(function (s, i) {
+      var d = Math.abs(s.getBoundingClientRect().top - 70);
+      if (d < bestD) { bestD = d; best = i; }
+    });
+    return best;
+  }
+
+  function apply() {
+    var want = deckMQ.matches;
+    if (want === deck) return;
+    if (want) {
+      var start = location.hash ? indexOf(location.hash.slice(1)) : nearest();
+      root.classList.add('deck');
+      deck = true;
+      window.scrollTo(0, 0);
+      show(start < 0 ? 0 : start);
+    } else {
+      var keep = idx;
+      root.classList.remove('deck');
+      deck = false;
+      sections.forEach(function (s) { s.scrollTop = 0; });
+      if (keep > 0 && sections[keep]) sections[keep].scrollIntoView({ block: 'start' });
+      progress();
+    }
+  }
+
+  // Links internos (#...): en deck se manejan acá; en scroll normal, el navegador.
   document.addEventListener('click', function (e) {
-    var a = e.target.closest('a[href^="#"]');
+    if (!deck) return;
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
     if (!a) return;
-    var id = a.getAttribute('href').slice(1) || 'top';
-    var i = (id === 'top') ? 0 : sections.findIndex(function (s) { return s.id === id; });
+    var i = indexOf(a.getAttribute('href').slice(1));
     if (i < 0) return;
     e.preventDefault();
     show(i);
   });
+  window.addEventListener('hashchange', function () {
+    var i = indexOf(location.hash.slice(1));
+    if (i < 0) return;
+    if (deck) { if (i !== idx) show(i); }
+    else idx = i;
+  });
+
   if (main) {
+    // Rueda / trackpad: pasa de sección solo si el gesto EMPEZÓ en el borde,
+    // y después de un salto exige ~250 ms de quietud (anti-inercia).
     main.addEventListener('wheel', function (e) {
-      var dir = e.deltaY > 0 ? 1 : -1;
-      if (!atEdge(sections[idx], dir)) return;
-      if (idx + dir < 0 || idx + dir >= sections.length) return;
+      if (!deck || e.ctrlKey) return;
+      var dy = e.deltaY;
+      if (!dy) return;
+      var now = (window.performance && performance.now()) || Date.now();
+      var dir = dy > 0 ? 1 : -1;
+      var quiet = now - lastWheel > QUIET;
+      lastWheel = now;
+      var cur = sections[idx];
+      if (wheelBlocked) {
+        if (!quiet) { e.preventDefault(); return; }
+        wheelBlocked = false;
+      }
+      if (quiet || dir !== gesture.dir) gesture = { dir: dir, edge: atEdge(cur, dir) };
+      if (!atEdge(cur, dir)) return;           // todavía hay contenido: scroll nativo
       e.preventDefault();
-      step(dir);
+      if (!gesture.edge) return;               // llegó al borde en este gesto: frenar acá
+      if (step(dir)) wheelBlocked = true;
     }, { passive: false });
-    var touchY = 0;
-    main.addEventListener('touchstart', function (e) { touchY = e.changedTouches[0].clientY; }, { passive: true });
+
+    // Pantallas táctiles con puntero fino (laptops híbridas) en modo deck.
+    var t0 = 0, tEdge = { up: false, down: false };
+    main.addEventListener('touchstart', function (e) {
+      if (!deck) return;
+      t0 = e.changedTouches[0].clientY;
+      var cur = sections[idx];
+      tEdge = { up: atEdge(cur, -1), down: atEdge(cur, 1) };
+    }, { passive: true });
     main.addEventListener('touchend', function (e) {
-      var dy = e.changedTouches[0].clientY - touchY;
+      if (!deck) return;
+      var dy = e.changedTouches[0].clientY - t0;
       if (Math.abs(dy) < 48) return;
-      step(dy < 0 ? 1 : -1);
+      if (dy < 0 && tEdge.down) step(1);
+      if (dy > 0 && tEdge.up) step(-1);
     }, { passive: true });
   }
+
   document.addEventListener('keydown', function (e) {
-    var tag = (e.target && e.target.tagName) || '';
-    if (tag === 'INPUT' || tag === 'TEXTAREA') return;
-    if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+    if (!deck || e.altKey || e.ctrlKey || e.metaKey) return;
+    var t = e.target || {};
+    var tag = t.tagName || '';
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || t.isContentEditable) return;
+    var cur = sections[idx];
+    var page = cur.clientHeight * 0.85;
+    var down = e.key === 'ArrowDown' || e.key === 'PageDown' || (e.key === ' ' && !e.shiftKey);
+    var up = e.key === 'ArrowUp' || e.key === 'PageUp' || (e.key === ' ' && e.shiftKey);
+    if (e.key === ' ' && (tag === 'BUTTON' || tag === 'A' || tag === 'SUMMARY')) return;
+    if (down || up) {
+      var dir = down ? 1 : -1;
       e.preventDefault();
-      if (atEdge(sections[idx], 1)) step(1);
-      else sections[idx].scrollBy({ top: e.key === 'PageDown' ? sections[idx].clientHeight * 0.85 : 120 });
-    }
-    if (e.key === 'ArrowUp' || e.key === 'PageUp') {
-      e.preventDefault();
-      if (atEdge(sections[idx], -1)) step(-1);
-      else sections[idx].scrollBy({ top: e.key === 'PageUp' ? -sections[idx].clientHeight * 0.85 : -120 });
+      if (atEdge(cur, dir)) { if (!e.repeat) step(dir); }
+      else cur.scrollBy({ top: dir * (e.key === 'ArrowDown' || e.key === 'ArrowUp' ? 120 : page) });
     }
     if (e.key === 'Home') { e.preventDefault(); show(0); }
     if (e.key === 'End') { e.preventDefault(); show(sections.length - 1); }
   });
-  root.classList.add('deck');
-  labelDots();
-  if (toggle) toggle.addEventListener('click', function () { window.setTimeout(labelDots, 0); });
+
+  // Barra de progreso: en deck = sección actual; en scroll normal = scroll de la página.
+  var ticking = false;
+  function progress() {
+    if (!bar || deck) return;
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (max > 0 ? Math.min(100, window.scrollY / max * 100) : 0) + '%';
+  }
   if (!reduce) {
-    var bar = document.createElement('div');
+    bar = document.createElement('div');
     bar.className = 'fx-bar';
     bar.setAttribute('aria-hidden', 'true');
     document.body.appendChild(bar);
+    window.addEventListener('scroll', function () {
+      if (deck || ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(function () { ticking = false; progress(); });
+    }, { passive: true });
     if (window.matchMedia('(pointer: fine)').matches) {
       window.addEventListener('pointermove', function (e) {
         root.style.setProperty('--mx', e.clientX + 'px');
@@ -154,7 +269,13 @@
       }, { passive: true });
     }
   }
-  var start = (location.hash || '#top').slice(1);
-  var startIndex = start === 'top' ? 0 : sections.findIndex(function (s) { return s.id === start; });
-  show(startIndex < 0 ? 0 : startIndex);
+
+  labelDots();
+  if (toggle) toggle.addEventListener('click', function () { window.setTimeout(labelDots, 0); });
+  var first = indexOf((location.hash || '#top').slice(1));
+  idx = first < 0 ? 0 : first;
+  apply();
+  if (!deck) progress();
+  if (deckMQ.addEventListener) deckMQ.addEventListener('change', apply);
+  else if (deckMQ.addListener) deckMQ.addListener(apply);
 })();

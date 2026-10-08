@@ -344,3 +344,22 @@ body::after { background: radial-gradient(460px 460px at var(--mx, 50%) var(--my
 @media (prefers-reduced-motion: reduce) {
   html.deck main > section.is-on { animation: none; }
 }
+
+/* Ajustes: deck solo en desktop (lo activa el JS), puntos solo en deck, impresión completa */
+html:not(.deck) .deck-dots { display: none; }
+@media print {
+  html.deck, html.deck body { height: auto !important; overflow: visible !important; display: block !important; }
+  html.deck main > section { display: block !important; height: auto !important; overflow: visible !important; }
+  .deck-dots, .fx-bar, .burger, .lang { display: none !important; }
+  body::after { display: none !important; }
+  .js .reveal { opacity: 1 !important; transform: none !important; }
+}
+@media (max-width:960px) and (min-width:821px){.nav__links{gap:11px;font-size:.82rem}.nav__inner{gap:10px}}
+@media (min-width:821px){.nav__links a{white-space:nowrap}}
+@media (max-width:900px) and (min-width:821px){.nav__links{gap:9px;font-size:.78rem}.nav__cta{padding-left:12px;padding-right:12px}}
+@media print{
+  :root{--bg:#fff;--bg2:#fff;--card:#fff;--card2:#fff;--txt:#111;--mut:#333;--dim:#555;--line:#ccc;--line2:#bbb}
+  body{background:#fff !important;color:#111}
+  .nav{position:static !important}
+  .nav__links{display:none !important}
+}
