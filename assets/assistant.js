@@ -16,7 +16,7 @@
       welcome: '¡Hola! 👋 Soy el asistente virtual de Leandro (LCA ITECH). Te cuento sobre sus servicios, proyectos y experiencia, o cómo contratarlo. ¿En qué te ayudo?',
       chips: ['¿Qué servicios ofrece Leandro?', '¿Cuánto cuesta un bot de Telegram para mi comunidad?', '¿Qué es ATH Intelligence?', '¿Cómo lo contrato?'],
       placeholder: 'Escribí tu pregunta…', label: 'Tu mensaje', send: 'Enviar', typing: 'El asistente está escribiendo…',
-      disclaimer: 'IA: puede equivocarse. No es asesoramiento financiero.',
+      disclaimer: 'IA: puede errar y no es asesoramiento financiero. Tus mensajes se envían a un servidor y a un proveedor de IA.',
       offline: 'El asistente no está disponible en este momento. Podés contactar a Leandro directamente:',
       error: 'No me pude conectar. Probá de nuevo en un rato o escribile a Leandro:',
       tooLong: 'Tu mensaje es muy largo (máximo ' + MAX_CHARS + ' caracteres).',
@@ -30,7 +30,7 @@
       welcome: "Hi! 👋 I'm Leandro's virtual assistant (LCA ITECH). Ask me about his services, projects and experience, or how to hire him.",
       chips: ['What services does Leandro offer?', 'How much is a Telegram bot for my community?', 'What is ATH Intelligence?', 'How do I hire him?'],
       placeholder: 'Type your question…', label: 'Your message', send: 'Send', typing: 'The assistant is typing…',
-      disclaimer: 'AI: it can make mistakes. Not financial advice.',
+      disclaimer: 'AI: it can be wrong and is not financial advice. Your messages are sent to a server and an AI provider.',
       offline: "The assistant isn't available right now. You can contact Leandro directly:",
       error: "I couldn't connect. Please try again later or reach Leandro:",
       tooLong: 'Your message is too long (max ' + MAX_CHARS + ' characters).',
@@ -117,7 +117,7 @@
   const fabLabel = el('span', { class: 'asst-fab__label' });
   const fab = el('button', { class: 'asst-fab', type: 'button', 'aria-expanded': 'false', 'aria-controls': 'asst-panel' },
     [svg(ICON_CHAT), fabLabel, el('span', { class: 'asst-fab__dot', 'aria-hidden': 'true' })]);
-  const title = el('h2', { class: 'asst-title', id: 'asst-title' });
+  const title = el('div', { class: 'asst-title', id: 'asst-title' });
   const subTxt = el('span');
   const sub = el('p', { class: 'asst-sub' }, [el('i', { 'aria-hidden': 'true' }), subTxt]);
   const btnReset = el('button', { class: 'asst-icon', type: 'button' }, [svg(ICON_RESET)]);
@@ -255,7 +255,17 @@
   const TOTAL_MS = 45000;        // tope absoluto de una respuesta
   const SLOW_HINT_MS = 6000;     // aviso "está tardando" si todavía no hay texto
 
+  // Historial a enviar: los últimos N mensajes, siempre empezando por uno del usuario
+  // (con un recorte impar el primero sería del asistente y algunas APIs de LLM lo rechazan).
+  function history() {
+    const h = state.msgs.slice(-SEND_HISTORY);
+    while (h.length && h[0].role !== 'user') h.shift();
+    return h;
+  }
+
   // Lee un text/event-stream de fetch y llama onEvent(nombre, datos) por cada evento.
+  // Acepta saltos de línea \n, \r\n y \r (según el servidor).
+  const SSE_BREAK = /\r\n\r\n|\n\n|\r\r/;
   async function readSSE(body, onEvent) {
     const reader = body.getReader();
     const dec = new TextDecoder();
@@ -264,11 +274,11 @@
       const { value, done } = await reader.read();
       if (done) break;
       buf += dec.decode(value, { stream: true });
-      let i;
-      while ((i = buf.indexOf('\n\n')) >= 0) {
-        const block = buf.slice(0, i); buf = buf.slice(i + 2);
+      let m;
+      while ((m = SSE_BREAK.exec(buf))) {
+        const block = buf.slice(0, m.index); buf = buf.slice(m.index + m[0].length);
         let ev = 'message'; let data = '';
-        block.split('\n').forEach((line) => {
+        block.split(/\r\n|\n|\r/).forEach((line) => {
           if (line.startsWith('event:')) ev = line.slice(6).trim();
           else if (line.startsWith('data:')) data += line.slice(5).trim();
         });
@@ -314,7 +324,7 @@
       restore(text);
     };
     try {
-      const body = JSON.stringify({ lang: lang(), messages: state.msgs.slice(-SEND_HISTORY) });
+      const body = JSON.stringify({ lang: lang(), messages: history() });
       const streaming = typeof ReadableStream !== 'undefined' && typeof TextDecoder !== 'undefined';
       const r = await fetch(API + (streaming ? '/chat/stream' : '/chat'), {
         method: 'POST', signal: ctl.signal, headers: { 'Content-Type': 'application/json' }, body,
