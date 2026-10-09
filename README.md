@@ -47,6 +47,6 @@ Add `?lang=es` or `?lang=en` to force a language.
 node .github/scripts/check.mjs
 ```
 
-No dependencies. It verifies JS syntax, unique ids, local files and anchors, `alt`/`width`/`height` on images, `rel="noopener"`, EN/ES pairing, heading order, JSON-LD, and that canonical, `CNAME`, `sitemap.xml` and `robots.txt` agree. It also warns about CSS classes nobody uses.
+It runs on every push to `main` and on every pull request (`.github/workflows/checks.yml`). A second workflow (`links.yml`) checks the external links every Monday and on demand (Actions → *External links* → *Run workflow*). No dependencies. The script verifies JS syntax, unique ids, local files and anchors, `alt`/`width`/`height` on images, `rel="noopener"`, EN/ES pairing, heading order, JSON-LD, and that canonical, `CNAME`, `sitemap.xml` and `robots.txt` agree. It also warns about CSS classes nobody uses.
 
 © LCA ITECH. All rights reserved.
