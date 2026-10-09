@@ -20,6 +20,8 @@
       offline: 'El asistente no está disponible en este momento. Podés contactar a Leandro directamente:',
       error: 'No me pude conectar. Probá de nuevo en un rato o escribile a Leandro:',
       tooLong: 'Tu mensaje es muy largo (máximo ' + MAX_CHARS + ' caracteres).',
+      slow: 'Está tardando un poco más de lo normal…',
+      cut: '(La respuesta se cortó. Si necesitás más detalle, escribile a Leandro.)',
       contacts: 'Contacto',
     },
     en: {
@@ -32,6 +34,8 @@
       offline: "The assistant isn't available right now. You can contact Leandro directly:",
       error: "I couldn't connect. Please try again later or reach Leandro:",
       tooLong: 'Your message is too long (max ' + MAX_CHARS + ' characters).',
+      slow: 'This is taking a bit longer than usual…',
+      cut: '(The answer was cut short. For more detail, reach Leandro.)',
       contacts: 'Contact',
     },
   };
@@ -246,6 +250,33 @@
 
   // ---------- enviar ----------
   function restore(text) { if (!input.value) { input.value = text; grow(); } } // para reintentar sin reescribir
+  // Tiempos (el backend corta a los 12 s sin primer texto y responde con los contactos).
+  const FIRST_EVENT_MS = 25000;  // sin ningún texto ni error en 25 s: abortar y mostrar contactos
+  const TOTAL_MS = 45000;        // tope absoluto de una respuesta
+  const SLOW_HINT_MS = 6000;     // aviso "está tardando" si todavía no hay texto
+
+  // Lee un text/event-stream de fetch y llama onEvent(nombre, datos) por cada evento.
+  async function readSSE(body, onEvent) {
+    const reader = body.getReader();
+    const dec = new TextDecoder();
+    let buf = '';
+    for (;;) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      buf += dec.decode(value, { stream: true });
+      let i;
+      while ((i = buf.indexOf('\n\n')) >= 0) {
+        const block = buf.slice(0, i); buf = buf.slice(i + 2);
+        let ev = 'message'; let data = '';
+        block.split('\n').forEach((line) => {
+          if (line.startsWith('event:')) ev = line.slice(6).trim();
+          else if (line.startsWith('data:')) data += line.slice(5).trim();
+        });
+        if (data) { let d = null; try { d = JSON.parse(data); } catch (e) {} if (d) onEvent(ev, d); }
+      }
+    }
+  }
+
   async function send(text) {
     text = (text || '').trim();
     if (!text || busy) return;
@@ -257,34 +288,75 @@
     const typing = el('div', { class: 'asst-typing', role: 'status', 'aria-label': t('typing') }, [el('span'), el('span'), el('span')]);
     log.appendChild(typing); log.scrollTop = log.scrollHeight;
     const ctl = new AbortController();
-    const timer = setTimeout(() => ctl.abort(), 40000);
-    try {
-      const r = await fetch(API + '/chat', {
-        method: 'POST', signal: ctl.signal, headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ lang: lang(), messages: state.msgs.slice(-SEND_HISTORY) }),
-      });
-      let j = null; try { j = await r.json(); } catch (e) {}
-      typing.remove();
-      if (r.ok && j && typeof j.reply === 'string') {
-        if (online !== true) setOnline(true);
-        state.msgs.push({ role: 'assistant', content: j.reply }); save();
-        addBubble('bot', j.reply);
-      } else if ((r.status === 429 || r.status === 400) && j && j.message) {
-        state.msgs.pop(); save();               // no queda en el historial
-        addBubble('note', j.message, r.status === 429 ? contactsNode() : null);
-        restore(text);
-      } else {
-        state.msgs.pop(); save();
-        addBubble('note', t('error'), contactsNode());
-        restore(text);
-      }
-    } catch (e) {
-      typing.remove();
+    let gotFirst = false;
+    const slowTimer = setTimeout(() => {
+      if (!gotFirst && typing.isConnected) typing.appendChild(el('em', { class: 'asst-slow', text: t('slow') }));
+    }, SLOW_HINT_MS);
+    const firstTimer = setTimeout(() => { if (!gotFirst) ctl.abort(); }, FIRST_EVENT_MS);
+    const totalTimer = setTimeout(() => ctl.abort(), TOTAL_MS);
+    let reply = ''; let bubble = null; let failed = null; let frame = 0;
+    const paint = () => {
+      frame = 0;
+      if (!bubble) return;
+      bubble.textContent = ''; bubble.appendChild(rich(reply));
+      log.scrollTop = log.scrollHeight;
+    };
+    const showText = () => {
+      if (!gotFirst) { gotFirst = true; typing.remove(); }
+      if (!bubble) { bubble = addBubble('bot', ''); bubble.setAttribute('aria-busy', 'true'); }
+      if (!frame) frame = requestAnimationFrame(paint);
+    };
+    const fail = (message) => {
+      gotFirst = true; typing.remove();
       state.msgs.pop(); save();
-      addBubble('note', t('error'), contactsNode());
+      if (bubble && !reply.trim()) bubble.remove();
+      addBubble('note', message || t('error'), contactsNode());
       restore(text);
+    };
+    try {
+      const body = JSON.stringify({ lang: lang(), messages: state.msgs.slice(-SEND_HISTORY) });
+      const streaming = typeof ReadableStream !== 'undefined' && typeof TextDecoder !== 'undefined';
+      const r = await fetch(API + (streaming ? '/chat/stream' : '/chat'), {
+        method: 'POST', signal: ctl.signal, headers: { 'Content-Type': 'application/json' }, body,
+      });
+      const isSSE = (r.headers.get('content-type') || '').indexOf('text/event-stream') === 0;
+      if (r.ok && isSSE && r.body) {
+        if (online !== true) setOnline(true);
+        await readSSE(r.body, (ev, d) => {
+          if (ev === 'delta' && typeof d.t === 'string') { reply += d.t; showText(); }
+          else if (ev === 'replace' && typeof d.t === 'string') { reply = d.t; showText(); }
+          else if (ev === 'error') { failed = d.message || t('error'); }
+        });
+      } else {
+        let j = null; try { j = await r.json(); } catch (e) {}
+        if (r.ok && j && typeof j.reply === 'string') {
+          if (online !== true) setOnline(true);
+          reply = j.reply; showText();
+        } else if ((r.status === 429 || r.status === 400) && j && j.message) {
+          gotFirst = true; typing.remove();
+          state.msgs.pop(); save();               // no queda en el historial
+          addBubble('note', j.message, r.status === 429 ? contactsNode() : null);
+          restore(text);
+          return;
+        } else {
+          failed = (j && j.message) || t('error');
+        }
+      }
+      if (failed && !reply.trim()) fail(failed);
+      else if (!reply.trim()) fail(t('error'));
+      else { state.msgs.push({ role: 'assistant', content: reply }); save(); }
+    } catch (e) {
+      if (reply.trim()) {          // se cortó a mitad: queda lo recibido + aviso
+        state.msgs.push({ role: 'assistant', content: reply }); save();
+        addBubble('note', t('cut'), contactsNode());
+      } else {
+        fail(t('error'));
+      }
     } finally {
-      clearTimeout(timer);
+      clearTimeout(slowTimer); clearTimeout(firstTimer); clearTimeout(totalTimer);
+      if (frame) { cancelAnimationFrame(frame); paint(); }
+      if (bubble) bubble.removeAttribute('aria-busy');
+      typing.remove();
       busy = false; count();
       if (state.open) input.focus({ preventScroll: true });
     }

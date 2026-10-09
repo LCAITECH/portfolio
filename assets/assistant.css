@@ -88,3 +88,5 @@ html.asst-lock,html.asst-lock body{overflow:hidden!important}
   .asst-fab{transition:none}
 }
 @media print{.asst{display:none!important}}
+.asst-typing{flex-wrap:wrap;align-items:center}
+.asst-slow{flex-basis:100%;margin-top:6px;font-size:.78rem;font-style:normal;color:var(--mut,#94a3b8)}
