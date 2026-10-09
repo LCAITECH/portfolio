@@ -11,9 +11,20 @@
     try { var s = localStorage.getItem(KEY); if (s === 'es' || s === 'en') return s; } catch (e) {}
     return (navigator.language || 'en').toLowerCase().indexOf('es') === 0 ? 'es' : 'en';
   }
+  // <title> y meta description: el inglés se lee del HTML; el español vive acá.
+  var descMeta = document.querySelector('meta[name="description"]');
+  var META = {
+    en: { title: document.title, desc: descMeta ? descMeta.getAttribute('content') : '' },
+    es: {
+      title: 'Leandro Buchter · LCA ITECH — Cripto + IA + APIs + Automatización + Cloud',
+      desc: 'Leandro Buchter (LCA ITECH): construyo plataformas de datos cripto, bots de Telegram, agentes de IA, APIs y automatizaciones — de punta a punta, desde la fuente de datos hasta el deploy. Buenos Aires, Argentina.'
+    }
+  };
   function setLang(l) {
     root.setAttribute('data-lang', l);
     root.setAttribute('lang', l);
+    document.title = META[l].title;
+    if (descMeta) descMeta.setAttribute('content', META[l].desc);
     try { localStorage.setItem(KEY, l); } catch (e) {}
   }
   setLang(pick());
