@@ -283,8 +283,8 @@ a.shot:hover{border-color:var(--acc)}
 
 
 /* Luces sobre el diseño existente. No cambian grilla, tipo ni color. */
-body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
-  background:radial-gradient(380px 380px at var(--mx,50%) var(--my,18%),rgba(34,211,238,.22),transparent 62%)}
+.fx-glow{position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(460px 460px at var(--mx,50%) var(--my,20%),rgba(34,211,238,.32),transparent 60%)}
 .fx-bar{position:fixed;top:0;left:0;height:3px;width:0;z-index:80;pointer-events:none;
   background:linear-gradient(90deg,var(--acc),var(--acc2));box-shadow:0 0 18px var(--acc)}
 .nav{box-shadow:0 1px 0 rgba(34,211,238,.18),0 12px 40px -24px rgba(34,211,238,.45)}
@@ -307,12 +307,14 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
 .card:hover,.svc:hover,.project:hover,.tl__card:hover{
   border-color:rgba(34,211,238,.55);
   box-shadow:0 0 0 1px rgba(34,211,238,.28),0 22px 48px -24px rgba(34,211,238,.7)}
+/* El logo del footer queda con el brillo fijo: animar box-shadow repinta en cada frame y en modo deck el footer siempre está a la vista. */
+.footer .brand__logo{animation:none}
 .footer__brand{display:flex;align-items:center;gap:14px}
 .footer__contact{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:6px;align-items:center}
 .footer__contact a{color:var(--txt)}
 @media (prefers-reduced-motion:reduce){
   .brand__logo{animation:none}
-  .card::after,.svc::after,.project::after,.btn--primary::after,body::after{display:none}
+  .card::after,.svc::after,.project::after,.btn--primary::after{display:none}
 }
 
 
@@ -336,7 +338,6 @@ html.deck .section { padding: 36px 0 48px; }
 .deck-dots button { width: 11px; height: 11px; border-radius: 50%; padding: 0; cursor: pointer;
   border: 1px solid rgba(34,211,238,.65); background: transparent; }
 .deck-dots button.is-on { background: var(--acc); box-shadow: 0 0 14px var(--acc), 0 0 28px rgba(167,139,250,.8); }
-body::after { background: radial-gradient(460px 460px at var(--mx, 50%) var(--my, 20%), rgba(34,211,238,.32), transparent 60%); }
 .card:hover, .svc:hover, .project:hover, .tl__card:hover, .cert:hover {
   box-shadow: 0 0 0 1px rgba(34,211,238,.55), 0 0 32px rgba(34,211,238,.35), 0 22px 48px -24px rgba(167,139,250,.65);
 }
@@ -350,8 +351,7 @@ html:not(.deck) .deck-dots { display: none; }
 @media print {
   html.deck, html.deck body { height: auto !important; overflow: visible !important; display: block !important; }
   html.deck main > section { display: block !important; height: auto !important; overflow: visible !important; }
-  .deck-dots, .fx-bar, .burger, .lang { display: none !important; }
-  body::after { display: none !important; }
+  .deck-dots, .fx-bar, .fx-glow, .burger, .lang { display: none !important; }
   .js .reveal { opacity: 1 !important; transform: none !important; }
 }
 @media (max-width:960px) and (min-width:821px){.nav__links{gap:11px;font-size:.82rem}.nav__inner{gap:10px}}

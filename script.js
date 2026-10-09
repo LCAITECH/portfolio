@@ -49,6 +49,11 @@
   var y = document.getElementById('year');
   if (y) y.textContent = new Date().getFullYear();
 
+  // Al imprimir, cargar ya las imágenes diferidas (loading="lazy").
+  window.addEventListener('beforeprint', function () {
+    document.querySelectorAll('img[loading="lazy"]').forEach(function (img) { img.loading = 'eager'; });
+  });
+
   // ---- Modo "una sección por pantalla": solo desktop con mouse/trackpad.
   // En mobile/tablet/touch y sin JS: scroll normal con todas las secciones visibles.
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -262,10 +267,23 @@
       ticking = true;
       window.requestAnimationFrame(function () { ticking = false; progress(); });
     }, { passive: true });
+    // Luz que sigue al mouse: elemento propio (no variables en :root, que recalcularían los
+    // estilos de toda la página) y una sola actualización por frame.
+    var glow = document.createElement('div');
+    glow.className = 'fx-glow';
+    glow.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(glow);
     if (window.matchMedia('(pointer: fine)').matches) {
+      var gx = 0, gy = 0, glowTick = false;
       window.addEventListener('pointermove', function (e) {
-        root.style.setProperty('--mx', e.clientX + 'px');
-        root.style.setProperty('--my', e.clientY + 'px');
+        gx = e.clientX; gy = e.clientY;
+        if (glowTick) return;
+        glowTick = true;
+        window.requestAnimationFrame(function () {
+          glowTick = false;
+          glow.style.setProperty('--mx', gx + 'px');
+          glow.style.setProperty('--my', gy + 'px');
+        });
       }, { passive: true });
     }
   }
