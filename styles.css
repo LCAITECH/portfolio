@@ -115,6 +115,9 @@ h2{font-size:clamp(1.7rem,3.4vw,2.5rem);line-height:1.15;letter-spacing:-.02em}
 .svc p{color:var(--mut);font-size:.93rem}
 .svc__price{margin-top:auto!important;padding-top:18px;color:var(--dim)!important;font-size:.85rem!important}
 .svc__price b{font:700 1.3rem var(--mono);color:var(--txt);margin-left:4px}
+.svc__status{color:var(--acc,var(--txt))!important;font:600 .8rem var(--mono)!important}
+.svc__tools{font:500 .76rem var(--mono)!important;color:var(--dim)!important;margin-top:10px}
+.svc__tools a{color:inherit;text-decoration:underline}
 .svc__price small{color:var(--dim);font-size:.85rem}
 .svc--featured{border-color:rgba(34,211,238,.35);box-shadow:0 20px 60px -30px rgba(34,211,238,.45)}
 .terms{list-style:none;display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:34px;color:var(--mut);font-size:.9rem}
