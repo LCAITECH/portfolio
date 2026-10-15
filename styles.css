@@ -176,7 +176,7 @@ h2{font-size:clamp(1.7rem,3.4vw,2.5rem);line-height:1.15;letter-spacing:-.02em}
 .js .reveal.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .js .reveal{opacity:1;transform:none;transition:none}
+  .js .reveal{transform:none;transition:opacity .35s ease}
   .dot,.caret{animation:none}
 }
 
@@ -380,7 +380,7 @@ html:not(.deck) .deck-dots { display: none; }
   background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(34,211,238,.13),transparent 65%)}
 .fx-tilt:hover{border-color:rgba(34,211,238,.45);box-shadow:0 12px 40px -12px rgba(34,211,238,.35)}
 .fx-tilt:hover::after{opacity:1}
-@media (prefers-reduced-motion:reduce){.hero__fx{animation:none}.fx-tilt{transform:none!important}}
+@media (prefers-reduced-motion:reduce){.hero__fx{animation:fxIn .6s ease both}.fx-tilt{transform:none!important}}
 @media print{.hero__fx{display:none}}
 
 /* Deck en pantallas de laptop: el footer queda siempre visible debajo de cada sección,

@@ -73,7 +73,7 @@
         if (b.c === a.c + 1 && Math.abs(a.y - b.y) < H * (mobile ? 0.38 : 0.3) && Math.random() < 0.75) edges.push({ a: ia, b: ib });
       });
     });
-    var np = mobile ? 10 : 26;
+    var np = RM ? (mobile ? 5 : 12) : (mobile ? 10 : 26);
     for (var k = 0; k < np; k++) spawn(true);
   }
 
@@ -82,10 +82,11 @@
     // arrancar preferentemente desde la primera columna para que el flujo "corra"
     var starts = edges.filter(function (e) { return nodes[e.a].c === 0; });
     var e = init || !starts.length ? edges[(Math.random() * edges.length) | 0] : starts[(Math.random() * starts.length) | 0];
-    packets.push({ e: e, t: init ? Math.random() : 0, v: rnd(0.25, 0.55) });
+    packets.push({ e: e, t: init ? Math.random() : 0, v: rnd(0.25, 0.55) * (RM ? 0.35 : 1) });
   }
 
   function pos(n) {
+    if (RM) return [n.x, n.y]; // sin parallax en reduced-motion
     var px = (mx * 18 + 0) * n.z, py = (my * 12 - sy * 0.15) * n.z;
     return [n.x + px, n.y + py];
   }
@@ -111,7 +112,7 @@
       p.t += p.v * dt;
       e = p.e; a = P[e.a]; b = P[e.b];
       if (p.t >= 1) {
-        nodes[e.b].hot = 1;
+        nodes[e.b].hot = RM ? 0.35 : 1; // sin destellos fuertes en reduced-motion
         var nxt = edges.filter(function (x) { return x.a === e.b; });
         if (nxt.length) { p.e = nxt[(Math.random() * nxt.length) | 0]; p.t = 0; }
         else { packets.splice(i, 1); spawn(false); }
@@ -127,8 +128,8 @@
     // nodos
     ctx.font = '11px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace';
     for (i = 0; i < nodes.length; i++) {
-      var n = nodes[i], q = P[i], c = colOf(n), pulse = 0.5 + 0.5 * Math.sin(time * 0.0016 + n.ph);
-      n.hot = Math.max(0, n.hot - dt * 1.6);
+      var n = nodes[i], q = P[i], c = colOf(n), pulse = 0.5 + 0.5 * Math.sin(time * (RM ? 0.0008 : 0.0016) + n.ph);
+      n.hot = Math.max(0, n.hot - dt * (RM ? 0.6 : 1.6));
       var glow = n.r * (2.2 + pulse * 1.2 + n.hot * 4);
       ctx.fillStyle = rgba(c, 0.07 + n.hot * 0.22); ctx.beginPath(); ctx.arc(q[0], q[1], glow, 0, 6.283); ctx.fill();
       ctx.fillStyle = rgba(c, 0.55 + n.hot * 0.45); ctx.beginPath(); ctx.arc(q[0], q[1], n.r, 0, 6.283); ctx.fill();
@@ -144,7 +145,6 @@
     raf = requestAnimationFrame(loop);
   }
   function start() {
-    if (RM) return;
     var go = visible && !document.hidden;
     if (go && !running) { running = true; last = 0; raf = requestAnimationFrame(loop); }
     else if (!go && running) { running = false; if (raf) cancelAnimationFrame(raf); raf = 0; }
@@ -152,7 +152,6 @@
 
   build();
   draw(0, 0);
-  if (RM) { for (var s = 0; s < 4; s++) draw(0, 0.3); } // estado estático con algunos paquetes en ruta
   window.__heroFx = { frames: 0 };
   var _d = draw; draw = function (t, dt) { window.__heroFx.frames++; _d(t, dt); };
 
@@ -161,7 +160,7 @@
     clearTimeout(rt);
     rt = setTimeout(function () { if (hero.clientWidth !== W || Math.abs(hero.clientHeight - H) > 60) { build(); draw(0, 0); } }, 150);
   }, { passive: true });
-  if (FINE) window.addEventListener('pointermove', function (e) {
+  if (FINE && !RM) window.addEventListener('pointermove', function (e) {
     tmx = e.clientX / window.innerWidth - 0.5; tmy = e.clientY / window.innerHeight - 0.5;
   }, { passive: true });
   window.addEventListener('scroll', function () { sy = Math.min(window.scrollY, H); }, { passive: true });
