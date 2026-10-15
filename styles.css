@@ -382,3 +382,25 @@ html:not(.deck) .deck-dots { display: none; }
 .fx-tilt:hover::after{opacity:1}
 @media (prefers-reduced-motion:reduce){.hero__fx{animation:none}.fx-tilt{transform:none!important}}
 @media print{.hero__fx{display:none}}
+
+/* Deck en pantallas de laptop: el footer queda siempre visible debajo de cada sección,
+   así que se compacta y el hero se ajusta a la altura disponible para que nada quede tapado. */
+html.deck .footer { padding: 10px 0; font-size: .8rem; }
+html.deck .footer .brand__logo { width: 30px; height: 30px; }
+html.deck .footer__contact { margin-top: 2px; }
+html.deck main > section.hero.is-on { display: flex; flex-direction: column; }
+html.deck .hero > .container { margin-top: auto; margin-bottom: auto; }
+@media (max-height: 920px) {
+  html.deck .hero { padding: 22px 0 22px; }
+  html.deck .hero__photo { width: 124px; height: 124px; margin-bottom: 14px; }
+  html.deck .hero h1 { margin: 14px 0 10px; font-size: clamp(2.1rem, 4.4vw, 3.3rem); }
+  html.deck .hero .lead { margin: 14px 0 20px; }
+  html.deck .hero__facts { margin-top: 18px; }
+}
+@media (max-height: 760px) {
+  html.deck .hero { padding: 16px 0 16px; }
+  html.deck .hero__photo { width: 96px; height: 96px; margin-bottom: 10px; }
+  html.deck .hero h1 { margin: 10px 0 8px; font-size: clamp(2rem, 4vw, 2.9rem); }
+  html.deck .hero .lead { margin: 10px 0 16px; font-size: 1rem; }
+  html.deck .hero__facts { margin-top: 14px; }
+}
