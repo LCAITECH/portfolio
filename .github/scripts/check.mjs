@@ -16,7 +16,7 @@ const fail = (m) => failures.push(m);
 const warn = (m) => warnings.push(m);
 
 // ---- 1. Sintaxis de los JS
-for (const f of ['script.js', 'assets/assistant.js']) {
+for (const f of ['script.js', 'assets/assistant.js', 'assets/fx.js']) {
   try { execFileSync(process.execPath, ['--check', path.join(root, f)], { stdio: 'pipe' }); }
   catch (e) { fail(`${f}: error de sintaxis\n${String(e.stderr || e.message).split('\n').slice(0, 4).join('\n')}`); }
 }
@@ -92,7 +92,7 @@ for (const f of ['og.jpg']) if (!exists(`assets/${f}`)) fail(`falta assets/${f} 
 
 // ---- 4. Aviso (no falla): clases de CSS que ya no usa nadie
 const css = (read('styles.css') + read('assets/assistant.css')).replace(/\/\*[\s\S]*?\*\//g, '').replace(/\{[^}]*\}/g, '{}');
-const used = html + read('script.js') + read('assets/assistant.js');
+const used = html + read('script.js') + read('assets/assistant.js') + read('assets/fx.js');
 const classes = new Set([...css.matchAll(/\.([A-Za-z_][\w-]*)/g)].map((m) => m[1]));
 const dead = [...classes].filter((c) => !new RegExp(`(?<![\\w-])${c.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')}(?![\\w-])`).test(used));
 if (dead.length) warn(`CSS: clases sin uso en HTML/JS: ${dead.sort().join(', ')}`);
