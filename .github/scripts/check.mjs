@@ -16,7 +16,7 @@ const fail = (m) => failures.push(m);
 const warn = (m) => warnings.push(m);
 
 // ---- 1. Sintaxis de los JS
-for (const f of ['script.js', 'assets/assistant.js', 'assets/fx.js', 'assets/live.js']) {
+for (const f of ['script.js', 'assets/assistant.js', 'assets/fx.js', 'assets/live.js', 'assets/contact.js']) {
   try { execFileSync(process.execPath, ['--check', path.join(root, f)], { stdio: 'pipe' }); }
   catch (e) { fail(`${f}: error de sintaxis\n${String(e.stderr || e.message).split('\n').slice(0, 4).join('\n')}`); }
 }

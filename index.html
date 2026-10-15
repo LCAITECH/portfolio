@@ -239,6 +239,7 @@
           <p class="live__status" id="liveStatus" role="status"><span class="live-dot" aria-hidden="true"></span> <span id="liveUpd"><span lang="en">Loading live data…</span><span lang="es">Cargando datos en vivo…</span></span></p>
           <div class="live__ctas">
             <a class="btn btn--primary" href="https://t.me/lcaitech_demo_bot" target="_blank" rel="noopener"><span lang="en">Try the full bot on Telegram</span><span lang="es">Probá el bot completo en Telegram</span></a>
+            <img class="live__qr" src="assets/qr/demo-bot.svg" alt="QR https://t.me/lcaitech_demo_bot" title="Scan to open the demo bot" width="64" height="64" loading="lazy">
             <a class="btn btn--ghost" href="#services"><span lang="en">Want this for your community? from USD 250/600</span><span lang="es">¿Lo querés para tu comunidad? desde USD 250/600</span></a>
           </div>
           <p class="live__src"><span lang="en">Data: CoinGecko, Alternative.me · Demo only, not financial advice.</span><span lang="es">Datos: CoinGecko, Alternative.me · Solo demo, no es asesoramiento financiero.</span></p>
@@ -676,19 +677,43 @@
           <p class="kicker">08 · <span lang="en">Contact</span><span lang="es">Contacto</span></p>
           <h2><span lang="en">Have a project in mind?</span><span lang="es">¿Tenés un proyecto en mente?</span></h2>
           <p class="section__sub">
-            <span lang="en">Tell me what you need in 2–3 lines. I will reply with questions or a first idea.</span>
-            <span lang="es">Contame qué necesitás en 2–3 líneas. Te respondo con preguntas o una primera idea.</span>
+            <span lang="en">Tell me about your project. I review every request and reply by email with questions or a first idea.</span>
+            <span lang="es">Contame de tu proyecto. Reviso cada consulta y te respondo por email con preguntas o una primera idea.</span>
           </p>
-          <div class="contact__ctas">
-            <a class="btn btn--primary" href="mailto:itech.lca@gmail.com?subject=Project%20inquiry">itech.lca@gmail.com</a>
-            <a class="btn btn--ghost" href="assets/Leandro_Buchter_CV_EN.pdf" target="_blank" rel="noopener" type="application/pdf" data-cv="contact"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M5 21h14"/></svg><span lang="en">Download CV</span><span lang="es">Descargar CV</span></a>
+          <div class="contact__layout">
+          <form class="cf" id="contactForm" novalidate action="https://formsubmit.co/itech.lca@gmail.com" method="POST">
+            <div class="cf__hp" aria-hidden="true"><label>Leave empty <input type="text" name="_honey" tabindex="-1" autocomplete="off"></label></div>
+            <div class="cf__grid">
+              <div class="cf__f"><label for="cfName"><span lang="en">Name</span><span lang="es">Nombre</span> <b aria-hidden="true">*</b></label><input id="cfName" name="name" type="text" required autocomplete="name" maxlength="120"><small class="cf__err" id="cfNameErr"></small></div>
+              <div class="cf__f"><label for="cfEmail"><span lang="en">Email</span><span lang="es">Email</span> <b aria-hidden="true">*</b></label><input id="cfEmail" name="email" type="email" required autocomplete="email" maxlength="160"><small class="cf__err" id="cfEmailErr"></small></div>
+              <div class="cf__f"><label for="cfCompany"><span lang="en">Company / project</span><span lang="es">Empresa / proyecto</span> <b aria-hidden="true">*</b></label><input id="cfCompany" name="company" type="text" required maxlength="160"><small class="cf__err" id="cfCompanyErr"></small></div>
+              <div class="cf__f"><label for="cfLink"><span lang="en">Link (web, X or LinkedIn)</span><span lang="es">Link (web, X o LinkedIn)</span> <b aria-hidden="true">*</b></label><input id="cfLink" name="link" type="text" required inputmode="url" maxlength="300" placeholder="https://"><small class="cf__err" id="cfLinkErr"></small></div>
+              <div class="cf__f cf__f--full"><label for="cfNeed"><span lang="en">What do you need?</span><span lang="es">¿Qué necesitás?</span> <b aria-hidden="true">*</b></label><textarea id="cfNeed" name="need" rows="3" required minlength="20" maxlength="3000"></textarea><small class="cf__err" id="cfNeedErr"></small></div>
+              <div class="cf__f"><label for="cfPkg"><span lang="en">Package of interest</span><span lang="es">Paquete de interés</span></label><select id="cfPkg" name="package"><option value="" data-en="— select —" data-es="— elegí —">— select —</option><option value="P0 Starter (USD 250)" data-en="P0 · Starter (USD 250)" data-es="P0 · Starter (USD 250)">P0 · Starter (USD 250)</option><option value="P1 Community Alert Bot" data-en="P1 · Community Alert Bot" data-es="P1 · Community Alert Bot">P1 · Community Alert Bot</option><option value="P2 Market Data API + Dashboard" data-en="P2 · Market Data API + Dashboard" data-es="P2 · Market Data API + Dashboard">P2 · Market Data API + Dashboard</option><option value="P3 Onboarding & Referral" data-en="P3 · Onboarding &amp; Referral" data-es="P3 · Onboarding y referidos">P3 · Onboarding &amp; Referral</option><option value="P4 AI Support Agent" data-en="P4 · AI Support Agent" data-es="P4 · Agente de soporte con IA">P4 · AI Support Agent</option><option value="P5 Part-time partner" data-en="P5 · Part-time technical partner" data-es="P5 · Partner técnico part-time">P5 · Part-time technical partner</option><option value="P6 AI automation consulting" data-en="P6 · AI automation consulting" data-es="P6 · Consultoría en automatización IA">P6 · AI automation consulting</option><option value="P7 AI assistant & model strategy" data-en="P7 · AI assistant &amp; model strategy" data-es="P7 · Asistente IA y estrategia de modelos">P7 · AI assistant &amp; model strategy</option><option value="P8 interest (in development)" data-en="P8 · Interested (in development)" data-es="P8 · Me interesa (en desarrollo)">P8 · Interested (in development)</option><option value="Not sure" data-en="Not sure" data-es="No estoy seguro">Not sure</option></select></div>
+              <div class="cf__f"><label for="cfBudget"><span lang="en">Approximate budget</span><span lang="es">Presupuesto aproximado</span></label><select id="cfBudget" name="budget"><option value="" data-en="— select —" data-es="— elegí —">— select —</option><option value="<500 USD" data-en="&lt; USD 500" data-es="&lt; USD 500">&lt; USD 500</option><option value="500-1500 USD" data-en="USD 500–1,500" data-es="USD 500–1.500">USD 500–1,500</option><option value="1500-3000 USD" data-en="USD 1,500–3,000" data-es="USD 1.500–3.000">USD 1,500–3,000</option><option value="3000+ USD" data-en="USD 3,000+" data-es="USD 3.000+">USD 3,000+</option><option value="Not sure" data-en="Not sure" data-es="No estoy seguro">Not sure</option></select></div>
+              <div class="cf__f"><label for="cfTime"><span lang="en">Timeline</span><span lang="es">Plazo</span></label><select id="cfTime" name="timeline"><option value="" data-en="— select —" data-es="— elegí —">— select —</option><option value="ASAP (<2 weeks)" data-en="ASAP (&lt; 2 weeks)" data-es="Urgente (&lt; 2 semanas)">ASAP (&lt; 2 weeks)</option><option value="Within 1 month" data-en="Within 1 month" data-es="En 1 mes">Within 1 month</option><option value="1-3 months" data-en="1–3 months" data-es="1–3 meses">1–3 months</option><option value="Just exploring" data-en="Just exploring" data-es="Solo explorando">Just exploring</option></select></div>
+              <div class="cf__f"><label for="cfLang"><span lang="en">Preferred language</span><span lang="es">Idioma preferido</span></label><select id="cfLang" name="preferred_language"><option value="Español">Español</option><option value="English">English</option><option value="Português">Português</option></select></div>
+              <div class="cf__f cf__f--full cf__consent"><label><input type="checkbox" id="cfConsent" name="consent" value="yes" required> <span lang="en">I agree that Leandro stores this info only to answer my inquiry.</span><span lang="es">Acepto que Leandro guarde estos datos solo para responder mi consulta.</span></label><small class="cf__err" id="cfConsentErr"></small></div>
+            </div>
+            <div class="cf__actions">
+              <button class="btn btn--primary" type="submit" id="cfSubmit"><span lang="en">Send inquiry</span><span lang="es">Enviar consulta</span></button>
+              <a class="link cf__mail" href="mailto:itech.lca@gmail.com?subject=Project%20inquiry"><span lang="en">or email itech.lca@gmail.com</span><span lang="es">o escribí a itech.lca@gmail.com</span></a>
+            </div>
+            <p class="cf__status" id="cfStatus" role="status" aria-live="polite" hidden></p>
+            <p class="cf__privacy"><span lang="en">Sent via FormSubmit to my inbox. Used only to reply; never shared. I review every request before scheduling any call.</span><span lang="es">Se envía por FormSubmit a mi correo. Solo lo uso para responderte; no se comparte. Reviso cada consulta antes de coordinar una llamada.</span></p>
+          </form>
+          <aside class="contact__side">
+            <p class="qr__hint"><span lang="en">On desktop? Scan with your phone:</span><span lang="es">¿Estás en la compu? Escaneá con el celular:</span></p>
+            <ul class="qr">
+              <li><a href="https://t.me/lcaitech_demo_bot" target="_blank" rel="noopener"><img class="qr__img" src="assets/qr/demo-bot.svg" alt="QR https://t.me/lcaitech_demo_bot" width="96" height="96" loading="lazy"><span class="qr__lbl"><span lang="en">Demo bot</span><span lang="es">Bot demo</span> <small>@lcaitech_demo_bot</small></span></a></li>
+              <li><a href="https://www.linkedin.com/in/leandrobuchter" target="_blank" rel="noopener"><img class="qr__img" src="assets/qr/linkedin.svg" alt="QR https://www.linkedin.com/in/leandrobuchter" width="96" height="96" loading="lazy"><span class="qr__lbl">LinkedIn <small>/in/leandrobuchter</small></span></a></li>
+              <li><a href="https://x.com/LCA_ITECH" target="_blank" rel="noopener"><img class="qr__img" src="assets/qr/x.svg" alt="QR https://x.com/LCA_ITECH" width="96" height="96" loading="lazy"><span class="qr__lbl">X <small>@LCA_ITECH</small></span></a></li>
+              <li><a href="https://github.com/LCAITECH" target="_blank" rel="noopener"><img class="qr__img" src="assets/qr/github.svg" alt="QR https://github.com/LCAITECH" width="96" height="96" loading="lazy"><span class="qr__lbl">GitHub <small>/LCAITECH</small></span></a></li>
+              <li><a href="https://t.me/leandroLCA" target="_blank" rel="noopener"><img class="qr__img" src="assets/qr/telegram.svg" alt="QR https://t.me/leandroLCA" width="96" height="96" loading="lazy"><span class="qr__lbl">Telegram <small>@leandroLCA</small></span></a></li>
+            </ul>
+            <a class="btn btn--ghost btn--sm" href="assets/Leandro_Buchter_CV_EN.pdf" target="_blank" rel="noopener" type="application/pdf" data-cv="contact"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M5 21h14"/></svg><span lang="en">Download CV</span><span lang="es">Descargar CV</span></a>
+          </aside>
           </div>
-          <ul class="socials">
-            <li><a href="https://www.linkedin.com/in/leandrobuchter" target="_blank" rel="noopener">LinkedIn <small>/in/leandrobuchter</small></a></li>
-            <li><a href="https://github.com/LCAITECH" target="_blank" rel="noopener">GitHub <small>/LCAITECH</small></a></li>
-            <li><a href="https://x.com/LCA_ITECH" target="_blank" rel="noopener">X <small>@LCA_ITECH</small></a></li>
-            <li><a href="https://t.me/lcaitech_demo_bot" target="_blank" rel="noopener"><span lang="en">Demo bot</span><span lang="es">Bot demo</span> <small>@lcaitech_demo_bot</small></a></li>
-          </ul>
         </div>
       </div>
     </section>
@@ -717,5 +742,6 @@
   <script src="assets/assistant.js" defer></script>
   <script src="assets/fx.js" defer></script>
   <script src="assets/live.js" defer></script>
+  <script src="assets/contact.js" defer></script>
 </body>
 </html>
