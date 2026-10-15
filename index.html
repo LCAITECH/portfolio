@@ -111,6 +111,7 @@
       </a>
       <nav class="nav__links" id="navLinks" aria-label="Main">
         <a href="#about"><span lang="en">About</span><span lang="es">Qué hago</span></a>
+        <a href="#live"><span lang="en">Live demo</span><span lang="es">Demo en vivo</span></a>
         <a href="#services"><span lang="en">Services</span><span lang="es">Servicios</span></a>
         <a href="#projects"><span lang="en">Projects</span><span lang="es">Proyectos</span></a>
         <a href="#journey"><span lang="en">Journey</span><span lang="es">Trayectoria</span></a>
@@ -211,6 +212,36 @@
             <h3><span lang="en">Cloud &amp; ops</span><span lang="es">Cloud y operación</span></h3>
             <p><span lang="en">Deploy on GCP / Linux VMs with Docker, SSH, Git, backups and monitoring. It doesn't end at "it works on my laptop".</span><span lang="es">Deploy en GCP / VMs Linux con Docker, SSH, Git, backups y monitoreo. No termina en "en mi máquina anda".</span></p>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="live">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="kicker"><span class="live-dot" aria-hidden="true"></span> <span lang="en">Live demo · P1 Community Alert Bot</span><span lang="es">Demo en vivo · P1 Community Alert Bot</span></p>
+          <h2><span lang="en">A real system, running right now</span><span lang="es">Un sistema real, funcionando ahora</span></h2>
+          <p class="section__sub"><span lang="en">Live market data and the kind of alerts the bot sends to your Telegram community.</span><span lang="es">Datos de mercado en vivo y el tipo de alertas que el bot envía a tu comunidad de Telegram.</span></p>
+        </header>
+        <div class="live" id="liveDemo">
+          <div class="live__grid">
+            <article class="card live__coin" data-coin="bitcoin"><p class="live__sym">BTC <small>Bitcoin</small></p><p class="live__px">—</p><p class="live__meta"><span class="live__chg">—</span> <span class="live__ath">ATH —</span></p><svg class="live__spark" viewBox="0 0 100 30" preserveAspectRatio="none" role="img" aria-label="7d"><path d=""/></svg></article>
+            <article class="card live__coin" data-coin="ethereum"><p class="live__sym">ETH <small>Ethereum</small></p><p class="live__px">—</p><p class="live__meta"><span class="live__chg">—</span> <span class="live__ath">ATH —</span></p><svg class="live__spark" viewBox="0 0 100 30" preserveAspectRatio="none" role="img" aria-label="7d"><path d=""/></svg></article>
+            <article class="card live__coin" data-coin="solana"><p class="live__sym">SOL <small>Solana</small></p><p class="live__px">—</p><p class="live__meta"><span class="live__chg">—</span> <span class="live__ath">ATH —</span></p><svg class="live__spark" viewBox="0 0 100 30" preserveAspectRatio="none" role="img" aria-label="7d"><path d=""/></svg></article>
+            <article class="card live__fng"><p class="live__sym">Fear &amp; Greed</p><svg class="live__gauge" viewBox="0 0 100 56" role="img" aria-labelledby="liveFngTxt"><defs><linearGradient id="liveG"><stop offset="0" stop-color="#f87171"/><stop offset=".5" stop-color="#fbbf24"/><stop offset="1" stop-color="#34d399"/></linearGradient></defs><path d="M10 50a40 40 0 0 1 80 0" fill="none" stroke="url(#liveG)" stroke-width="8" stroke-linecap="round"/><line class="live__needle" x1="50" y1="50" x2="50" y2="16"/><circle cx="50" cy="50" r="4"/></svg><p class="live__fngv" id="liveFngTxt">—</p></article>
+          </div>
+          <div class="live__feed card" aria-label="Demo alert feed">
+            <p class="live__bot"><b>LCA Alert Bot</b> <span class="live__tag">DEMO</span> <small><span lang="en">simulated from live data</span><span lang="es">simulado con datos reales</span></small></p>
+            <ol class="live__msgs" id="liveFeed" aria-live="polite"></ol>
+          </div>
+        </div>
+        <div class="live__foot">
+          <p class="live__status" id="liveStatus" role="status"><span class="live-dot" aria-hidden="true"></span> <span id="liveUpd"><span lang="en">Loading live data…</span><span lang="es">Cargando datos en vivo…</span></span></p>
+          <div class="live__ctas">
+            <a class="btn btn--primary" href="https://t.me/lcaitech_demo_bot" target="_blank" rel="noopener"><span lang="en">Try the full bot on Telegram</span><span lang="es">Probá el bot completo en Telegram</span></a>
+            <a class="btn btn--ghost" href="#services"><span lang="en">Want this for your community? from USD 250/600</span><span lang="es">¿Lo querés para tu comunidad? desde USD 250/600</span></a>
+          </div>
+          <p class="live__src"><span lang="en">Data: CoinGecko, Alternative.me · Demo only, not financial advice.</span><span lang="es">Datos: CoinGecko, Alternative.me · Solo demo, no es asesoramiento financiero.</span></p>
         </div>
       </div>
     </section>
@@ -685,5 +716,6 @@
   <script src="script.js"></script>
   <script src="assets/assistant.js" defer></script>
   <script src="assets/fx.js" defer></script>
+  <script src="assets/live.js" defer></script>
 </body>
 </html>

@@ -16,7 +16,7 @@ const fail = (m) => failures.push(m);
 const warn = (m) => warnings.push(m);
 
 // ---- 1. Sintaxis de los JS
-for (const f of ['script.js', 'assets/assistant.js', 'assets/fx.js']) {
+for (const f of ['script.js', 'assets/assistant.js', 'assets/fx.js', 'assets/live.js']) {
   try { execFileSync(process.execPath, ['--check', path.join(root, f)], { stdio: 'pipe' }); }
   catch (e) { fail(`${f}: error de sintaxis\n${String(e.stderr || e.message).split('\n').slice(0, 4).join('\n')}`); }
 }
@@ -69,6 +69,10 @@ const ld = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>
 if (!ld) warn('index.html: no hay JSON-LD');
 else { try { JSON.parse(ld[1]); } catch (e) { fail(`index.html: el JSON-LD no es JSON válido (${e.message})`); } }
 
+// demo en vivo: piezas que usa assets/live.js
+for (const id of ['live', 'liveDemo', 'liveFeed', 'liveStatus', 'liveUpd', 'liveFngTxt']) if (!seen.has(id)) fail(`index.html: falta #${id} (demo en vivo)`);
+if (!/href="#live"/.test(html)) fail('index.html: el nav no enlaza a #live');
+
 // ---- 3. Dominio, sitemap y robots coherentes
 const canonical = (html.match(/<link rel="canonical" href="([^"]+)"/) || [])[1];
 const ogUrl = (html.match(/<meta property="og:url" content="([^"]+)"/) || [])[1];
@@ -92,7 +96,7 @@ for (const f of ['og.jpg']) if (!exists(`assets/${f}`)) fail(`falta assets/${f} 
 
 // ---- 4. Aviso (no falla): clases de CSS que ya no usa nadie
 const css = (read('styles.css') + read('assets/assistant.css')).replace(/\/\*[\s\S]*?\*\//g, '').replace(/\{[^}]*\}/g, '{}');
-const used = html + read('script.js') + read('assets/assistant.js') + read('assets/fx.js');
+const used = html + read('script.js') + read('assets/assistant.js') + read('assets/fx.js') + read('assets/live.js');
 const classes = new Set([...css.matchAll(/\.([A-Za-z_][\w-]*)/g)].map((m) => m[1]));
 const dead = [...classes].filter((c) => !new RegExp(`(?<![\\w-])${c.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')}(?![\\w-])`).test(used));
 if (dead.length) warn(`CSS: clases sin uso en HTML/JS: ${dead.sort().join(', ')}`);
