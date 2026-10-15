@@ -181,21 +181,54 @@
       log.appendChild(chips);
     }
     state.msgs.forEach((m) => addBubble(m.role === 'user' ? 'user' : 'bot', m.content));
-    if (online === false) addBubble('note', t('offline'), contactsNode());
+    if (online === false) offlineNote();
   }
-  function setOnline(v) { online = v; wrap.classList.toggle('is-offline', v === false); labels(); }
+  function offlineNote() {
+    if (log.querySelector('.asst-msg--offline')) return;
+    addBubble('note', t('offline'), contactsNode()).classList.add('asst-msg--offline');
+  }
+  let recheckTimer = 0;
+  function setOnline(v) {
+    const was = online;
+    online = v; wrap.classList.toggle('is-offline', v === false); labels();
+    if (v === false) {
+      if (state.open) offlineNote();
+      if (!recheckTimer) recheckTimer = setInterval(() => { if (!document.hidden) checkHealth(); }, 30000);
+    } else {
+      if (recheckTimer) { clearInterval(recheckTimer); recheckTimer = 0; }
+      if (was === false) log.querySelectorAll('.asst-msg--offline').forEach((n) => n.remove());
+    }
+  }
 
-  async function checkHealth() {
+  // Health con reintentos: un corte breve de red móvil/túnel no deja el widget "sin conexión".
+  const HEALTH_DELAYS = [0, 2000, 5000];
+  const HEALTH_TIMEOUT = 8000;
+  const wait = (ms) => new Promise((res) => setTimeout(res, ms));
+  async function probe() {
     const ctl = new AbortController();
-    const timer = setTimeout(() => ctl.abort(), 6000);
+    const timer = setTimeout(() => ctl.abort(), HEALTH_TIMEOUT);
     try {
       const r = await fetch(API + '/health', { signal: ctl.signal, cache: 'no-store' });
       const j = await r.json();
-      setOnline(!!(r.ok && j && j.status === 'ok' && j.accepting !== false));
-    } catch (e) { setOnline(false); }
-    clearTimeout(timer);
-    if (online === false) addBubble('note', t('offline'), contactsNode());
+      return !!(r.ok && j && j.status === 'ok' && j.accepting !== false);
+    } catch (e) { return false; } finally { clearTimeout(timer); }
   }
+  let checking = null;
+  function checkHealth() {
+    if (checking) return checking;
+    checking = (async () => {
+      const retries = online === false ? [0] : HEALTH_DELAYS; // ya offline: un intento por ciclo
+      for (const d of retries) {
+        if (d) await wait(d);
+        if (online === true && d) return;             // un envío exitoso ya lo marcó online
+        if (await probe()) { setOnline(true); return; }
+      }
+      setOnline(false);
+    })().finally(() => { checking = null; });
+    return checking;
+  }
+  window.addEventListener('online', () => { if (online === false) checkHealth(); });
+  document.addEventListener('visibilitychange', () => { if (!document.hidden && online === false) checkHealth(); });
 
   // ---------- abrir / cerrar ----------
   function trapOn() { return mobileMQ.matches && state.open; }
