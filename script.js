@@ -16,7 +16,7 @@
   var META = {
     en: { title: document.title, desc: descMeta ? descMeta.getAttribute('content') : '' },
     es: {
-      title: 'Leandro Buchter · LCA ITECH — Cripto + IA + APIs + Automatización + Cloud',
+      title: 'Leandro Buchter · LCA ITECH — Constructor de sistemas: bots cripto, APIs, automatización con IA',
       desc: 'Leandro Buchter (LCA ITECH): construyo plataformas de datos cripto, bots de Telegram, agentes de IA, APIs y automatizaciones — de punta a punta, desde la fuente de datos hasta el deploy. Buenos Aires, Argentina.'
     }
   };

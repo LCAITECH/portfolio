@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Leandro Buchter · LCA ITECH — Crypto + AI + APIs + Automation + Cloud</title>
-  <meta name="description" content="Leandro Buchter (LCA ITECH): I build crypto data platforms, Telegram bots, AI agents, APIs and automations — end to end, from the data source to deploy. Buenos Aires, Argentina.">
+  <title>Leandro Buchter · LCA ITECH — Systems builder: crypto bots, APIs, AI automation</title>
+  <meta name="description" content="Leandro Buchter (LCA ITECH), Buenos Aires: systems builder for crypto data platforms, Telegram bots, REST APIs and AI automation, end to end. Site available in English and Spanish.">
   <meta name="author" content="Leandro Buchter">
-  <meta property="og:title" content="Leandro Buchter · LCA ITECH">
-  <meta property="og:description" content="Crypto + AI + APIs + Automation + Cloud. Full systems, end to end.">
+  <meta property="og:title" content="Leandro Buchter · LCA ITECH — Systems builder: crypto bots, APIs, AI automation">
+  <meta property="og:description" content="Crypto bots, market data APIs and AI automation — full systems, end to end. English / Español.">
   <meta property="og:type" content="website">
   <link rel="canonical" href="https://portfolio.lcaitech.com/">
   <meta property="og:url" content="https://portfolio.lcaitech.com/">
@@ -17,11 +17,14 @@
   <meta property="og:site_name" content="LCA ITECH">
   <meta property="og:locale" content="en_US">
   <meta property="og:locale:alternate" content="es_AR">
-  <meta property="og:image:alt" content="Leandro Buchter · LCA ITECH — Crypto + AI + APIs + Automation + Cloud">
+  <meta property="og:image:alt" content="Leandro Buchter · LCA ITECH — Systems builder: crypto bots, APIs, AI automation">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@LCA_ITECH">
-  <meta name="twitter:title" content="Leandro Buchter · LCA ITECH">
-  <meta name="twitter:description" content="Crypto + AI + APIs + Automation + Cloud. Full systems, end to end.">
+  <meta name="twitter:title" content="Leandro Buchter · LCA ITECH — Systems builder: crypto bots, APIs, AI automation">
+  <meta name="twitter:description" content="Crypto bots, market data APIs and AI automation — full systems, end to end. English / Español.">
+  <meta name="twitter:creator" content="@LCA_ITECH">
+  <meta name="twitter:image:alt" content="Leandro Buchter · LCA ITECH — Systems builder: crypto bots, APIs, AI automation">
+  <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="twitter:image" content="https://portfolio.lcaitech.com/assets/og.jpg">
   <meta name="theme-color" content="#070a10">
   <link rel="icon" href="assets/favicon-32.png" type="image/png" sizes="32x32">
@@ -35,9 +38,10 @@
       "@id": "https://portfolio.lcaitech.com/#leandro",
       "name": "Leandro Buchter",
       "alternateName": "Leandro Hernan Buchter",
-      "jobTitle": "Founder & developer, LCA ITECH",
+      "jobTitle": "Systems builder · AI automation",
       "url": "https://portfolio.lcaitech.com/",
-      "email": "itech.lca@gmail.com",
+      "image": "https://portfolio.lcaitech.com/assets/leandro.jpg",
+      "email": "mailto:itech.lca@gmail.com",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Buenos Aires",
@@ -54,29 +58,210 @@
         "Crypto market data",
         "Telegram bots",
         "AI agents",
+        "AI automation",
         "REST APIs",
         "Automation",
-        "Google Cloud"
+        "Google Cloud",
+        "Decentralized finance"
       ],
       "sameAs": [
         "https://www.linkedin.com/in/leandrobuchter",
         "https://github.com/LCAITECH",
-        "https://x.com/LCA_ITECH"
+        "https://x.com/LCA_ITECH",
+        "https://t.me/leandroLCA"
       ]
     },
     {
-      "@type": "Organization",
+      "@type": [
+        "Organization",
+        "ProfessionalService"
+      ],
       "@id": "https://portfolio.lcaitech.com/#org",
       "name": "LCA ITECH",
       "url": "https://portfolio.lcaitech.com/",
       "logo": "https://portfolio.lcaitech.com/assets/lca-logo.webp",
+      "image": "https://portfolio.lcaitech.com/assets/og.jpg",
+      "email": "itech.lca@gmail.com",
       "foundingDate": "2022",
       "founder": {
         "@id": "https://portfolio.lcaitech.com/#leandro"
       },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Buenos Aires",
+        "addressCountry": "AR"
+      },
+      "areaServed": [
+        {
+          "@type": "Place",
+          "name": "Worldwide"
+        },
+        {
+          "@type": "Place",
+          "name": "Latin America"
+        }
+      ],
       "sameAs": [
         "https://github.com/LCAITECH",
         "https://x.com/LCA_ITECH"
+      ],
+      "hasOfferCatalog": {
+        "@id": "https://portfolio.lcaitech.com/#services"
+      }
+    },
+    {
+      "@type": "OfferCatalog",
+      "@id": "https://portfolio.lcaitech.com/#services",
+      "name": "LCA ITECH services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "name": "P0 · Starter: one bot or one automation",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Starter: one bot or one automation",
+            "provider": {
+              "@id": "https://portfolio.lcaitech.com/#org"
+            }
+          },
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": 250,
+            "priceCurrency": "USD",
+            "description": "from USD 250"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "P1 · Community Alert Bot",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Community Alert Bot",
+            "provider": {
+              "@id": "https://portfolio.lcaitech.com/#org"
+            }
+          },
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": 600,
+            "priceCurrency": "USD",
+            "description": "from USD 600"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "P2 · Market Data API + Dashboard",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Market Data API + Dashboard",
+            "provider": {
+              "@id": "https://portfolio.lcaitech.com/#org"
+            }
+          },
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": 2500,
+            "priceCurrency": "USD",
+            "description": "from USD 2,500"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "P3 · Onboarding & Referral Automation",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Onboarding & Referral Automation",
+            "provider": {
+              "@id": "https://portfolio.lcaitech.com/#org"
+            }
+          },
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": 1200,
+            "priceCurrency": "USD",
+            "description": "from USD 1,200"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "P4 · AI Support Agent",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "AI Support Agent",
+            "provider": {
+              "@id": "https://portfolio.lcaitech.com/#org"
+            }
+          },
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": 1500,
+            "priceCurrency": "USD",
+            "description": "from USD 1,500"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "P5 · Part-time technical partner",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Part-time technical partner",
+            "provider": {
+              "@id": "https://portfolio.lcaitech.com/#org"
+            }
+          },
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": 1500,
+            "priceCurrency": "USD",
+            "description": "from USD 1,500 / month",
+            "unitText": "MONTH"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "P6 · AI automation consulting",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "AI automation consulting",
+            "provider": {
+              "@id": "https://portfolio.lcaitech.com/#org"
+            }
+          },
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": 800,
+            "priceCurrency": "USD",
+            "description": "from USD 800"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "P7 · AI assistant & model strategy consulting",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "AI assistant & model strategy consulting",
+            "provider": {
+              "@id": "https://portfolio.lcaitech.com/#org"
+            }
+          },
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": 2000,
+            "priceCurrency": "USD",
+            "description": "from USD 2,000"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "P8 · AI Trading Signal Bot (in development)",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "AI Trading Signal Bot",
+            "provider": {
+              "@id": "https://portfolio.lcaitech.com/#org"
+            }
+          }
+        }
       ]
     },
     {
@@ -90,6 +275,9 @@
       ],
       "publisher": {
         "@id": "https://portfolio.lcaitech.com/#org"
+      },
+      "about": {
+        "@id": "https://portfolio.lcaitech.com/#leandro"
       }
     }
   ]
