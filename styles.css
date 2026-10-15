@@ -368,20 +368,16 @@ html:not(.deck) .deck-dots { display: none; }
 /* --- hero: mapa de sistema animado (assets/fx.js) --- */
 .hero{position:relative;isolation:isolate;overflow:hidden}
 .hero>.container{position:relative;z-index:1}
-.hero__fx{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;
-  -webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,.22) 0%,rgba(0,0,0,.45) 40%,#000 70%);
-  mask-image:linear-gradient(90deg,rgba(0,0,0,.22) 0%,rgba(0,0,0,.45) 40%,#000 70%);
-  animation:fxIn 1.2s ease both}
-@keyframes fxIn{from{opacity:0}to{opacity:1}}
-@media (max-width:720px){.hero__fx{-webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,.55));mask-image:linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,.55))}}
+.bgfx{position:fixed;inset:0;width:100vw;height:100vh;z-index:-1;pointer-events:none;opacity:0;transition:opacity 1.2s ease}
+.bgfx.is-on{opacity:1}
 /* glow que sigue al mouse + tilt en cards */
 .fx-tilt,.js .fx-tilt.reveal{position:relative;transition:opacity .6s ease,transform .25s ease,border-color .25s ease,box-shadow .25s ease;will-change:transform}
 .fx-tilt::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .25s ease;
   background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(34,211,238,.13),transparent 65%)}
 .fx-tilt:hover{border-color:rgba(34,211,238,.45);box-shadow:0 12px 40px -12px rgba(34,211,238,.35)}
 .fx-tilt:hover::after{opacity:1}
-@media (prefers-reduced-motion:reduce){.hero__fx{animation:fxIn .6s ease both}.fx-tilt{transform:none!important}}
-@media print{.hero__fx{display:none}}
+@media (prefers-reduced-motion:reduce){.bgfx{transition-duration:.6s}.fx-tilt,.fx-mag{transform:none!important}}
+@media print{.bgfx{display:none}}
 
 /* Deck en pantallas de laptop: el footer queda siempre visible debajo de cada sección,
    así que se compacta y el hero se ajusta a la altura disponible para que nada quede tapado. */
@@ -404,3 +400,12 @@ html.deck .hero > .container { margin-top: auto; margin-bottom: auto; }
   html.deck .hero .lead { margin: 10px 0 16px; font-size: 1rem; }
   html.deck .hero__facts { margin-top: 14px; }
 }
+
+/* system.map: líneas que se tipean (solo opacity/clip-path: sin layout shift) */
+.term__body.is-typing .tline{display:block;clip-path:inset(0 100% 0 0);opacity:.2;transition:clip-path .42s steps(22,end),opacity .2s ease}
+.term__body.is-typing .tline.on{clip-path:inset(0 0 0 0);opacity:1}
+/* CTAs magnéticos */
+.btn.fx-mag{transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s ease,background .25s ease,border-color .25s ease;will-change:transform}
+.hero__ctas .btn--primary.fx-mag:hover{box-shadow:0 10px 34px -8px rgba(34,211,238,.55)}
+/* el terminal deja ver la red de fondo */
+.hero .term{background:linear-gradient(180deg,rgba(18,27,40,.78),rgba(15,22,33,.72))}
