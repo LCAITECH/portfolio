@@ -308,3 +308,18 @@
   if (deckMQ.addEventListener) deckMQ.addEventListener('change', apply);
   else if (deckMQ.addListener) deckMQ.addListener(apply);
 })();
+
+// Clientes: los loops de producto se cargan y reproducen solo cuando están a la vista.
+(function () {
+  var vids = document.querySelectorAll('video.js-loop');
+  if (!vids.length || !('IntersectionObserver' in window)) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      var v = e.target;
+      if (e.isIntersecting) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+      else v.pause();
+    });
+  }, { threshold: 0.4 });
+  vids.forEach(function (v) { io.observe(v); });
+})();
