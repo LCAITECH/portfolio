@@ -521,6 +521,10 @@ html.deck #live .section__head{margin-bottom:18px}
 .client__id{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin:12px 0 18px}
 .client__logo{width:190px;height:auto}
 .client__name{font-weight:700;margin-bottom:6px}
+.client__quote{margin:0 0 14px;padding:10px 16px;border-left:3px solid var(--accent,#3ddc97);background:rgba(255,255,255,.03);border-radius:8px}
+.client__quote p{margin:0 0 4px;font-style:italic;font-size:1.05rem}
+.client__quote footer{font-size:.85rem;opacity:.8}
+.client__quote a{color:inherit;text-decoration:underline}
 .client__main{--h:min(40vh,380px);display:flex;gap:16px;align-items:flex-start;margin-top:8px}
 .client__vid{margin:0;flex:none}
 .client__vid video,.client__loop video{display:block;border-radius:12px;border:1px solid var(--line2);background:#000}
