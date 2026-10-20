@@ -605,16 +605,34 @@
             <a class="link" href="https://x.com/LCA_ITECH" target="_blank" rel="noopener">x.com/LCA_ITECH ↗</a>
           </article>
 
-          <article class="project reveal">
+          <article class="project project--gpt reveal">
             <div class="project__head">
               <h3>LCA-GPT</h3>
-              <span class="badge"><span lang="en">Internal tool</span><span lang="es">Herramienta interna</span></span>
+              <span class="badge"><span lang="en">Internal tool · Under evaluation</span><span lang="es">Herramienta interna · En evaluación</span></span>
             </div>
             <p>
-              <span lang="en">An internal web interface with AI routing: each request goes to the most suitable model (Gemini, Claude or OpenAI) depending on the task and the cost.</span>
-              <span lang="es">Una interfaz web interna con ruteo de IA: cada consulta va al modelo más adecuado (Gemini, Claude u OpenAI) según la tarea y el costo.</span>
+              <span lang="en">Internal multi-provider AI chat (Gemini, Claude, OpenAI, NVIDIA). Auto-routing picks the model by task and cost and spreads traffic across free tiers within their rate limits. The Arena runs the same prompt on several models in parallel.</span>
+              <span lang="es">Chat de IA interno multi-proveedor (Gemini, Claude, OpenAI, NVIDIA). El auto-routing elige el modelo según la tarea y el costo, y reparte el tráfico entre niveles gratuitos respetando sus límites de uso. La Arena corre el mismo prompt en varios modelos en paralelo.</span>
             </p>
-            <p class="chips"><span>LLM routing</span><span>Gemini</span><span>Claude</span><span>OpenAI</span></p>
+            <p class="project__note">
+              <span lang="en"><b>Under evaluation:</b> given the interest it got on social media, I'm considering launching it as a subscription.</span>
+              <span lang="es"><b>En evaluación:</b> por el interés que generó en redes, estoy evaluando lanzarlo como suscripción.</span>
+            </p>
+            <p class="chips"><span>LLM routing</span><span>Auto-routing</span><span>Gemini</span><span>Claude</span><span>OpenAI</span><span>NVIDIA</span></p>
+            <div class="gallery">
+              <figure class="gallery__item">
+                <a class="gallery__link" href="assets/lcagpt/picker.webp" target="_blank" rel="noopener" data-lightbox>
+                  <img loading="lazy" decoding="async" src="assets/lcagpt/picker.webp" alt="LCA-GPT model picker: NVIDIA, Google, OpenAI and Anthropic tabs, free and paid Gemini models, RPM and RPD rate-limit counters" width="369" height="618">
+                </a>
+                <figcaption><span lang="en">Model picker with free tiers and rate-limit counters</span><span lang="es">Selector de modelos con niveles gratuitos y contadores de límites</span></figcaption>
+              </figure>
+              <figure class="gallery__item gallery__item--wide">
+                <a class="gallery__link" href="assets/lcagpt/arena.webp" target="_blank" rel="noopener" data-lightbox>
+                  <img loading="lazy" decoding="async" src="assets/lcagpt/arena.webp" alt="LCA-GPT Arena: the same prompt answered by three models side by side, with first-token time, tokens and cost for each" width="1593" height="711">
+                </a>
+                <figcaption><span lang="en">Arena: same prompt, several models side by side (speed and cost)</span><span lang="es">Arena: el mismo prompt en varios modelos (velocidad y costo)</span></figcaption>
+              </figure>
+            </div>
           </article>
 
           <article class="project project--wide reveal">

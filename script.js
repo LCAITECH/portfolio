@@ -243,6 +243,7 @@
 
   document.addEventListener('keydown', function (e) {
     if (!deck || e.altKey || e.ctrlKey || e.metaKey) return;
+    if (document.querySelector('dialog[open]')) return;
     var t = e.target || {};
     var tag = t.tagName || '';
     if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || t.isContentEditable) return;
@@ -322,4 +323,36 @@
     });
   }, { threshold: 0.4 });
   vids.forEach(function (v) { io.observe(v); });
+})();
+
+// Lightbox para capturas (a[data-lightbox]). Sin JS o sin <dialog>: el link abre la imagen en otra pestaña.
+(function () {
+  var links = document.querySelectorAll('a[data-lightbox]');
+  if (!links.length || typeof HTMLDialogElement !== 'function') return;
+  var box = document.createElement('dialog');
+  box.className = 'lightbox';
+  box.innerHTML = '<div class="lightbox__bar"><span class="lightbox__cap"></span><button type="button" class="lightbox__close"></button></div><img alt="">';
+  document.body.appendChild(box);
+  var img = box.querySelector('img');
+  var cap = box.querySelector('.lightbox__cap');
+  var btn = box.querySelector('.lightbox__close');
+  btn.addEventListener('click', function () { box.close(); });
+  box.addEventListener('click', function (e) { if (e.target === box || e.target === img) box.close(); });
+  box.addEventListener('close', function () { img.removeAttribute('src'); });
+  Array.prototype.forEach.call(links, function (a) {
+    a.addEventListener('click', function (e) {
+      if (e.ctrlKey || e.metaKey || e.shiftKey || e.button) return;
+      e.preventDefault();
+      var lang = document.documentElement.getAttribute('data-lang') || 'en';
+      var thumb = a.querySelector('img');
+      var fig = a.closest('figure');
+      var c = fig && fig.querySelector('figcaption [lang="' + lang + '"]');
+      img.src = a.getAttribute('href');
+      img.alt = thumb ? thumb.alt : '';
+      cap.textContent = c ? c.textContent : '';
+      btn.textContent = lang === 'es' ? 'Cerrar ✕' : 'Close ✕';
+      btn.setAttribute('aria-label', lang === 'es' ? 'Cerrar imagen' : 'Close image');
+      box.showModal();
+    });
+  });
 })();
