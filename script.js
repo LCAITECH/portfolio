@@ -356,3 +356,75 @@
     });
   });
 })();
+
+// ---- Plantillas gratuitas de Grok Bot (#templates)
+// >>> CONFIG: link para compartir de cada plantilla (https://...).
+// >>> Vacío ('') = botón "Abrir en Grok" deshabilitado con "Próximamente" / "Coming soon".
+var GROK_TEMPLATES = {
+  xpander: 'https://x.ai/bot/PiAVOjg_IkMuXmwGxz6rE',
+  reclami: 'https://x.ai/bot/BFB_Y_2zjSHrwAT47jmLE',
+  sponsi: '',
+  macri: '',
+  senali: 'https://x.ai/bot/JBqoMDnp2-ye7i35JC0es'
+};
+
+(function () {
+  var cards = document.querySelectorAll('.tpl[data-tpl]');
+  if (!cards.length) return;
+  var live = document.querySelector('.tpl__live');
+  function lang() { return document.documentElement.getAttribute('data-lang') || 'en'; }
+  function linkFor(key) {
+    var url = (GROK_TEMPLATES[key] || '').trim();
+    return /^https:\/\//i.test(url) ? url : '';
+  }
+  function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
+    return new Promise(function (resolve, reject) {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta);
+      if (ok) resolve(); else reject(new Error('copy failed'));
+    });
+  }
+  Array.prototype.forEach.call(cards, function (card) {
+    var key = card.getAttribute('data-tpl');
+    var url = linkFor(key);
+    var open = card.querySelector('.tpl__open');
+    if (open && url) {
+      open.classList.remove('is-disabled');
+      open.removeAttribute('aria-disabled');
+      open.removeAttribute('role');
+      open.setAttribute('href', url);
+      open.setAttribute('target', '_blank');
+      open.setAttribute('rel', 'noopener');
+    }
+    var btn = card.querySelector('.tpl__copy');
+    if (!btn) return;
+    var timer = 0;
+    btn.addEventListener('click', function () {
+      var l = lang();
+      var text = url;
+      if (!text) {
+        var name = card.querySelector('.tpl__name');
+        var desc = card.querySelector('.tpl__desc [lang="' + l + '"]') || card.querySelector('.tpl__desc');
+        text = (name ? name.textContent.trim() : key) + ' — ' + (desc ? desc.textContent.trim() : '');
+      }
+      copyText(text).then(function () {
+        btn.classList.add('is-copied');
+        if (live) live.textContent = l === 'es' ? 'Copiado' : 'Copied';
+        window.clearTimeout(timer);
+        timer = window.setTimeout(function () {
+          btn.classList.remove('is-copied');
+          if (live) live.textContent = '';
+        }, 1600);
+      }, function () {});
+    });
+  });
+})();

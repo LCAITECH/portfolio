@@ -570,3 +570,15 @@ html.deck #live .section__head{margin-bottom:18px}
 .lightbox__bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px;font-size:.85rem;color:var(--mut)}
 .lightbox__close{flex:none;border:1px solid var(--line2);background:transparent;color:var(--txt);border-radius:8px;padding:4px 10px;cursor:pointer;font:inherit}
 @media (max-width:640px){.gallery{grid-template-columns:1fr 1.35fr}.gallery__link img{height:100px}}
+
+/* Plantillas gratuitas de Grok Bot (#templates). Links en GROK_TEMPLATES (script.js). */
+.tpl h3{font-size:1.12rem;margin-bottom:8px}
+.tpl__actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto!important;padding-top:18px}
+.tpl__open.is-disabled{opacity:.5;cursor:not-allowed;pointer-events:none;box-shadow:none;filter:grayscale(.6)}
+.tpl__open .tpl__off,.tpl__open.is-disabled .tpl__on{display:none}
+.tpl__open.is-disabled .tpl__off{display:inline}
+.tpl__copy{cursor:pointer;color:var(--txt);font-family:inherit}
+.tpl__copy .tpl__done,.tpl__copy.is-copied .tpl__idle{display:none}
+.tpl__copy.is-copied .tpl__done{display:inline;color:var(--acc)}
+.tpl__copy.is-copied{border-color:var(--acc)}
+.tpl__live{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
