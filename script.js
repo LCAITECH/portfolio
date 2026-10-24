@@ -363,8 +363,8 @@
 var GROK_TEMPLATES = {
   xpander: 'https://x.ai/bot/PiAVOjg_IkMuXmwGxz6rE',
   reclami: 'https://x.ai/bot/BFB_Y_2zjSHrwAT47jmLE',
-  sponsi: '',
-  macri: '',
+  sponsi: 'https://x.ai/bot/tryDjauMe1hh9RaHWSalF',
+  macri: 'https://x.ai/bot/qu21_bTbRJ47k-f89-3h3',
   senali: 'https://x.ai/bot/JBqoMDnp2-ye7i35JC0es'
 };
 
