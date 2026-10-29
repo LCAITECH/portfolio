@@ -31,6 +31,7 @@
   var toggle = document.getElementById('langToggle');
   if (toggle) toggle.addEventListener('click', function () {
     setLang(root.getAttribute('data-lang') === 'es' ? 'en' : 'es');
+    fitNav(); // el español es más largo: puede cambiar si el menú entra
   });
 
   // ---- Menú mobile
@@ -45,6 +46,29 @@
     links.addEventListener('click', function (e) { if (e.target.closest('a')) close(); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
   }
+
+  // ---- Menú adaptable: si no entra en la pantalla (por ancho, idioma o cantidad de links), achica la
+  // letra en dos pasos y, si igual no entra, pasa a menú hamburguesa (ver "Menú adaptable" en styles.css).
+  var navTools = document.querySelector('.nav__tools');
+  var NAV_LEVELS = ['nav--s1', 'nav--s2', 'nav--burger'];
+  function navFits() { return navTools.getBoundingClientRect().right <= document.documentElement.clientWidth - 8; }
+  function fitNav() {
+    if (!links || !navTools) return;
+    NAV_LEVELS.forEach(function (c) { root.classList.remove(c); });
+    for (var i = 0; i < NAV_LEVELS.length && !navFits(); i++) {
+      if (i) root.classList.remove(NAV_LEVELS[i - 1]);
+      root.classList.add(NAV_LEVELS[i]);
+    }
+    if (!root.classList.contains('nav--burger')) close();
+  }
+  fitNav();
+  var navTick = false;
+  window.addEventListener('resize', function () {
+    if (navTick) return;
+    navTick = true;
+    window.requestAnimationFrame(function () { navTick = false; fitNav(); });
+  }, { passive: true });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitNav);
 
   // ---- Animación al hacer scroll
   var items = document.querySelectorAll('.reveal');
