@@ -15,7 +15,7 @@ index.html            all the content (one page)
 styles.css            site styles
 script.js             language toggle, mobile menu, reveal animations, "one section per screen" mode
 assets/assistant.js   AI assistant chat widget (+ assistant.css)
-assets/armador.js     project builder (#builder): 4-step wizard (type → modules with live demo → platform & AI → summary), pre-fills the contact form; saves only the choices in localStorage
+assets/armador.js     project builder (#builder): 4-step wizard (type → modules with live demo → platform & AI → summary), per-module ⓘ tooltips (what it does, how, time, price), live quantity discount (S1–S3 only), "real cases" strip per category, pre-fills the contact form; saves only the choices in localStorage (unknown ids are dropped on load)
 assets/               images, favicons, certificates, social preview (og.jpg)
 robots.txt, sitemap.xml, CNAME, .nojekyll
 .github/              checks (script + workflows)
