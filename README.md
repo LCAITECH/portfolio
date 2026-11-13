@@ -4,7 +4,7 @@ Personal portfolio of Leandro Buchter (LCA ITECH): crypto data platforms, Telegr
 
 **Live site:** https://portfolio.lcaitech.com
 
-Projects featured: [ATH Intelligence](https://athintelligence.pro), [ARDC](https://ardc.club) and [Model Compass](https://github.com/LCAITECH/model-compass), all under LCA ITECH.
+Projects featured: [ATH Intelligence](https://athintelligence.pro) and [Model Compass](https://github.com/LCAITECH/model-compass), all under LCA ITECH.
 
 Static site (HTML, CSS and vanilla JS, no build step), hosted on GitHub Pages with a custom domain.
 
@@ -15,6 +15,7 @@ index.html            all the content (one page)
 styles.css            site styles
 script.js             language toggle, mobile menu, reveal animations, "one section per screen" mode
 assets/assistant.js   AI assistant chat widget (+ assistant.css)
+assets/builder.js     modular bot builder (#builder): S1–S3 toggles, simulated Telegram chat, combo price, pre-fills the contact form
 assets/               images, favicons, certificates, social preview (og.jpg)
 robots.txt, sitemap.xml, CNAME, .nojekyll
 .github/              checks (script + workflows)

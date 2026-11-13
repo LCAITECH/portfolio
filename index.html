@@ -443,8 +443,8 @@
           <p class="kicker">02 · <span lang="en">Services</span><span lang="es">Servicios</span></p>
           <h2><span lang="en">Packages with clear scope</span><span lang="es">Paquetes con alcance claro</span></h2>
           <p class="section__sub">
-            <span lang="en">Fixed price per project, agreed after a short call. Prices are a starting point in USD.</span>
-            <span lang="es">Precio cerrado por proyecto, acordado después de una llamada corta. Los precios son un punto de partida en USD.</span>
+            <span lang="en">Fixed price per project, agreed in writing (chat or email). Prices are a starting point in USD.</span>
+            <span lang="es">Precio cerrado por proyecto, acordado por escrito (chat o email). Los precios son un punto de partida en USD.</span>
           </p>
         </header>
 
@@ -494,6 +494,35 @@
           </article>
         </div>
 
+        <h3 class="group-title reveal"><span lang="en">Small bots · modular (S1–S3)</span><span lang="es">Bots chicos · modulares (S1–S3)</span></h3>
+        <div class="grid grid--3">
+          <article class="svc reveal">
+            <p class="svc__tag">S1 · 3–5 <span lang="en">days</span><span lang="es">días</span></p>
+            <h4><span lang="en">Telegram FAQ bot</span><span lang="es">Bot de preguntas frecuentes para Telegram</span></h4>
+            <p><span lang="en">Answers your community's frequent questions (how to buy, links, rules, guides) in your group or in private, with your texts and commands.</span><span lang="es">Responde las preguntas frecuentes de tu comunidad (cómo comprar, links, reglas, guías) en tu grupo o por privado, con tus textos y comandos.</span></p>
+            <p class="svc__price"><b>USD 100–150</b></p>
+          </article>
+          <article class="svc reveal">
+            <p class="svc__tag">S2 · 2–4 <span lang="en">days</span><span lang="es">días</span></p>
+            <h4><span lang="en">Crypto price alert bot</span><span lang="es">Bot de alertas de precio (cripto)</span></h4>
+            <p><span lang="en">Posts price alerts to your Telegram group or channel when an asset crosses the levels you choose, with the data source in every message.</span><span lang="es">Publica alertas en tu grupo o canal de Telegram cuando un activo cruza los niveles que elijas, con la fuente del dato en cada mensaje.</span></p>
+            <p class="svc__price"><b>USD 100–150</b></p>
+          </article>
+          <article class="svc reveal">
+            <p class="svc__tag">S3 · 4–6 <span lang="en">days</span><span lang="es">días</span></p>
+            <h4><span lang="en">Moderation bot for Discord or Telegram</span><span lang="es">Bot de moderación para Discord o Telegram</span></h4>
+            <p><span lang="en">Welcomes new members, deletes spam and messages asking for seed phrases or private keys, and warns or mutes the sender.</span><span lang="es">Da la bienvenida a los nuevos, borra spam y mensajes que piden seed phrases o claves privadas, y advierte o silencia al que los manda.</span></p>
+            <p class="svc__price"><b>USD 120–180</b></p>
+          </article>
+        </div>
+        <div class="combo reveal">
+          <p class="combo__txt">
+            <span lang="en"><b>Combine modules and pay less:</b> any 2 modules −15% · <b>Community Pack</b> S1 + S2 + S3 for USD 250–350 (~25% off).</span>
+            <span lang="es"><b>Combiná módulos y pagás menos:</b> 2 módulos −15% · <b>Pack Comunidad</b> S1 + S2 + S3 por USD 250–350 (~25% menos).</span>
+          </p>
+          <a class="btn btn--ghost btn--sm" href="#builder"><span lang="en">Build your bot →</span><span lang="es">Armá tu bot →</span></a>
+        </div>
+
         <h3 class="group-title reveal"><span lang="en">AI &amp; automation for businesses</span><span lang="es">IA y automatización para empresas</span></h3>
         <div class="grid grid--2">
           <article class="svc reveal">
@@ -518,6 +547,73 @@
           <li><span lang="en">30 days of support after delivery</span><span lang="es">30 días de soporte después de la entrega</span></li>
           <li><span lang="en">No third-party repos, zips or "tech tests" before a signed scope; client code is reviewed in an isolated environment</span><span lang="es">Sin repos, zips ni "pruebas técnicas" de terceros antes de un alcance firmado; el código del cliente se revisa en un entorno aislado</span></li>
         </ul>
+      </div>
+    </section>
+
+    <section class="section" id="builder">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="kicker">S1 · S2 · S3 · <span lang="en">Bot builder</span><span lang="es">Configurador</span></p>
+          <h2><span lang="en">Build your bot, module by module</span><span lang="es">Armá tu bot por módulos</span></h2>
+          <p class="section__sub">
+            <span lang="en">Turn modules on and off and watch what the bot does in a Telegram group. The price updates with the combo discount.</span>
+            <span lang="es">Prendé y apagá módulos y mirá qué hace el bot en un grupo de Telegram. El precio se actualiza con el descuento por combo.</span>
+          </p>
+        </header>
+        <div class="bld reveal" id="bld">
+          <div class="bld__mods" role="group" aria-labelledby="bldModsTitle">
+            <p class="bld__title" id="bldModsTitle"><span lang="en">Modules</span><span lang="es">Módulos</span></p>
+            <label class="bld__mod" data-mod="s1">
+              <input class="bld__chk" type="checkbox" role="switch" value="s1" checked>
+              <span class="bld__ico" aria-hidden="true">?</span>
+              <span class="bld__info">
+                <span class="bld__name">S1 · <span lang="en">FAQ bot</span><span lang="es">Preguntas frecuentes</span></span>
+                <span class="bld__desc"><span lang="en">Answers how to buy, links, rules</span><span lang="es">Responde cómo comprar, links, reglas</span></span>
+                <span class="bld__px">USD 100–150 · 3–5 <span lang="en">days</span><span lang="es">días</span></span>
+              </span>
+              <span class="bld__sw" aria-hidden="true"></span>
+            </label>
+            <label class="bld__mod" data-mod="s2">
+              <input class="bld__chk" type="checkbox" role="switch" value="s2">
+              <span class="bld__ico" aria-hidden="true">₿</span>
+              <span class="bld__info">
+                <span class="bld__name">S2 · <span lang="en">Price alerts</span><span lang="es">Alertas de precio</span></span>
+                <span class="bld__desc"><span lang="en">Crypto alerts at your levels</span><span lang="es">Alertas cripto en tus niveles</span></span>
+                <span class="bld__px">USD 100–150 · 2–4 <span lang="en">days</span><span lang="es">días</span></span>
+              </span>
+              <span class="bld__sw" aria-hidden="true"></span>
+            </label>
+            <label class="bld__mod" data-mod="s3">
+              <input class="bld__chk" type="checkbox" role="switch" value="s3">
+              <span class="bld__ico" aria-hidden="true">⛨</span>
+              <span class="bld__info">
+                <span class="bld__name">S3 · <span lang="en">Moderation</span><span lang="es">Moderación</span></span>
+                <span class="bld__desc"><span lang="en">Deletes spam and seed-phrase scams</span><span lang="es">Borra spam y estafas de seed phrase</span></span>
+                <span class="bld__px">USD 120–180 · 4–6 <span lang="en">days</span><span lang="es">días</span></span>
+              </span>
+              <span class="bld__sw" aria-hidden="true"></span>
+            </label>
+          </div>
+          <div class="bld__phone">
+            <div class="phone">
+              <div class="phone__bar">
+                <span class="phone__ava" aria-hidden="true">LCA</span>
+                <span class="phone__who"><b>LCA Demo Community</b><small><span lang="en">group · bot online</span><span lang="es">grupo · bot online</span></small></span>
+                <span class="live__tag">DEMO</span>
+              </div>
+              <ol class="phone__chat" id="bldChat" aria-live="polite" aria-label="Demo chat"></ol>
+              <div class="phone__input" aria-hidden="true"><span lang="en">Message</span><span lang="es">Mensaje</span><i></i></div>
+            </div>
+            <p class="bld__note"><span lang="en">Demo simulation: fictional chat, users and messages.</span><span lang="es">Simulación de demo: chat, usuarios y mensajes ficticios.</span></p>
+          </div>
+          <div class="bld__total">
+            <p class="bld__title"><span lang="en">Estimated price</span><span lang="es">Precio estimado</span></p>
+            <p class="bld__sum"><s class="bld__old" id="bldOld"></s> <b class="bld__price" id="bldPrice">USD 100–150</b></p>
+            <p class="bld__save" id="bldSave" aria-live="polite"></p>
+            <p class="bld__hint"><span lang="en">2 modules −15% · all 3 = Community Pack (~25% off). Fixed price, agreed in writing.</span><span lang="es">2 módulos −15% · los 3 = Pack Comunidad (~25% menos). Precio cerrado, acordado por escrito.</span></p>
+            <a class="btn btn--primary bld__order" href="#contact" id="bldOrder"><span lang="en">Order this bot</span><span lang="es">Pedir este bot</span></a>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -579,22 +675,6 @@
 
           <article class="project reveal">
             <div class="project__head">
-              <h3>ARDC · Alto Riesgo Degens Club</h3>
-              <span class="badge badge--ok"><span lang="en">Now · with a partner</span><span lang="es">Hoy · con un socio</span></span>
-            </div>
-            <a class="shot" href="https://ardc.club" target="_blank" rel="noopener">
-              <img loading="lazy" decoding="async" src="assets/ardc-site.jpg" alt="ARDC home page: Memecoins with your eyes open" width="1200" height="750">
-            </a>
-            <p>
-              <span lang="en">A Spanish-speaking community for high-risk crypto, focused on memecoin trading, which I co-run with a partner. Risk comes first: before every entry we check liquidity, holders, contract permissions (mint, freeze, honeypot) and locked liquidity. There is a free token analyzer with AI risk analysis, every trade goes into a public record (wins and losses), and the site has anti-scam security guides. No promises of returns.</span>
-              <span lang="es">Comunidad de habla hispana de cripto de alto riesgo, enfocada en trading de memecoins, que co-dirijo con un socio. Primero el riesgo: antes de cada entrada se revisan liquidez, holders, permisos del contrato (mint, freeze, honeypot) y liquidez bloqueada. Tiene un analizador de tokens gratuito con análisis de riesgo con IA, cada trade queda en un registro público (ganadores y perdedores) y la web tiene guías de seguridad anti-scam. Sin promesas de rentabilidad.</span>
-            </p>
-            <p class="chips"><span>Memecoins</span><span>Solana · BNB Chain · Base</span><span><span lang="en">AI risk analysis</span><span lang="es">Análisis de riesgo con IA</span></span><span><span lang="en">Public trade record</span><span lang="es">Registro público de trades</span></span><span>Anti-scam</span></p>
-            <a class="link" href="https://ardc.club" target="_blank" rel="noopener">ardc.club ↗</a>
-          </article>
-
-          <article class="project reveal">
-            <div class="project__head">
               <h3>LCA ITECH / LCA Trading</h3>
               <span class="badge"><span lang="en">2022 → today</span><span lang="es">2022 → hoy</span></span>
             </div>
@@ -606,7 +686,7 @@
             <a class="link" href="https://x.com/LCA_ITECH" target="_blank" rel="noopener">x.com/LCA_ITECH ↗</a>
           </article>
 
-          <article class="project project--gpt reveal">
+          <article class="project project--gpt project--wide reveal">
             <div class="project__head">
               <h3>LCA-GPT</h3>
               <span class="badge"><span lang="en">Internal tool · Under evaluation</span><span lang="es">Herramienta interna · En evaluación</span></span>
@@ -826,15 +906,6 @@
               <p class="chips"><span>Telegram Bot API</span><span>Python</span><span><span lang="en">Exchange APIs</span><span lang="es">APIs de exchanges</span></span></p>
             </div>
           </li>
-          <li class="tl reveal">
-            <p class="tl__date"><span lang="en">Now</span><span lang="es">Hoy</span></p>
-            <div class="tl__card">
-              <h3>ARDC · Alto Riesgo Degens Club</h3>
-              <p><span lang="en">With a partner, I co-run a high-risk crypto community focused on memecoin trading: risk checks before every entry, a public trade record with wins and losses, and anti-scam guides.</span><span lang="es">Con un socio co-dirijo una comunidad cripto de alto riesgo enfocada en trading de memecoins: chequeo de riesgo antes de cada entrada, registro público de trades con ganadores y perdedores, y guías anti-scam.</span></p>
-              <p class="chips"><span>Memecoins</span><span><span lang="en">Risk management</span><span lang="es">Gestión de riesgo</span></span><span>Anti-scam</span></p>
-              <a class="link" href="https://ardc.club" target="_blank" rel="noopener">ardc.club ↗</a>
-            </div>
-          </li>
           <li class="tl tl--now reveal">
             <p class="tl__date"><span lang="en">Now</span><span lang="es">Hoy</span></p>
             <div class="tl__card">
@@ -875,15 +946,14 @@
           <p class="kicker">06 · <span lang="en">Community experience</span><span lang="es">Experiencia en comunidades</span></p>
           <h2><span lang="en">I know crypto communities from the inside</span><span lang="es">Conozco las comunidades cripto desde adentro</span></h2>
           <p class="section__sub">
-            <span lang="en">I've been in crypto since 2020. Since 2022 I run the LCA Trading community, and today I also co-run ARDC, a memecoin trading community, with a partner. I share crypto, trading and AI content on X. I know what members ask, how scams work and what admins need.</span>
-            <span lang="es">Estoy en cripto desde 2020. Desde 2022 llevo adelante la comunidad LCA Trading y hoy también co-dirijo con un socio ARDC, una comunidad de trading de memecoins. Comparto contenido de cripto, trading e IA en X. Sé qué pregunta la gente, cómo funcionan las estafas y qué necesitan los admins.</span>
+            <span lang="en">I've been in crypto since 2020. Since 2022 I run the LCA Trading community. I share crypto, trading and AI content on X. I know what members ask, how scams work and what admins need.</span>
+            <span lang="es">Estoy en cripto desde 2020. Desde 2022 llevo adelante la comunidad LCA Trading. Comparto contenido de cripto, trading e IA en X. Sé qué pregunta la gente, cómo funcionan las estafas y qué necesitan los admins.</span>
           </p>
         </header>
         <ul class="checklist reveal">
           <li><span lang="en">Telegram and Discord groups: moderation, onboarding and bots</span><span lang="es">Grupos de Telegram y Discord: moderación, onboarding y bots</span></li>
           <li><span lang="en">Crypto education: spot, perpetuals, leverage, fees and risk</span><span lang="es">Educación cripto: spot, perpetuos, apalancamiento, fees y riesgo</span></li>
           <li><span lang="en">Exchange referral programs and partner integrations</span><span lang="es">Programas de referidos de exchanges e integraciones con partners</span></li>
-          <li><span lang="en">High-risk / memecoin trading with risk rules and anti-scam checks (ARDC)</span><span lang="es">Trading de alto riesgo / memecoins con reglas de riesgo y chequeos anti-scam (ARDC)</span></li>
           <li><span lang="en">Dashboards and alerts for members</span><span lang="es">Dashboards y alertas para miembros</span></li>
           <li><span lang="en">Content on X, Instagram and YouTube</span><span lang="es">Contenido en X, Instagram y YouTube</span></li>
         </ul>
@@ -1008,7 +1078,7 @@
               <div class="cf__f"><label for="cfCompany"><span lang="en">Company / project</span><span lang="es">Empresa / proyecto</span> <b aria-hidden="true">*</b></label><input id="cfCompany" name="company" type="text" required maxlength="160"><small class="cf__err" id="cfCompanyErr"></small></div>
               <div class="cf__f"><label for="cfLink"><span lang="en">Link (web, X or LinkedIn)</span><span lang="es">Link (web, X o LinkedIn)</span> <b aria-hidden="true">*</b></label><input id="cfLink" name="link" type="text" required inputmode="url" maxlength="300" placeholder="https://"><small class="cf__err" id="cfLinkErr"></small></div>
               <div class="cf__f cf__f--full"><label for="cfNeed"><span lang="en">What do you need?</span><span lang="es">¿Qué necesitás?</span> <b aria-hidden="true">*</b></label><textarea id="cfNeed" name="need" rows="3" required minlength="20" maxlength="3000"></textarea><small class="cf__err" id="cfNeedErr"></small></div>
-              <div class="cf__f"><label for="cfPkg"><span lang="en">Package of interest</span><span lang="es">Paquete de interés</span></label><select id="cfPkg" name="package"><option value="" data-en="— select —" data-es="— elegí —">— select —</option><option value="P0 Starter (USD 250)" data-en="P0 · Starter (USD 250)" data-es="P0 · Starter (USD 250)">P0 · Starter (USD 250)</option><option value="P1 Community Alert Bot" data-en="P1 · Community Alert Bot" data-es="P1 · Community Alert Bot">P1 · Community Alert Bot</option><option value="P2 Market Data API + Dashboard" data-en="P2 · Market Data API + Dashboard" data-es="P2 · Market Data API + Dashboard">P2 · Market Data API + Dashboard</option><option value="P3 Onboarding & Referral" data-en="P3 · Onboarding &amp; Referral" data-es="P3 · Onboarding y referidos">P3 · Onboarding &amp; Referral</option><option value="P4 AI Support Agent" data-en="P4 · AI Support Agent" data-es="P4 · Agente de soporte con IA">P4 · AI Support Agent</option><option value="P5 Part-time partner" data-en="P5 · Part-time technical partner" data-es="P5 · Partner técnico part-time">P5 · Part-time technical partner</option><option value="P6 AI automation consulting" data-en="P6 · AI automation consulting" data-es="P6 · Consultoría en automatización IA">P6 · AI automation consulting</option><option value="P7 AI assistant & model strategy" data-en="P7 · AI assistant &amp; model strategy" data-es="P7 · Asistente IA y estrategia de modelos">P7 · AI assistant &amp; model strategy</option><option value="P8 interest (in development)" data-en="P8 · Interested (in development)" data-es="P8 · Me interesa (en desarrollo)">P8 · Interested (in development)</option><option value="Not sure" data-en="Not sure" data-es="No estoy seguro">Not sure</option></select></div>
+              <div class="cf__f"><label for="cfPkg"><span lang="en">Package of interest</span><span lang="es">Paquete de interés</span></label><select id="cfPkg" name="package"><option value="" data-en="— select —" data-es="— elegí —">— select —</option><option value="P0 Starter (USD 250)" data-en="P0 · Starter (USD 250)" data-es="P0 · Starter (USD 250)">P0 · Starter (USD 250)</option><option value="S1 Telegram FAQ bot" data-en="S1 · Telegram FAQ bot (USD 100–150)" data-es="S1 · Bot de preguntas frecuentes (USD 100–150)">S1 · Telegram FAQ bot (USD 100–150)</option><option value="S2 Price alert bot" data-en="S2 · Price alert bot (USD 100–150)" data-es="S2 · Bot de alertas de precio (USD 100–150)">S2 · Price alert bot (USD 100–150)</option><option value="S3 Moderation bot" data-en="S3 · Moderation bot (USD 120–180)" data-es="S3 · Bot de moderación (USD 120–180)">S3 · Moderation bot (USD 120–180)</option><option value="Combo 2 modules (S1-S3, -15%)" data-en="Combo · 2 modules (−15%)" data-es="Combo · 2 módulos (−15%)">Combo · 2 modules (−15%)</option><option value="Pack Comunidad S1+S2+S3 (USD 250-350)" data-en="Community Pack · S1 + S2 + S3 (USD 250–350)" data-es="Pack Comunidad · S1 + S2 + S3 (USD 250–350)">Community Pack · S1 + S2 + S3 (USD 250–350)</option><option value="P1 Community Alert Bot" data-en="P1 · Community Alert Bot" data-es="P1 · Community Alert Bot">P1 · Community Alert Bot</option><option value="P2 Market Data API + Dashboard" data-en="P2 · Market Data API + Dashboard" data-es="P2 · Market Data API + Dashboard">P2 · Market Data API + Dashboard</option><option value="P3 Onboarding & Referral" data-en="P3 · Onboarding &amp; Referral" data-es="P3 · Onboarding y referidos">P3 · Onboarding &amp; Referral</option><option value="P4 AI Support Agent" data-en="P4 · AI Support Agent" data-es="P4 · Agente de soporte con IA">P4 · AI Support Agent</option><option value="P5 Part-time partner" data-en="P5 · Part-time technical partner" data-es="P5 · Partner técnico part-time">P5 · Part-time technical partner</option><option value="P6 AI automation consulting" data-en="P6 · AI automation consulting" data-es="P6 · Consultoría en automatización IA">P6 · AI automation consulting</option><option value="P7 AI assistant & model strategy" data-en="P7 · AI assistant &amp; model strategy" data-es="P7 · Asistente IA y estrategia de modelos">P7 · AI assistant &amp; model strategy</option><option value="P8 interest (in development)" data-en="P8 · Interested (in development)" data-es="P8 · Me interesa (en desarrollo)">P8 · Interested (in development)</option><option value="Not sure" data-en="Not sure" data-es="No estoy seguro">Not sure</option></select></div>
               <div class="cf__f"><label for="cfBudget"><span lang="en">Approximate budget</span><span lang="es">Presupuesto aproximado</span></label><select id="cfBudget" name="budget"><option value="" data-en="— select —" data-es="— elegí —">— select —</option><option value="<500 USD" data-en="&lt; USD 500" data-es="&lt; USD 500">&lt; USD 500</option><option value="500-1500 USD" data-en="USD 500–1,500" data-es="USD 500–1.500">USD 500–1,500</option><option value="1500-3000 USD" data-en="USD 1,500–3,000" data-es="USD 1.500–3.000">USD 1,500–3,000</option><option value="3000+ USD" data-en="USD 3,000+" data-es="USD 3.000+">USD 3,000+</option><option value="Not sure" data-en="Not sure" data-es="No estoy seguro">Not sure</option></select></div>
               <div class="cf__f"><label for="cfTime"><span lang="en">Timeline</span><span lang="es">Plazo</span></label><select id="cfTime" name="timeline"><option value="" data-en="— select —" data-es="— elegí —">— select —</option><option value="ASAP (<2 weeks)" data-en="ASAP (&lt; 2 weeks)" data-es="Urgente (&lt; 2 semanas)">ASAP (&lt; 2 weeks)</option><option value="Within 1 month" data-en="Within 1 month" data-es="En 1 mes">Within 1 month</option><option value="1-3 months" data-en="1–3 months" data-es="1–3 meses">1–3 months</option><option value="Just exploring" data-en="Just exploring" data-es="Solo explorando">Just exploring</option></select></div>
               <div class="cf__f"><label for="cfLang"><span lang="en">Preferred language</span><span lang="es">Idioma preferido</span></label><select id="cfLang" name="preferred_language"><option value="Español">Español</option><option value="English">English</option><option value="Português">Português</option></select></div>
@@ -1019,7 +1089,7 @@
               <a class="link cf__mail" href="mailto:itech.lca@gmail.com?subject=Project%20inquiry"><span lang="en">or email itech.lca@gmail.com</span><span lang="es">o escribí a itech.lca@gmail.com</span></a>
             </div>
             <p class="cf__status" id="cfStatus" role="status" aria-live="polite" hidden></p>
-            <p class="cf__privacy"><span lang="en">Sent via FormSubmit to my inbox. Used only to reply; never shared. I review every request before scheduling any call.</span><span lang="es">Se envía por FormSubmit a mi correo. Solo lo uso para responderte; no se comparte. Reviso cada consulta antes de coordinar una llamada.</span></p>
+            <p class="cf__privacy"><span lang="en">Sent via FormSubmit to my inbox. Used only to reply; never shared. I review every request and reply in writing.</span><span lang="es">Se envía por FormSubmit a mi correo. Solo lo uso para responderte; no se comparte. Reviso cada consulta y te respondo por escrito.</span></p>
           </form>
           <aside class="contact__side">
             <p class="qr__hint"><span lang="en">On desktop? Scan with your phone:</span><span lang="es">¿Estás en la compu? Escaneá con el celular:</span></p>
@@ -1062,5 +1132,6 @@
   <script src="assets/fx.js" defer></script>
   <script src="assets/live.js" defer></script>
   <script src="assets/contact.js" defer></script>
+  <script src="assets/builder.js" defer></script>
 </body>
 </html>
