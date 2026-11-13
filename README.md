@@ -15,7 +15,7 @@ index.html            all the content (one page)
 styles.css            site styles
 script.js             language toggle, mobile menu, reveal animations, "one section per screen" mode
 assets/assistant.js   AI assistant chat widget (+ assistant.css)
-assets/builder.js     modular bot builder (#builder): S1–S3 toggles, simulated Telegram chat, combo price, pre-fills the contact form
+assets/armador.js     project builder (#builder): 4-step wizard (type → modules with live demo → platform & AI → summary), pre-fills the contact form; saves only the choices in localStorage
 assets/               images, favicons, certificates, social preview (og.jpg)
 robots.txt, sitemap.xml, CNAME, .nojekyll
 .github/              checks (script + workflows)

@@ -553,66 +553,58 @@
     <section class="section" id="builder">
       <div class="container">
         <header class="section__head reveal">
-          <p class="kicker">S1 · S2 · S3 · <span lang="en">Bot builder</span><span lang="es">Configurador</span></p>
-          <h2><span lang="en">Build your bot, module by module</span><span lang="es">Armá tu bot por módulos</span></h2>
+          <p class="kicker"><span lang="en">Project builder · 4 steps</span><span lang="es">Armador de proyectos · 4 pasos</span></p>
+          <h2><span lang="en">Build your project step by step</span><span lang="es">Armá tu proyecto paso a paso</span></h2>
           <p class="section__sub">
-            <span lang="en">Turn modules on and off and watch what the bot does in a Telegram group. The price updates with the combo discount.</span>
-            <span lang="es">Prendé y apagá módulos y mirá qué hace el bot en un grupo de Telegram. El precio se actualiza con el descuento por combo.</span>
+            <span lang="en">Pick what you need, turn modules on and watch them work in a demo, choose platform and intelligence, and send me the request already filled in.</span>
+            <span lang="es">Elegí qué necesitás, prendé módulos y miralos funcionar en una demo, elegí plataforma e inteligencia, y mandame el pedido ya armado.</span>
           </p>
         </header>
-        <div class="bld reveal" id="bld">
-          <div class="bld__mods" role="group" aria-labelledby="bldModsTitle">
-            <p class="bld__title" id="bldModsTitle"><span lang="en">Modules</span><span lang="es">Módulos</span></p>
-            <label class="bld__mod" data-mod="s1">
-              <input class="bld__chk" type="checkbox" role="switch" value="s1" checked>
-              <span class="bld__ico" aria-hidden="true">?</span>
-              <span class="bld__info">
-                <span class="bld__name">S1 · <span lang="en">FAQ bot</span><span lang="es">Preguntas frecuentes</span></span>
-                <span class="bld__desc"><span lang="en">Answers how to buy, links, rules</span><span lang="es">Responde cómo comprar, links, reglas</span></span>
-                <span class="bld__px">USD 100–150 · 3–5 <span lang="en">days</span><span lang="es">días</span></span>
-              </span>
-              <span class="bld__sw" aria-hidden="true"></span>
-            </label>
-            <label class="bld__mod" data-mod="s2">
-              <input class="bld__chk" type="checkbox" role="switch" value="s2">
-              <span class="bld__ico" aria-hidden="true">₿</span>
-              <span class="bld__info">
-                <span class="bld__name">S2 · <span lang="en">Price alerts</span><span lang="es">Alertas de precio</span></span>
-                <span class="bld__desc"><span lang="en">Crypto alerts at your levels</span><span lang="es">Alertas cripto en tus niveles</span></span>
-                <span class="bld__px">USD 100–150 · 2–4 <span lang="en">days</span><span lang="es">días</span></span>
-              </span>
-              <span class="bld__sw" aria-hidden="true"></span>
-            </label>
-            <label class="bld__mod" data-mod="s3">
-              <input class="bld__chk" type="checkbox" role="switch" value="s3">
-              <span class="bld__ico" aria-hidden="true">⛨</span>
-              <span class="bld__info">
-                <span class="bld__name">S3 · <span lang="en">Moderation</span><span lang="es">Moderación</span></span>
-                <span class="bld__desc"><span lang="en">Deletes spam and seed-phrase scams</span><span lang="es">Borra spam y estafas de seed phrase</span></span>
-                <span class="bld__px">USD 120–180 · 4–6 <span lang="en">days</span><span lang="es">días</span></span>
-              </span>
-              <span class="bld__sw" aria-hidden="true"></span>
-            </label>
-          </div>
-          <div class="bld__phone">
-            <div class="phone">
-              <div class="phone__bar">
-                <span class="phone__ava" aria-hidden="true">LCA</span>
-                <span class="phone__who"><b>LCA Demo Community</b><small><span lang="en">group · bot online</span><span lang="es">grupo · bot online</span></small></span>
-                <span class="live__tag">DEMO</span>
-              </div>
-              <ol class="phone__chat" id="bldChat" aria-live="polite" aria-label="Demo chat"></ol>
-              <div class="phone__input" aria-hidden="true"><span lang="en">Message</span><span lang="es">Mensaje</span><i></i></div>
+        <p class="arm__nojs"><span lang="en">The builder needs JavaScript. You can see every package in <a href="#services">Services</a> or write to me from <a href="#contact">Contact</a>.</span><span lang="es">El armador necesita JavaScript. Podés ver todos los paquetes en <a href="#services">Servicios</a> o escribirme desde <a href="#contact">Contacto</a>.</span></p>
+        <div class="arm reveal" id="arm" hidden>
+          <ol class="arm__prog" id="armProg">
+            <li><button type="button" class="arm__pstep" data-go="0"><b>1</b><span lang="en">What you want</span><span lang="es">Qué querés</span></button></li>
+            <li><button type="button" class="arm__pstep" data-go="1"><b>2</b><span lang="en">Modules</span><span lang="es">Módulos</span></button></li>
+            <li><button type="button" class="arm__pstep" data-go="2"><b>3</b><span lang="en">Platform &amp; brain</span><span lang="es">Plataforma y cerebro</span></button></li>
+            <li><button type="button" class="arm__pstep" data-go="3"><b>4</b><span lang="en">Summary</span><span lang="es">Resumen</span></button></li>
+          </ol>
+          <div class="arm__bar" aria-hidden="true"><i id="armBar"></i></div>
+
+          <div class="arm__steps">
+            <div class="arm__step" data-step="0" role="group" aria-labelledby="armT0">
+              <h3 class="arm__title" id="armT0"><span lang="en">1 · Choose what you want</span><span lang="es">1 · Elegí qué querés</span></h3>
+              <div class="arm__cats" id="armCats"></div>
             </div>
-            <p class="bld__note"><span lang="en">Demo simulation: fictional chat, users and messages.</span><span lang="es">Simulación de demo: chat, usuarios y mensajes ficticios.</span></p>
+            <div class="arm__step" data-step="1" role="group" aria-labelledby="armT1" hidden>
+              <h3 class="arm__title" id="armT1"><span lang="en">2 · Build it with modules</span><span lang="es">2 · Armalo por módulos</span></h3>
+              <p class="arm__help"><span lang="en">Turn modules on (or drag them onto the preview) and watch each one work.</span><span lang="es">Prendé módulos (o arrastralos a la vista previa) y mirá cómo funciona cada uno.</span></p>
+              <div class="arm__mods-wrap">
+                <div class="arm__mods" id="armMods"></div>
+                <div class="arm__preview" id="armDrop">
+                  <div class="arm__pv" id="armPv"></div>
+                  <p class="bld__note"><span lang="en">Demo simulation: fictional chat, users and data.</span><span lang="es">Simulación de demo: chat, usuarios y datos ficticios.</span></p>
+                </div>
+              </div>
+            </div>
+            <div class="arm__step" data-step="2" role="group" aria-labelledby="armT2" hidden>
+              <h3 class="arm__title" id="armT2"><span lang="en">3 · Platform and brain</span><span lang="es">3 · Plataforma y cerebro</span></h3>
+              <p class="arm__sub"><span lang="en">Where it runs (you can pick more than one)</span><span lang="es">Dónde funciona (podés elegir más de una)</span></p>
+              <div class="arm__chips" id="armPlat"></div>
+              <p class="arm__sub"><span lang="en">Intelligence level</span><span lang="es">Nivel de inteligencia</span></p>
+              <div class="arm__brains" id="armBrain"></div>
+            </div>
+            <div class="arm__step" data-step="3" role="group" aria-labelledby="armT3" hidden>
+              <h3 class="arm__title" id="armT3"><span lang="en">4 · Summary and request</span><span lang="es">4 · Resumen y pedido</span></h3>
+              <div class="arm__sum" id="armSum"></div>
+            </div>
           </div>
-          <div class="bld__total">
-            <p class="bld__title"><span lang="en">Estimated price</span><span lang="es">Precio estimado</span></p>
-            <p class="bld__sum"><s class="bld__old" id="bldOld"></s> <b class="bld__price" id="bldPrice">USD 100–150</b></p>
-            <p class="bld__save" id="bldSave" aria-live="polite"></p>
-            <p class="bld__hint"><span lang="en">2 modules −15% · all 3 = Community Pack (~25% off). Fixed price, agreed in writing.</span><span lang="es">2 módulos −15% · los 3 = Pack Comunidad (~25% menos). Precio cerrado, acordado por escrito.</span></p>
-            <a class="btn btn--primary bld__order" href="#contact" id="bldOrder"><span lang="en">Order this bot</span><span lang="es">Pedir este bot</span></a>
+
+          <div class="arm__nav">
+            <button type="button" class="btn btn--ghost btn--sm" id="armBack"><span lang="en">← Back</span><span lang="es">← Atrás</span></button>
+            <button type="button" class="arm__reset" id="armReset"><span lang="en">Start over</span><span lang="es">Empezar de nuevo</span></button>
+            <button type="button" class="btn btn--primary btn--sm" id="armNext"><span lang="en">Next →</span><span lang="es">Siguiente →</span></button>
           </div>
+          <p class="arm__live" id="armLive" aria-live="polite"></p>
         </div>
       </div>
     </section>
@@ -1078,7 +1070,7 @@
               <div class="cf__f"><label for="cfCompany"><span lang="en">Company / project</span><span lang="es">Empresa / proyecto</span> <b aria-hidden="true">*</b></label><input id="cfCompany" name="company" type="text" required maxlength="160"><small class="cf__err" id="cfCompanyErr"></small></div>
               <div class="cf__f"><label for="cfLink"><span lang="en">Link (web, X or LinkedIn)</span><span lang="es">Link (web, X o LinkedIn)</span> <b aria-hidden="true">*</b></label><input id="cfLink" name="link" type="text" required inputmode="url" maxlength="300" placeholder="https://"><small class="cf__err" id="cfLinkErr"></small></div>
               <div class="cf__f cf__f--full"><label for="cfNeed"><span lang="en">What do you need?</span><span lang="es">¿Qué necesitás?</span> <b aria-hidden="true">*</b></label><textarea id="cfNeed" name="need" rows="3" required minlength="20" maxlength="3000"></textarea><small class="cf__err" id="cfNeedErr"></small></div>
-              <div class="cf__f"><label for="cfPkg"><span lang="en">Package of interest</span><span lang="es">Paquete de interés</span></label><select id="cfPkg" name="package"><option value="" data-en="— select —" data-es="— elegí —">— select —</option><option value="P0 Starter (USD 250)" data-en="P0 · Starter (USD 250)" data-es="P0 · Starter (USD 250)">P0 · Starter (USD 250)</option><option value="S1 Telegram FAQ bot" data-en="S1 · Telegram FAQ bot (USD 100–150)" data-es="S1 · Bot de preguntas frecuentes (USD 100–150)">S1 · Telegram FAQ bot (USD 100–150)</option><option value="S2 Price alert bot" data-en="S2 · Price alert bot (USD 100–150)" data-es="S2 · Bot de alertas de precio (USD 100–150)">S2 · Price alert bot (USD 100–150)</option><option value="S3 Moderation bot" data-en="S3 · Moderation bot (USD 120–180)" data-es="S3 · Bot de moderación (USD 120–180)">S3 · Moderation bot (USD 120–180)</option><option value="Combo 2 modules (S1-S3, -15%)" data-en="Combo · 2 modules (−15%)" data-es="Combo · 2 módulos (−15%)">Combo · 2 modules (−15%)</option><option value="Pack Comunidad S1+S2+S3 (USD 250-350)" data-en="Community Pack · S1 + S2 + S3 (USD 250–350)" data-es="Pack Comunidad · S1 + S2 + S3 (USD 250–350)">Community Pack · S1 + S2 + S3 (USD 250–350)</option><option value="P1 Community Alert Bot" data-en="P1 · Community Alert Bot" data-es="P1 · Community Alert Bot">P1 · Community Alert Bot</option><option value="P2 Market Data API + Dashboard" data-en="P2 · Market Data API + Dashboard" data-es="P2 · Market Data API + Dashboard">P2 · Market Data API + Dashboard</option><option value="P3 Onboarding & Referral" data-en="P3 · Onboarding &amp; Referral" data-es="P3 · Onboarding y referidos">P3 · Onboarding &amp; Referral</option><option value="P4 AI Support Agent" data-en="P4 · AI Support Agent" data-es="P4 · Agente de soporte con IA">P4 · AI Support Agent</option><option value="P5 Part-time partner" data-en="P5 · Part-time technical partner" data-es="P5 · Partner técnico part-time">P5 · Part-time technical partner</option><option value="P6 AI automation consulting" data-en="P6 · AI automation consulting" data-es="P6 · Consultoría en automatización IA">P6 · AI automation consulting</option><option value="P7 AI assistant & model strategy" data-en="P7 · AI assistant &amp; model strategy" data-es="P7 · Asistente IA y estrategia de modelos">P7 · AI assistant &amp; model strategy</option><option value="P8 interest (in development)" data-en="P8 · Interested (in development)" data-es="P8 · Me interesa (en desarrollo)">P8 · Interested (in development)</option><option value="Not sure" data-en="Not sure" data-es="No estoy seguro">Not sure</option></select></div>
+              <div class="cf__f"><label for="cfPkg"><span lang="en">Package of interest</span><span lang="es">Paquete de interés</span></label><select id="cfPkg" name="package"><option value="" data-en="— select —" data-es="— elegí —">— select —</option><option value="P0 Starter (USD 250)" data-en="P0 · Starter (USD 250)" data-es="P0 · Starter (USD 250)">P0 · Starter (USD 250)</option><option value="S1 Telegram FAQ bot" data-en="S1 · Telegram FAQ bot (USD 100–150)" data-es="S1 · Bot de preguntas frecuentes (USD 100–150)">S1 · Telegram FAQ bot (USD 100–150)</option><option value="S2 Price alert bot" data-en="S2 · Price alert bot (USD 100–150)" data-es="S2 · Bot de alertas de precio (USD 100–150)">S2 · Price alert bot (USD 100–150)</option><option value="S3 Moderation bot" data-en="S3 · Moderation bot (USD 120–180)" data-es="S3 · Bot de moderación (USD 120–180)">S3 · Moderation bot (USD 120–180)</option><option value="Combo 2 modules (S1-S3, -15%)" data-en="Combo · 2 modules (−15%)" data-es="Combo · 2 módulos (−15%)">Combo · 2 modules (−15%)</option><option value="Pack Comunidad S1+S2+S3 (USD 250-350)" data-en="Community Pack · S1 + S2 + S3 (USD 250–350)" data-es="Pack Comunidad · S1 + S2 + S3 (USD 250–350)">Community Pack · S1 + S2 + S3 (USD 250–350)</option><option value="P1 Community Alert Bot" data-en="P1 · Community Alert Bot" data-es="P1 · Community Alert Bot">P1 · Community Alert Bot</option><option value="P2 Market Data API + Dashboard" data-en="P2 · Market Data API + Dashboard" data-es="P2 · Market Data API + Dashboard">P2 · Market Data API + Dashboard</option><option value="P3 Onboarding & Referral" data-en="P3 · Onboarding &amp; Referral" data-es="P3 · Onboarding y referidos">P3 · Onboarding &amp; Referral</option><option value="P4 AI Support Agent" data-en="P4 · AI Support Agent" data-es="P4 · Agente de soporte con IA">P4 · AI Support Agent</option><option value="P5 Part-time partner" data-en="P5 · Part-time technical partner" data-es="P5 · Partner técnico part-time">P5 · Part-time technical partner</option><option value="P6 AI automation consulting" data-en="P6 · AI automation consulting" data-es="P6 · Consultoría en automatización IA">P6 · AI automation consulting</option><option value="P7 AI assistant & model strategy" data-en="P7 · AI assistant &amp; model strategy" data-es="P7 · Asistente IA y estrategia de modelos">P7 · AI assistant &amp; model strategy</option><option value="P8 interest (in development)" data-en="P8 · Interested (in development)" data-es="P8 · Me interesa (en desarrollo)">P8 · Interested (in development)</option><option value="Custom project (project builder)" data-en="Custom project (project builder)" data-es="Proyecto a medida (armador)">Custom project (project builder)</option><option value="Not sure" data-en="Not sure" data-es="No estoy seguro">Not sure</option></select></div>
               <div class="cf__f"><label for="cfBudget"><span lang="en">Approximate budget</span><span lang="es">Presupuesto aproximado</span></label><select id="cfBudget" name="budget"><option value="" data-en="— select —" data-es="— elegí —">— select —</option><option value="<500 USD" data-en="&lt; USD 500" data-es="&lt; USD 500">&lt; USD 500</option><option value="500-1500 USD" data-en="USD 500–1,500" data-es="USD 500–1.500">USD 500–1,500</option><option value="1500-3000 USD" data-en="USD 1,500–3,000" data-es="USD 1.500–3.000">USD 1,500–3,000</option><option value="3000+ USD" data-en="USD 3,000+" data-es="USD 3.000+">USD 3,000+</option><option value="Not sure" data-en="Not sure" data-es="No estoy seguro">Not sure</option></select></div>
               <div class="cf__f"><label for="cfTime"><span lang="en">Timeline</span><span lang="es">Plazo</span></label><select id="cfTime" name="timeline"><option value="" data-en="— select —" data-es="— elegí —">— select —</option><option value="ASAP (<2 weeks)" data-en="ASAP (&lt; 2 weeks)" data-es="Urgente (&lt; 2 semanas)">ASAP (&lt; 2 weeks)</option><option value="Within 1 month" data-en="Within 1 month" data-es="En 1 mes">Within 1 month</option><option value="1-3 months" data-en="1–3 months" data-es="1–3 meses">1–3 months</option><option value="Just exploring" data-en="Just exploring" data-es="Solo explorando">Just exploring</option></select></div>
               <div class="cf__f"><label for="cfLang"><span lang="en">Preferred language</span><span lang="es">Idioma preferido</span></label><select id="cfLang" name="preferred_language"><option value="Español">Español</option><option value="English">English</option><option value="Português">Português</option></select></div>
@@ -1132,6 +1124,6 @@
   <script src="assets/fx.js" defer></script>
   <script src="assets/live.js" defer></script>
   <script src="assets/contact.js" defer></script>
-  <script src="assets/builder.js" defer></script>
+  <script src="assets/armador.js" defer></script>
 </body>
 </html>
