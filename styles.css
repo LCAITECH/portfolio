@@ -647,7 +647,6 @@ html.deck #live .section__head{margin-bottom:18px}
 .scard--sheet .scard__row{border-top:1px solid var(--line)}
 .scard--alert{border-color:rgba(251,191,36,.45)}
 .scard--dev{border-style:dashed;border-color:rgba(167,139,250,.5)}
-.scard--chat .scard__row:nth-child(2){color:var(--txt)}
 @keyframes armRow{from{opacity:0;transform:translateX(-8px)}}
 .scard__tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:4px 0}
 .scard__tile{display:flex;flex-direction:column;padding:6px 8px;border-radius:8px;background:rgba(34,211,238,.06);border:1px solid rgba(34,211,238,.18);animation:armRow .4s var(--d,0s) both ease;min-width:0}

@@ -24,7 +24,7 @@
       plat: ['telegram'], brain: 'fixed' },
     { id: 'business', ico: '⚙️', skin: 'screen', pk: 'P0 · P6',
       n: { en: 'Automate your business', es: 'Automatizar tu negocio' },
-      d: { en: 'Emails, Google Sheets, automatic reports and WhatsApp answers, without manual work.', es: 'Mails, Google Sheets, reportes automáticos y respuestas por WhatsApp, sin trabajo manual.' },
+      d: { en: 'Emails, Google Sheets and automatic reports, without manual work.', es: 'Mails, Google Sheets y reportes automáticos, sin trabajo manual.' },
       head: { en: 'Your business panel', es: 'Panel de tu negocio' }, plat: ['telegram'], brain: 'basic' },
     { id: 'assistant', ico: '🧠', skin: 'phone', pk: 'P4 · P7',
       n: { en: 'AI assistant', es: 'Asistente con IA' },
@@ -49,8 +49,7 @@
     business: [
       { id: 'gmail', tag: 'Gmail', ico: '✉', t: 'auto', n: { en: 'Gmail: emails sorted by AI', es: 'Gmail: mails clasificados con IA' }, d: { en: 'Each email tagged and routed', es: 'Cada mail etiquetado y derivado' } },
       { id: 'sheets', tag: 'Sheets', ico: '▦', t: 'auto', n: { en: 'Google Sheets automation', es: 'Automatización de Google Sheets' }, d: { en: 'Forms and orders into your sheet', es: 'Formularios y pedidos a tu planilla' } },
-      { id: 'reports', tag: '+', ico: '▤', t: 'auto', n: { en: 'Automatic reports', es: 'Reportes automáticos' }, d: { en: 'Weekly summary by email', es: 'Resumen semanal por mail' } },
-      { id: 'wa', tag: '+', ico: '☏', t: 'q', n: { en: 'WhatsApp FAQ', es: 'Preguntas frecuentes por WhatsApp' }, d: { en: 'Automatic answers to common questions', es: 'Respuestas automáticas a consultas comunes' } }
+      { id: 'reports', tag: '+', ico: '▤', t: 'auto', n: { en: 'Automatic reports', es: 'Reportes automáticos' }, d: { en: 'Weekly summary by email', es: 'Resumen semanal por mail' } }
     ],
     assistant: [
       { id: 'kb', tag: 'P4', ico: '📄', t: 'p', from: 1500, days: D(14, 28), cf: 'P4 AI Support Agent', n: { en: 'Knowledge base', es: 'Base de conocimiento' }, d: { en: 'Answers from your docs, with sources', es: 'Responde desde tus docs, con fuente' } },
@@ -66,7 +65,7 @@
     ]
   };
   var PLATS = [
-    { id: 'telegram', n: 'Telegram' }, { id: 'discord', n: 'Discord' }, { id: 'whatsapp', n: 'WhatsApp' }, { id: 'web', n: 'Web' }
+    { id: 'telegram', n: 'Telegram' }, { id: 'discord', n: 'Discord' }, { id: 'web', n: 'Web' }
   ];
   var BRAINS = [
     { id: 'fixed', n: { en: 'Fixed answers', es: 'Respuestas fijas' }, d: { en: 'Commands and texts you define', es: 'Comandos y textos que vos definís' } },
@@ -100,9 +99,10 @@
       Object.keys(S.mods).forEach(function (k) {
         if (saved.mods && Array.isArray(saved.mods[k])) S.mods[k] = saved.mods[k].filter(function (id) { return MODS[k].some(function (m) { return m.id === id; }); });
       });
-      if (saved.plat && typeof saved.plat === 'object') Object.keys(saved.plat).forEach(function (k) { if (Array.isArray(saved.plat[k])) S.plat[k] = saved.plat[k].filter(function (p) { return PLATS.some(function (x) { return x.id === p; }); }); });
-      if (saved.brain && typeof saved.brain === 'object') Object.keys(saved.brain).forEach(function (k) { if (BRAIN_RANK[saved.brain[k]] != null) S.brain[k] = saved.brain[k]; });
-      S.step = Math.max(0, Math.min(3, saved.step | 0));
+      if (saved.plat && typeof saved.plat === 'object') Object.keys(saved.plat).forEach(function (k) { if (S.mods[k] && Array.isArray(saved.plat[k])) S.plat[k] = saved.plat[k].filter(function (p) { return PLATS.some(function (x) { return x.id === p; }); }); });
+      if (saved.brain && typeof saved.brain === 'object') Object.keys(saved.brain).forEach(function (k) { if (S.mods[k] && BRAIN_RANK[saved.brain[k]] != null) S.brain[k] = saved.brain[k]; });
+      S.step = Math.max(0, Math.min(3, saved.step | 0, maxStep()));
+      save();
     }
   } catch (e) {}
   function save() {
@@ -334,7 +334,7 @@
         { who: 'Marta', c: 'msg--u1', text: es ? 'Hola de nuevo' : 'Hi again' }, { typing: 700 },
         { who: 'bot', text: es ? '¡Hola Marta! La última vez me consultaste por un cambio de talle. ¿Seguimos con eso? 🧠' : 'Hi Marta! Last time you asked about a size exchange. Shall we continue? 🧠' }];
       case 'multi': return [
-        { sys: es ? '⇄ Misma conversación desde Telegram, WhatsApp y la web' : '⇄ Same conversation from Telegram, WhatsApp and the web' }, { typing: 500 },
+        { sys: es ? '⇄ Misma conversación desde Telegram, Discord y la web' : '⇄ Same conversation from Telegram, Discord and the web' }, { typing: 500 },
         { who: 'bot', text: es ? 'Vi que empezaste por la web: sigo acá con tu consulta, sin repetir nada.' : 'You started on the web: I continue here with your question, no need to repeat.' }];
       case 'inner': return [
         { who: es ? 'Equipo' : 'Team', c: 'msg--u2', text: es ? 'Resumime este contrato en 5 puntos' : 'Summarize this contract in 5 points' }, { typing: 800 },
@@ -342,7 +342,6 @@
       case 'gmail': return [{ card: { ico: '✉', h: 'Gmail', rows: es ? ['Nuevo mail: "Quiero un presupuesto"', '→ clasificado con IA: Ventas ✓', '→ derivado a ventas@ y respondido con plantilla'] : ['New email: "I want a quote"', '→ sorted by AI: Sales ✓', '→ routed to sales@ and answered with a template'] } }];
       case 'sheets': return [{ card: { ico: '▦', h: 'Google Sheets', k: 'scard--sheet', rows: es ? ['+ fila: Cliente A · Pedido web · Nuevo', '+ fila: Cliente B · Formulario · En curso', '+ fila: Cliente C · Mail · Respondido'] : ['+ row: Client A · Web order · New', '+ row: Client B · Form · In progress', '+ row: Client C · Email · Answered'] } }];
       case 'reports': return [{ card: { ico: '▤', h: es ? 'Reporte semanal' : 'Weekly report', bar: true, rows: es ? ['Generando el resumen de la semana…', '✓ Enviado por mail los lunes a las 9:00'] : ['Building the weekly summary…', '✓ Emailed every Monday at 9:00'] } }];
-      case 'wa': return [{ card: { ico: '☏', h: 'WhatsApp', k: 'scard--chat', rows: es ? ['Cliente: "¿Hasta qué hora atienden?"', 'Bot: "De lunes a viernes de 9 a 18. ¿Te ayudo con algo más?"'] : ['Customer: "What are your opening hours?"', 'Bot: "Monday to Friday, 9 to 18. Anything else?"'] } }];
       case 'prices': return [{ card: { ico: '▲', h: es ? 'Mercado' : 'Market', tiles: [['BTC', livePx('bitcoin') || (es ? 'en vivo' : 'live')], ['ETH', livePx('ethereum') || (es ? 'en vivo' : 'live')], ['SOL', livePx('solana') || (es ? 'en vivo' : 'live')]], rows: [es ? 'Fuente: CoinGecko · API REST propia' : 'Source: CoinGecko · your own REST API'] } }];
       case 'wallets': return [{ card: { ico: '◈', h: es ? 'Wallets' : 'Wallets', rows: es ? ['0x7a3…f19 · vigilada', '→ movimiento detectado: salida a un exchange'] : ['0x7a3…f19 · watched', '→ movement detected: transfer to an exchange'] } }];
       case 'alerts': return [{ card: { ico: '🔔', h: es ? 'Alerta enviada a Telegram' : 'Alert sent to Telegram', k: 'scard--alert', rows: [es ? 'BTC cruzó el nivel que configuraste' + (px ? ' · ' + px : '') : 'BTC crossed the level you set' + (px ? ' · ' + px : '')] } }];
