@@ -422,9 +422,7 @@ html.deck .hero > .container { margin-top: auto; margin-bottom: auto; }
 .live__spark{width:100%;height:34px;margin-top:auto;fill:none;stroke-width:1.6;vector-effect:non-scaling-stroke}
 .live__spark path{vector-effect:non-scaling-stroke}
 .live__spark.up{stroke:var(--ok)}.live__spark.dn{stroke:#f87171}.live__spark{stroke:var(--acc2)}
-.live__gauge{width:120px;height:67px;margin:4px auto 0;display:block}
-.live__gauge circle{fill:var(--txt)}
-.live__needle{stroke:var(--txt);stroke-width:2.5;stroke-linecap:round;transform-origin:50px 50px;transition:transform .8s ease}
+.live__gauge{width:100%;max-width:190px;height:auto;margin:2px auto 0;display:block;overflow:visible}
 .live__fngv{text-align:center;font-family:var(--mono);color:var(--txt)!important}
 .live__fngv b{font-size:1.3rem;margin-right:6px}
 .live__feed{display:flex;flex-direction:column;min-height:312px;background:linear-gradient(180deg,rgba(23,33,43,.92),rgba(14,22,33,.92))!important}
@@ -443,7 +441,7 @@ html.deck .hero > .container { margin-top: auto; margin-bottom: auto; }
 .live__src{width:100%;font-size:.72rem;color:var(--dim)}
 @media (max-width:1000px){.live{grid-template-columns:1fr}.live__feed{min-height:0}}
 @media (max-width:520px){.live__grid{gap:10px}.live .card{padding:12px}.live__px{font-size:1.1rem}.live__coin,.live__fng{min-height:132px}.live__ctas{margin-left:0}}
-@media (prefers-reduced-motion:reduce){.live-dot{animation:none}.live__needle{transition:none}}
+@media (prefers-reduced-motion:reduce){.live-dot{animation:none}}
 html.deck #live .section__head{margin-bottom:18px}
 @media (max-height:800px){html.deck #live .section__sub{display:none}html.deck #live h2{font-size:1.6rem}html.deck #live.section{padding:20px 0 24px}html.deck .live__coin,html.deck .live__fng{min-height:132px}html.deck .live__feed{min-height:280px}html.deck .live__msgs li{padding:5px 10px}}
 
@@ -776,4 +774,80 @@ html.deck #builder .section__head{margin-bottom:14px}
 @media (prefers-reduced-motion:reduce){
   .bld__mod,.bld__sw,.bld__sw::after,.bld__ico,.msg,.scard,.arm__cat,.arm__cico,.arm__bar i,.arm__chip,.arm__brain{transition:none}
   .arm__cat,.arm__step.is-in,.arm__step.is-back,.scard__row,.scard__tile,.scard__prog i,.arm__row,.bld__price.is-bump,.msg--spam.is-deleting,.dots i,.cf select.is-prefilled{animation:none}
+}
+
+/* --- #live inmersivo (assets/live.js) --- */
+.live-sec{position:relative;isolation:isolate;overflow:hidden}
+.live-sec::before{content:"";position:absolute;inset:-2px;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(600px circle at var(--gx,70%) var(--gy,30%),rgba(34,211,238,.10),transparent 60%),
+    radial-gradient(500px circle at 10% 90%,rgba(167,139,250,.10),transparent 60%),
+    linear-gradient(rgba(148,163,184,.07) 1px,transparent 1px) 0 0/44px 44px,
+    linear-gradient(90deg,rgba(148,163,184,.07) 1px,transparent 1px) 0 0/44px 44px;
+  -webkit-mask-image:radial-gradient(ellipse 85% 75% at 50% 45%,#000 40%,transparent 100%);mask-image:radial-gradient(ellipse 85% 75% at 50% 45%,#000 40%,transparent 100%);
+  animation:liveGrid 18s linear infinite;animation-play-state:paused}
+.live-sec.is-visible::before{animation-play-state:running}
+@keyframes liveGrid{to{background-position:0 0,0 0,0 44px,44px 0}}
+.live-sec::after{content:"";position:absolute;left:0;right:0;top:-30%;height:30%;z-index:-1;pointer-events:none;background:linear-gradient(180deg,transparent,rgba(34,211,238,.06),transparent);animation:liveScan 7s linear infinite;animation-play-state:paused}
+.live-sec.is-visible::after{animation-play-state:running}
+@keyframes liveScan{to{transform:translateY(480%)}}
+/* bordes con gradiente animado */
+@property --ang{syntax:"<angle>";inherits:false;initial-value:0deg}
+.live .card{position:relative}
+.live .card::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;
+  background:conic-gradient(from var(--ang),transparent 0 55%,rgba(34,211,238,.9) 70%,rgba(167,139,250,.9) 82%,transparent 95%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);
+  opacity:.55;animation:liveSpin 6s linear infinite;animation-play-state:paused}
+.live-sec.is-visible .live .card::before{animation-play-state:running}
+.live .card:nth-child(2)::before{animation-delay:-1.5s}.live .card:nth-child(3)::before{animation-delay:-3s}.live .card:nth-child(4)::before{animation-delay:-4.5s}
+.live .card:hover::before{opacity:1}
+@keyframes liveSpin{to{--ang:360deg}}
+.live .card:hover{box-shadow:0 22px 60px -28px rgba(34,211,238,.6)}
+/* precio: flash verde/rojo al actualizar */
+.live__coin.is-up .live__px{animation:liveUp 1.2s ease}
+.live__coin.is-dn .live__px{animation:liveDn 1.2s ease}
+@keyframes liveUp{0%{color:#34d399;text-shadow:0 0 18px rgba(52,211,153,.8)}100%{color:var(--txt)}}
+@keyframes liveDn{0%{color:#f87171;text-shadow:0 0 18px rgba(248,113,113,.8)}100%{color:var(--txt)}}
+.live__coin.is-up{box-shadow:0 0 0 1px rgba(52,211,153,.5),0 0 40px -10px rgba(52,211,153,.5)}
+.live__coin.is-dn{box-shadow:0 0 0 1px rgba(248,113,113,.5),0 0 40px -10px rgba(248,113,113,.5)}
+.live__coin{transition:box-shadow 1.2s ease}
+/* sparklines: área con gradiente, trazo con glow y dibujo progresivo */
+.live__spark{height:48px;overflow:visible}
+.live__spark .live__area{stroke:none}
+.live__spark .live__line{fill:none;stroke:inherit;stroke-width:1.8}
+.live__spark.up{filter:drop-shadow(0 0 4px rgba(52,211,153,.65))}
+.live__spark.dn{filter:drop-shadow(0 0 4px rgba(248,113,113,.65))}
+.live__spark.is-draw .live__line{stroke-dasharray:1;stroke-dashoffset:1}
+.live__spark.is-draw .live__area{opacity:0}
+.live__spark.is-draw.is-drawn .live__line{stroke-dashoffset:0;transition:stroke-dashoffset 1.6s cubic-bezier(.4,0,.2,1)}
+.live__spark.is-draw.is-drawn .live__area{opacity:1;transition:opacity .8s ease 1s}
+.live__defs{position:absolute;width:0;height:0;overflow:hidden}
+/* Fear & Greed */
+.live__arcbg{fill:none;stroke:rgba(148,163,184,.14);stroke-width:12;stroke-linecap:round}
+.live__arc{fill:none;stroke:url(#liveG);stroke-width:8;stroke-linecap:round}
+.live__ticks line{stroke:rgba(230,237,246,.35);stroke-width:.8;stroke-linecap:round}
+.live__ticks line.is-major{stroke:rgba(230,237,246,.75);stroke-width:1.3}
+.live__tlabels text{font:600 5.4px var(--mono);fill:var(--dim);text-anchor:middle}
+.live__needle path{fill:#f8fafc}
+.live__needle circle{fill:#f8fafc}
+.live__needle .live__hub{fill:var(--fng,#0b1018)}
+.live__fng{box-shadow:inset 0 -40px 60px -40px var(--fng,transparent)}
+.live__fngv b{font-variant-numeric:tabular-nums;text-shadow:0 0 16px currentColor}
+/* feed del bot */
+.live__bot{display:flex;align-items:center;flex-wrap:wrap;gap:6px}
+.live__bot small{flex-basis:100%}
+.live__ava{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--grad);font-size:.9rem}
+.live__onair{margin-left:auto;display:inline-flex;align-items:center;gap:6px;font:700 .66rem var(--mono);letter-spacing:.08em;color:var(--ok);padding:2px 8px;border:1px solid rgba(52,211,153,.4);border-radius:999px;background:rgba(52,211,153,.08)}
+.live__msgs li{transition:opacity .4s ease,transform .45s cubic-bezier(.2,.9,.3,1.2)}
+.live__msgs li.is-new{opacity:0;transform:translateX(-16px) scale(.97)}
+.live__msgs li.live__typing{width:max-content;padding:8px 12px}
+.live-dot{position:relative}
+.live-dot::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:1px solid rgba(52,211,153,.6);animation:liveRing 1.8s ease-out infinite}
+@keyframes liveRing{from{transform:scale(.6);opacity:1}to{transform:scale(1.8);opacity:0}}
+@media (max-width:520px){.live__gauge{max-width:150px}.live-sec::after{display:none}}
+@media (prefers-reduced-motion:reduce){
+  .live-sec::before,.live-sec::after,.live .card::before,.live-dot::after{animation:none}
+  .live-sec::after{display:none}
+  .live__coin.is-up .live__px,.live__coin.is-dn .live__px{animation:none}
+  .live__msgs li,.live__coin{transition:none}
 }
