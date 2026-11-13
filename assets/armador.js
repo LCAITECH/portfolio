@@ -43,7 +43,7 @@
     community: [
       { id: 's1', tag: 'S1', ico: '?', t: 's', pr: [100, 150], days: D(3, 5), n: { en: 'FAQ bot', es: 'Preguntas frecuentes' }, d: { en: 'Answers how to buy, links, rules', es: 'Responde cómo comprar, links, reglas' },
         how: { en: 'Answers your community\u2019s frequent questions (how to buy, links, rules, guides) in the group or by DM, with your own texts and commands. You edit the answers; nothing is improvised.', es: 'Responde las preguntas frecuentes de tu comunidad (cómo comprar, links, reglas, guías) en el grupo o por privado, con tus textos y comandos. Las respuestas las definís vos: no improvisa.' } },
-      { id: 's2', tag: 'S2', ico: '₿', t: 's', pr: [100, 150], days: D(2, 4), n: { en: 'Price alerts', es: 'Alertas de precio' }, d: { en: 'Crypto alerts at your levels', es: 'Alertas cripto en tus niveles' },
+      { id: 's2', tag: 'S2', ico: '₿', t: 's', cov: 'p1', pr: [100, 150], days: D(2, 4), n: { en: 'Price alerts', es: 'Alertas de precio' }, d: { en: 'Crypto alerts at your levels', es: 'Alertas cripto en tus niveles' },
         how: { en: 'Posts an alert in your Telegram group or channel when an asset crosses the levels you choose, with the data source in every message.', es: 'Publica una alerta en tu grupo o canal de Telegram cuando un activo cruza los niveles que elijas, con la fuente del dato en cada mensaje.' } },
       { id: 's3', tag: 'S3', ico: '⛨', t: 's', pr: [120, 180], days: D(4, 6), n: { en: 'Moderation', es: 'Moderación' }, d: { en: 'Deletes spam and seed-phrase scams', es: 'Borra spam y estafas de seed phrase' },
         how: { en: 'Welcomes new members, deletes spam and messages asking for seed phrases or private keys, and warns or mutes whoever sends them. Works on Discord or Telegram.', es: 'Da la bienvenida a los nuevos, borra spam y mensajes que piden seed phrases o claves privadas, y advierte o silencia al que los manda. Para Discord o Telegram.' } },
@@ -163,6 +163,7 @@
       });
       if (saved.plat && typeof saved.plat === 'object') Object.keys(saved.plat).forEach(function (k) { if (S.mods[k] && Array.isArray(saved.plat[k])) S.plat[k] = saved.plat[k].filter(function (p) { return PLATS.some(function (x) { return x.id === p; }); }); });
       if (saved.brain && typeof saved.brain === 'object') Object.keys(saved.brain).forEach(function (k) { if (S.mods[k] && BRAIN_RANK[saved.brain[k]] != null) S.brain[k] = saved.brain[k]; });
+      Object.keys(MODS).forEach(function (k) { S.mods[k] = S.mods[k].filter(function (id) { var m = MODS[k].filter(function (x) { return x.id === id; })[0]; return !(m && m.cov && S.mods[k].indexOf(m.cov) >= 0); }); });  // S2 no va con P1
       S.step = Math.max(0, Math.min(3, saved.step | 0, maxStep()));
       save();
     }
@@ -171,6 +172,7 @@
     try { localStorage.setItem(KEY, JSON.stringify({ v: 1, step: S.step, cat: S.cat, mods: S.mods, plat: S.plat, brain: S.brain })); } catch (e) {}
   }
   function cat() { for (var i = 0; i < CATS.length; i++) if (CATS[i].id === S.cat) return CATS[i]; return null; }
+  function covered(m) { return !!(m && m.cov && active().indexOf(m.cov) >= 0); }  // p. ej. S2 cuando P1 está prendido
   function modIn(id) { var c = S.cat; for (var i = 0; c && i < MODS[c].length; i++) if (MODS[c][i].id === id) return MODS[c][i]; return null; }
   function mod(id) { var c = S.cat; for (var i = 0; c && i < MODS[c].length; i++) if (MODS[c][i].id === id) return MODS[c][i]; return null; }
   function active() { return S.cat ? S.mods[S.cat] : []; }
@@ -186,7 +188,7 @@
     var ids = active(), q = { lines: [], lo: 0, hi: 0, from: false, quote: false, dlo: 0, dhi: 0, combo: '', incl: [], save: null, sCount: 0, autos: 0 };
     var s = [], autos = [];
     ids.forEach(function (id) {
-      var m = mod(id); if (!m) return;
+      var m = mod(id); if (!m || covered(m)) return;
       if (m.t === 's') s.push(m);
       else if (m.t === 'auto') autos.push(m);
       else if (m.t === 'incl') {
@@ -381,6 +383,7 @@
     }
     deal.appendChild(el('span', 'arm__deal-v' + (/^✓/.test(dealText(q)) ? ' is-ok' : ''), dealText(q)));
     var tot = el('span', 'arm__deal-t', totalText(q)); deal.appendChild(tot);
+    if (covNote && S.cat === 'community') deal.appendChild(el('span', 'arm__deal-note', 'ℹ️ ' + covNote));
   }
 
   // ---------- Casos reales por categoría ----------
@@ -417,6 +420,7 @@
       lab.setAttribute('data-mod', m.id);
       lab.draggable = true;
       var inp = el('input', 'bld__chk'); inp.type = 'checkbox'; inp.setAttribute('role', 'switch'); inp.value = m.id; inp.checked = on;
+      if (m.cov) { var cv = el('span', 'bld__covered', covText(m)); cv.hidden = !covered(m); lab.setAttribute('data-cov', m.cov); }
       inp.addEventListener('change', function () { toggle(m.id, inp.checked); });
       lab.addEventListener('dragstart', function (e) { try { e.dataTransfer.setData('text/plain', m.id); e.dataTransfer.effectAllowed = 'copy'; } catch (x) {} lab.classList.add('is-drag'); });
       lab.addEventListener('dragend', function () { lab.classList.remove('is-drag'); });
@@ -426,6 +430,7 @@
       info.appendChild(el('span', 'bld__name', modName(m)));
       info.appendChild(el('span', 'bld__desc', tx(m.d)));
       info.appendChild(el('span', 'bld__px' + (m.t === 'q' || m.t === 'incl' ? ' is-quote' : ''), priceLabel(m)));
+      if (m.cov) info.appendChild(cv);
       lab.appendChild(info);
       var ib = el('button', 'bld__tip', 'i'); ib.type = 'button';
       ib.setAttribute('aria-label', T[L()].info + ': ' + tx(m.n)); ib.setAttribute('aria-expanded', 'false'); ib.setAttribute('aria-controls', 'armTip');
@@ -434,15 +439,38 @@
       lab.appendChild(el('span', 'bld__sw')).setAttribute('aria-hidden', 'true');
       box.appendChild(lab);
     });
+    refreshCovered();
   }
+  function covText(m) { var pk = modIn(m.cov); return L() === 'es' ? '✓ Incluido en ' + (pk ? pk.tag : '') + ': no se paga dos veces' : '✓ Included in ' + (pk ? pk.tag : '') + ': you don\u2019t pay twice'; }
+  function refreshCovered() {
+    Array.prototype.forEach.call($('armMods').querySelectorAll('[data-cov]'), function (card) {
+      var m = mod(card.getAttribute('data-mod')), on = covered(m);
+      card.classList.toggle('is-covered', on);
+      var inp = card.querySelector('.bld__chk'); if (inp) { inp.disabled = on; if (on) inp.checked = false; }
+      var n = card.querySelector('.bld__covered'); if (n) n.hidden = !on;
+      card.draggable = !on;
+    });
+  }
+  var covNote = '';
   function toggle(id, on) {
     var a = active(), i = a.indexOf(id);
+    if (on && covered(mod(id))) return;
+    covNote = '';
+    if (on) MODS[S.cat].forEach(function (m) {  // al prender P1 se apaga S2 (las alertas ya vienen en P1)
+      if (m.cov === id && a.indexOf(m.id) >= 0) {
+        a.splice(a.indexOf(m.id), 1); removeMod(m.id);
+        var c = $('armMods').querySelector('[data-mod="' + m.id + '"]'); if (c) c.classList.remove('is-on');
+        covNote = L() === 'es' ? m.tag + ' se apagó: las alertas de precio ya vienen en ' + mod(id).tag + ', así no lo pagás dos veces.' : m.tag + ' was turned off: price alerts already come with ' + mod(id).tag + ', so you don\u2019t pay twice.';
+      }
+    });
+    i = a.indexOf(id);
     if (on && i < 0) a.push(id);
     if (!on && i >= 0) a.splice(i, 1);
     save();
     var card = $('armMods').querySelector('[data-mod="' + id + '"]');
     if (card) { card.classList.toggle('is-on', on); var c = card.querySelector('input'); if (c) c.checked = on; }
     if (on) { emptyState(); play(id, reduce); } else { removeMod(id); window.setTimeout(emptyState, reduce ? 0 : 270); }
+    refreshCovered();
     renderDeal();
     updateNav();
   }

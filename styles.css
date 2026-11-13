@@ -758,6 +758,11 @@ html.deck #live .section__head{margin-bottom:18px}
 @media (min-width:901px){.arm__mods .bld__desc{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
 @media (prefers-reduced-motion:reduce){.arm__tip.is-in{animation:none}.bld__tip,.arm__case,.arm__pips i{transition:none}}
 .arm__modcol{min-width:0}
+.bld__mod.is-covered{opacity:.62;cursor:not-allowed;border-style:dashed}
+.bld__mod.is-covered:hover{transform:none}
+.bld__covered{font:600 .74rem var(--mono);color:var(--ok)}
+.bld__covered[hidden]{display:none}
+.arm__deal-note{flex-basis:100%;font-size:.8rem;color:var(--warn)}
 .arm__preview .arm__cases{margin-top:12px}
 .arm__preview .arm__cases-row{grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
 @media (max-height:900px){html.deck .arm__mods{gap:7px}html.deck .bld__desc{display:none}html.deck .arm__preview .arm__case-t small{display:none}html.deck .arm__preview .arm__case{padding:7px 10px}html.deck .arm__preview .arm__case-ico{width:26px;height:26px}html.deck .arm__deal{margin-top:8px;padding:8px 12px}}
