@@ -40,24 +40,30 @@
       following: 'Siguiendo',
       a: {
         follow: ['💜', function (u) { return '<em>' + u + '</em> te sigue'; }, '¡Bienvenido a la comunidad!'],
-        sub: ['⭐', function (u) { return '<em>' + u + '</em> se suscribió'; }, 'Nivel 1 · 3 meses seguidos'],
+        sub: ['⭐', function (u) { return '<em>' + u + '</em> se suscribió'; }, 'Nivel 1 · ¡nuevo en el club!'],
+        resub: ['🔁', function (u) { return '<em>' + u + '</em> renovó su sub'; }, '8 meses · «¡No me pierdo ni un directo!»'],
         gift: ['🎁', function (u) { return '<em>' + u + '</em> regaló 5 subs'; }, '¡Gracias por tanto!'],
         bits: ['💎', function (u) { return '<em>' + u + '</em> envió 500 bits'; }, '«¡Vamos con todo, Madrid!»'],
-        raid: ['🚀', function (u) { return 'Raid de <em>' + u + '</em>'; }, 'llegan 87 espectadores']
+        raid: ['🚀', function (u) { return 'Raid de <em>' + u + '</em>'; }, 'llegan 87 espectadores'],
+        live: ['🔴', function (u) { return '<em>' + u + '</em> está en directo'; }, 'Mensaje de inicio enviado al chat']
       },
       ev: {
         follow: function (u) { return '💜 ' + u + ' acaba de seguir el canal'; },
-        sub: function (u) { return '⭐ ' + u + ' se suscribió · 3 meses'; },
+        sub: function (u) { return '⭐ ' + u + ' se suscribió con Nivel 1'; },
+        resub: function (u) { return '🔁 ' + u + ' renovó su suscripción · 8 meses'; },
         gift: function (u) { return '🎁 ' + u + ' regaló 5 suscripciones a la comunidad'; },
         bits: function (u) { return '💎 ' + u + ' envió 500 bits'; },
-        raid: function (u) { return '🚀 ¡' + u + ' hace raid con 87 espectadores!'; }
+        raid: function (u) { return '🚀 ¡' + u + ' hace raid con 87 espectadores!'; },
+        live: function () { return '🔴 ¡Empieza el directo!'; }
       },
       thanks: {
         follow: function (u) { return '¡Gracias por el follow, @' + u + '! 💜'; },
         sub: function (u) { return '¡Gracias por la suscripción, @' + u + '! Bienvenido al club ⭐'; },
+        resub: function (u) { return '¡8 meses ya, @' + u + '! Gracias por seguir aquí 💜'; },
         gift: function (u) { return '¡@' + u + ' es una leyenda! Gracias por los 5 subs 🎁'; },
         bits: function (u) { return '¡Gracias por los 500 bits, @' + u + '! 💎'; },
-        raid: function (u) { return '¡Bienvenidos los del raid de @' + u + '! Saludad en el chat 👋'; }
+        raid: function (u) { return '¡Bienvenidos los del raid de @' + u + '! Saludad en el chat 👋'; },
+        live: function () { return '¡Arrancamos! 🔴 Hoy toca IRL por Madrid. Escribe !comandos para ver todo lo que hace el bot.'; }
       },
       replies: {
         '!redes': 'Instagram, X y TikTok: @tucanal · Todo en tucanal.com',
@@ -88,24 +94,30 @@
       following: 'Following',
       a: {
         follow: ['💜', function (u) { return '<em>' + u + '</em> followed'; }, 'Welcome to the community!'],
-        sub: ['⭐', function (u) { return '<em>' + u + '</em> subscribed'; }, 'Tier 1 · 3 months in a row'],
+        sub: ['⭐', function (u) { return '<em>' + u + '</em> subscribed'; }, 'Tier 1 · new to the club!'],
+        resub: ['🔁', function (u) { return '<em>' + u + '</em> resubscribed'; }, '8 months · “Never missing a stream!”'],
         gift: ['🎁', function (u) { return '<em>' + u + '</em> gifted 5 subs'; }, 'Thank you so much!'],
         bits: ['💎', function (u) { return '<em>' + u + '</em> cheered 500 bits'; }, '“Let’s go, Madrid!”'],
-        raid: ['🚀', function (u) { return '<em>' + u + '</em> is raiding'; }, 'with 87 viewers']
+        raid: ['🚀', function (u) { return '<em>' + u + '</em> is raiding'; }, 'with 87 viewers'],
+        live: ['🔴', function (u) { return '<em>' + u + '</em> is live'; }, 'Go-live message sent to chat']
       },
       ev: {
         follow: function (u) { return '💜 ' + u + ' just followed'; },
-        sub: function (u) { return '⭐ ' + u + ' subscribed · 3 months'; },
+        sub: function (u) { return '⭐ ' + u + ' subscribed at Tier 1'; },
+        resub: function (u) { return '🔁 ' + u + ' resubscribed · 8 months'; },
         gift: function (u) { return '🎁 ' + u + ' gifted 5 subs to the community'; },
         bits: function (u) { return '💎 ' + u + ' cheered 500 bits'; },
-        raid: function (u) { return '🚀 ' + u + ' is raiding with 87 viewers!'; }
+        raid: function (u) { return '🚀 ' + u + ' is raiding with 87 viewers!'; },
+        live: function () { return '🔴 The stream is live!'; }
       },
       thanks: {
         follow: function (u) { return 'Thanks for the follow, @' + u + '! 💜'; },
         sub: function (u) { return 'Thanks for subscribing, @' + u + '! Welcome to the club ⭐'; },
+        resub: function (u) { return '8 months already, @' + u + '! Thanks for sticking around 💜'; },
         gift: function (u) { return '@' + u + ' is a legend! Thanks for the 5 subs 🎁'; },
         bits: function (u) { return 'Thanks for the 500 bits, @' + u + '! 💎'; },
-        raid: function (u) { return 'Welcome, @' + u + ' raiders! Say hi in chat 👋'; }
+        raid: function (u) { return 'Welcome, @' + u + ' raiders! Say hi in chat 👋'; },
+        live: function () { return "We're live! 🔴 Today: IRL around Madrid. Type !commands to see everything the bot does."; }
       },
       replies: {
         '!socials': 'Instagram, X and TikTok: @yourchannel · Everything at yourchannel.com',
@@ -348,22 +360,87 @@
     requestAnimationFrame(frame);
   }
 
-  // ------------------------------------------------------------------ alertas
-  var queue = [], showing = false, audio = null, goal = 37, GOAL = 50;
-  var ticker = { follow: 'luciaplays', sub: 'NachoGG', bits: 'MarGamer' };
-  function beep(kind) {
-    if (!sound.checked) return;
-    try {
-      audio = audio || new (window.AudioContext || window.webkitAudioContext)();
-      var notes = kind === 'raid' ? [392, 523, 659, 784, 1047] : kind === 'gift' ? [523, 659, 784, 1047, 1319] : [660, 880, 1320];
-      notes.forEach(function (f, i) {
-        var o = audio.createOscillator(), g = audio.createGain(), t0 = audio.currentTime + i * 0.1;
-        o.frequency.value = f; o.type = 'triangle';
-        g.gain.setValueAtTime(0.0001, t0); g.gain.exponentialRampToValueAtTime(0.16, t0 + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, t0 + 0.3);
-        o.connect(g); g.connect(audio.destination); o.start(t0); o.stop(t0 + 0.35);
-      });
-    } catch (e) {}
+  // ------------------------------------------------------------------ sonido
+  // Efectos hechos con ElevenLabs: assets/sounds/<alerta>-<n>.mp3, varias versiones por alerta. Se bajan
+  // recién cuando el visitante activa el sonido; hasta que cargan, o si alguno falla, suena un beep
+  // sintetizado. Cada alerta elige una versión al azar, sin repetir la anterior.
+  var SND = 'assets/sounds/', SFX = { follow: 3, sub: 3, resub: 3, gift: 3, bits: 3, raid: 3, live: 3 };
+  var audio = null, fxOut = null, bufs = {}, lastFx = {}, fxAsked = false, hello = 0;
+
+  function quiet(p) { if (p && p.catch) p.catch(function () {}); }
+  function ctx() {  // un solo AudioContext, creado en el primer gesto del visitante
+    var AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return null;
+    if (!audio) {
+      try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (e) {}  // suena aunque el iPhone esté en silencio
+      try { audio = new AC(); } catch (e) { return null; }
+      fxOut = audio.createGain(); fxOut.gain.value = 0.85; fxOut.connect(audio.destination);
+      var s = audio.createBufferSource(); s.buffer = audio.createBuffer(1, 1, 22050); s.connect(audio.destination); s.start();  // destraba iOS
+    }
+    if (audio.state === 'suspended') quiet(audio.resume());
+    return audio;
   }
+  function load(name, done) {
+    if (!window.fetch) return;
+    fetch(SND + name + '.mp3')
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.arrayBuffer(); })
+      .then(function (data) { quiet(audio.decodeAudioData(data, done, function () {})); })
+      .catch(function () {});
+  }
+  function loadFx() {
+    if (fxAsked) return;
+    fxAsked = true;
+    Object.keys(SFX).forEach(function (kind) {
+      for (var i = 1; i <= SFX[kind]; i++) load(kind + '-' + i, function (buf) {
+        (bufs[kind] = bufs[kind] || []).push(buf);
+        if (kind === 'follow' && hello) {  // el primer chime que llega confirma que el sonido anda
+          if (Date.now() - hello < 4000 && sound.checked) playFx('follow');
+          hello = 0;
+        }
+      });
+    });
+  }
+  function playFx(kind) {
+    var list = bufs[kind];
+    if (!list || !list.length) return false;
+    var i = Math.floor(Math.random() * list.length);
+    if (list.length > 1 && i === lastFx[kind]) i = (i + 1) % list.length;
+    lastFx[kind] = i;
+    var src = audio.createBufferSource();
+    src.buffer = list[i]; src.connect(fxOut); src.start();
+    return true;
+  }
+  function beep(kind) {  // respaldo sintetizado
+    var notes = kind === 'raid' || kind === 'live' ? [392, 523, 659, 784, 1047] : kind === 'gift' ? [523, 659, 784, 1047, 1319] : [660, 880, 1320];
+    notes.forEach(function (f, i) {
+      var o = audio.createOscillator(), g = audio.createGain(), t0 = audio.currentTime + i * 0.1;
+      o.frequency.value = f; o.type = 'triangle';
+      g.gain.setValueAtTime(0.0001, t0); g.gain.exponentialRampToValueAtTime(0.19, t0 + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, t0 + 0.3);
+      o.connect(g); g.connect(fxOut); o.start(t0); o.stop(t0 + 0.35);
+    });
+  }
+  function sfx(kind) {  // sonido de una alerta
+    if (!sound.checked || !ctx()) return;
+    try { if (!playFx(kind)) beep(kind); } catch (e) {}
+  }
+  sound.addEventListener('change', function () {
+    if (!sound.checked) {  // apagado: el audio se suspende para no gastar batería
+      if (audio) setTimeout(function () { if (!sound.checked) quiet(audio.suspend()); }, 900);
+      return;
+    }
+    if (!ctx()) return;
+    loadFx();
+    try { if (!playFx('follow')) hello = Date.now(); } catch (e) {}
+  });
+  document.addEventListener('visibilitychange', function () {
+    if (!audio) return;
+    if (document.hidden) quiet(audio.suspend());
+    else if (sound.checked) quiet(audio.resume());
+  });
+
+  // ------------------------------------------------------------------ alertas
+  var queue = [], showing = false, goal = 37, GOAL = 50;
+  var ticker = { follow: 'luciaplays', sub: 'NachoGG', bits: 'MarGamer' };
   function setGoal(n) {
     goal = Math.min(GOAL, n);
     $('stGoalNum').textContent = goal + ' / ' + GOAL;
@@ -388,19 +465,26 @@
     alertBox.appendChild(title);
     alertBox.appendChild(el('span', 'st-alert__sub', a[2]));
     alertBox.classList.add('is-on');
-    burst(kind); beep(kind); hueShift += 40;
+    burst(kind); sfx(kind); hueShift += 40;
     line(null, STR[lang()].ev[kind](user), { cls: 'is-event' });
     bot(STR[lang()].thanks[kind](user), 900);
     if (kind === 'follow') ticker.follow = user;
-    if (kind === 'sub') { ticker.sub = user; setGoal(goal + 1); }
+    if (kind === 'sub' || kind === 'resub') { ticker.sub = user; setGoal(goal + 1); }
+    if (kind === 'live') up = 0;  // el contador del directo arranca de cero
     if (kind === 'gift') setGoal(goal + 5);
     if (kind === 'bits') ticker.bits = user;
     if (kind === 'raid') { bumpViewers(87); setTimeout(function () { for (var i = 0; i < 4; i++) setTimeout(function () { say(rnd(NAMES), rnd(['👋👋👋', 'RAID 🚀', 'hola desde el raid!', 'raid hype 🔥'])); }, i * 450); }, 1200); }
     renderTicker();
     setTimeout(function () { alertBox.classList.remove('is-on'); setTimeout(function () { showing = false; next(); }, 500); }, 3800);
   }
+  var hints = 2;
+  function hint() {  // si prueban alertas con el sonido apagado, el interruptor late para que lo vean
+    if (sound.checked || hints <= 0) return;
+    hints--;
+    var l = sound.parentNode; l.classList.remove('is-hint'); void l.offsetWidth; l.classList.add('is-hint');
+  }
   document.querySelectorAll('[data-alert]').forEach(function (b) {
-    b.addEventListener('click', function () { trigger(b.getAttribute('data-alert')); });
+    b.addEventListener('click', function () { trigger(b.getAttribute('data-alert'), b.getAttribute('data-user')); hint(); });
   });
   var follow = $('stFollow');
   follow.addEventListener('click', function () {
@@ -475,7 +559,7 @@
       else { var u = rnd(NAMES); say(u, rnd(STR[lang()].chatter), { badges: PEOPLE[u] }); }
       if (ticks % 8 === 0 && on('timerOn')) bot(T('timer'), 900);
       if (ticks % 4 === 0) bumpViewers(Math.round(Math.random() * 14 - 5));
-      if (ticks % 13 === 0) trigger(rnd(['follow', 'follow', 'sub', 'bits']));
+      if (ticks % 13 === 0) trigger(rnd(['follow', 'follow', 'sub', 'resub', 'bits']));
     }
     setTimeout(life, (reduce ? 8000 : 2600) + Math.random() * 2600);
   }
