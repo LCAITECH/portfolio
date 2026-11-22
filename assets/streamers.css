@@ -95,6 +95,7 @@ body.stx::before{background:
 .st-tests__btns button:hover{border-color:var(--tw2)}
 .st-tests__btns button:active{transform:scale(.96)}
 
+.st-tests__sw{display:flex;flex-wrap:wrap;gap:8px 16px;margin-left:auto}
 .st-switch{display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-size:.85rem;color:var(--sx-mut);user-select:none}
 .st-switch input{position:absolute;opacity:0;width:1px;height:1px}
 .st-switch__ui{position:relative;flex:none;width:34px;height:20px;border-radius:99px;background:var(--sx-s3);border:1px solid var(--sx-line);transition:background .2s}

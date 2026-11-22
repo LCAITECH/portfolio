@@ -348,22 +348,129 @@
     requestAnimationFrame(frame);
   }
 
-  // ------------------------------------------------------------------ alertas
-  var queue = [], showing = false, audio = null, goal = 37, GOAL = 50;
-  var ticker = { follow: 'luciaplays', sub: 'NachoGG', bits: 'MarGamer' };
-  function beep(kind) {
-    if (!sound.checked) return;
-    try {
-      audio = audio || new (window.AudioContext || window.webkitAudioContext)();
-      var notes = kind === 'raid' ? [392, 523, 659, 784, 1047] : kind === 'gift' ? [523, 659, 784, 1047, 1319] : [660, 880, 1320];
-      notes.forEach(function (f, i) {
-        var o = audio.createOscillator(), g = audio.createGain(), t0 = audio.currentTime + i * 0.1;
-        o.frequency.value = f; o.type = 'triangle';
-        g.gain.setValueAtTime(0.0001, t0); g.gain.exponentialRampToValueAtTime(0.16, t0 + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, t0 + 0.3);
-        o.connect(g); g.connect(audio.destination); o.start(t0); o.stop(t0 + 0.35);
-      });
-    } catch (e) {}
+  // ------------------------------------------------------------------ sonido
+  // Efectos por alerta en assets/sounds/ (hechos con ElevenLabs). Se bajan recién cuando el visitante
+  // activa el sonido; hasta que cargan, o si alguno falla, suena un beep sintetizado. Cada alerta elige
+  // al azar entre sus versiones. Si la música está activada, baja de volumen mientras suena la alerta.
+  var SND = 'assets/sounds/';
+  var SFX = { follow: ['follow'], sub: ['sub'], gift: ['gift'], bits: ['bits'], raid: ['raid'] };
+  var FX_VOL = 0.85, MUSIC_VOL = 0.3, DUCK = 0.35;
+  var audio = null, fxOut = null, bufs = {}, fxAsked = false, hello = 0;
+  var musicSw = $('stMusic'), mus = { out: null, src: null, old: null, buf: null, edge: null, asked: false };
+
+  function quiet(p) { if (p && p.catch) p.catch(function () {}); }
+  function ctx() {  // un solo AudioContext, creado en el primer gesto del visitante
+    var AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return null;
+    if (!audio) {
+      try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (e) {}  // suena aunque el iPhone esté en silencio
+      try { audio = new AC(); } catch (e) { return null; }
+      fxOut = audio.createGain(); fxOut.gain.value = FX_VOL; fxOut.connect(audio.destination);
+      var s = audio.createBufferSource(); s.buffer = audio.createBuffer(1, 1, 22050); s.connect(audio.destination); s.start();  // destraba iOS
+    }
+    if (audio.state === 'suspended') quiet(audio.resume());
+    return audio;
   }
+  function load(name, done) {
+    if (!window.fetch) return;
+    fetch(SND + name + '.mp3')
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.arrayBuffer(); })
+      .then(function (data) { quiet(audio.decodeAudioData(data, done, function () {})); })
+      .catch(function () {});
+  }
+  function loadFx() {
+    if (fxAsked) return;
+    fxAsked = true;
+    Object.keys(SFX).forEach(function (kind) {
+      SFX[kind].forEach(function (name) {
+        load(name, function (buf) {
+          (bufs[kind] = bufs[kind] || []).push(buf);
+          if (kind === 'follow' && hello && Date.now() - hello < 4000 && sound.checked) playFx('follow');
+          if (kind === 'follow') hello = 0;
+        });
+      });
+    });
+  }
+  function duck(secs) {  // baja la música mientras suena la alerta y después la vuelve a subir
+    if (!mus.src) return;
+    var g = mus.out.gain, t = audio.currentTime;
+    g.cancelScheduledValues(t); g.setValueAtTime(g.value, t);
+    g.linearRampToValueAtTime(MUSIC_VOL * DUCK, t + 0.15);
+    g.setValueAtTime(MUSIC_VOL * DUCK, t + 0.15 + secs);
+    g.linearRampToValueAtTime(MUSIC_VOL, t + 1.2 + secs);
+  }
+  function playFx(kind) {
+    var list = bufs[kind];
+    if (!list || !list.length) return false;
+    var buf = rnd(list), src = audio.createBufferSource();
+    src.buffer = buf; src.connect(fxOut); src.start();
+    duck(buf.duration);
+    return true;
+  }
+  function beep(kind) {  // respaldo sintetizado
+    var notes = kind === 'raid' ? [392, 523, 659, 784, 1047] : kind === 'gift' ? [523, 659, 784, 1047, 1319] : [660, 880, 1320];
+    notes.forEach(function (f, i) {
+      var o = audio.createOscillator(), g = audio.createGain(), t0 = audio.currentTime + i * 0.1;
+      o.frequency.value = f; o.type = 'triangle';
+      g.gain.setValueAtTime(0.0001, t0); g.gain.exponentialRampToValueAtTime(0.19, t0 + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, t0 + 0.3);
+      o.connect(g); g.connect(fxOut); o.start(t0); o.stop(t0 + 0.35);
+    });
+    duck(0.6);
+  }
+  function sfx(kind) {  // sonido de una alerta
+    if (!sound.checked || !ctx()) return;
+    try { if (!playFx(kind)) beep(kind); } catch (e) {}
+  }
+  function edges(buf) {  // el MP3 puede traer relleno mudo al principio y al final: el loop lo salta
+    var d = buf.getChannelData(0), n = d.length, a = 0, b = n - 1, lim = Math.min(n >> 1, 8192);
+    while (a < lim && Math.abs(d[a]) < 1e-4) a++;
+    while (b > n - lim && Math.abs(d[b]) < 1e-4) b--;
+    return [a / buf.sampleRate, (b + 1) / buf.sampleRate];
+  }
+  function musicOn() {
+    if (!ctx()) return;
+    if (!mus.out) { mus.out = audio.createGain(); mus.out.gain.value = 0.0001; mus.out.connect(audio.destination); }
+    if (!mus.buf) {
+      if (!mus.asked) { mus.asked = true; load('music', function (buf) { mus.buf = buf; mus.edge = edges(buf); if (musicSw.checked) musicOn(); }); }
+      return;
+    }
+    if (mus.src) return;
+    if (mus.old) { try { mus.old.stop(); } catch (e) {} mus.old = null; }
+    var src = mus.src = audio.createBufferSource(), g = mus.out.gain, t = audio.currentTime;
+    src.buffer = mus.buf; src.loop = true; src.loopStart = mus.edge[0]; src.loopEnd = mus.edge[1];
+    src.connect(mus.out); src.start(t, mus.edge[0]);
+    g.cancelScheduledValues(t); g.setValueAtTime(0.0001, t); g.linearRampToValueAtTime(MUSIC_VOL, t + 1.5);
+  }
+  function musicOff() {
+    if (!mus.src) return;
+    var src = mus.old = mus.src, g = mus.out.gain, t = audio.currentTime;
+    mus.src = null;
+    g.cancelScheduledValues(t); g.setValueAtTime(g.value, t); g.linearRampToValueAtTime(0.0001, t + 0.5);
+    src.stop(t + 0.55);
+  }
+  function rest() {  // con todo apagado, el audio se suspende para no gastar batería
+    setTimeout(function () {
+      if (audio && !sound.checked && !(musicSw && musicSw.checked)) quiet(audio.suspend());
+    }, 900);
+  }
+  sound.addEventListener('change', function () {
+    if (!sound.checked) return rest();
+    if (!ctx()) return;
+    loadFx();
+    try { if (!playFx('follow')) hello = Date.now(); } catch (e) {}  // un chime confirma que el sonido anda
+  });
+  if (musicSw) musicSw.addEventListener('change', function () {
+    if (musicSw.checked) musicOn(); else { musicOff(); rest(); }
+  });
+  document.addEventListener('visibilitychange', function () {
+    if (!audio) return;
+    if (document.hidden) quiet(audio.suspend());
+    else if (sound.checked || (musicSw && musicSw.checked)) quiet(audio.resume());
+  });
+
+  // ------------------------------------------------------------------ alertas
+  var queue = [], showing = false, goal = 37, GOAL = 50;
+  var ticker = { follow: 'luciaplays', sub: 'NachoGG', bits: 'MarGamer' };
   function setGoal(n) {
     goal = Math.min(GOAL, n);
     $('stGoalNum').textContent = goal + ' / ' + GOAL;
@@ -388,7 +495,7 @@
     alertBox.appendChild(title);
     alertBox.appendChild(el('span', 'st-alert__sub', a[2]));
     alertBox.classList.add('is-on');
-    burst(kind); beep(kind); hueShift += 40;
+    burst(kind); sfx(kind); hueShift += 40;
     line(null, STR[lang()].ev[kind](user), { cls: 'is-event' });
     bot(STR[lang()].thanks[kind](user), 900);
     if (kind === 'follow') ticker.follow = user;
