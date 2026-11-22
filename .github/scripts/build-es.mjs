@@ -15,9 +15,9 @@ const SITE = 'https://portfolio.lcaitech.com';
 
 // Textos del <head> en español
 export const ES = {
-  title: 'Automatizaciones con IA, bots de Telegram y APIs · Leandro Buchter (LCA ITECH)',
-  desc: 'Automatizaciones con IA, bots de Telegram y Discord, agentes de IA y APIs a medida para negocios y proyectos cripto. Precio cerrado, para clientes de cualquier país, en español e inglés.',
-  short: 'Automatizaciones con IA, bots, agentes de IA y APIs a medida, de punta a punta. Clientes de cualquier país · Español / English.',
+  title: 'Automatizaciones con IA, bots de Telegram y Twitch, APIs · Leandro Buchter (LCA ITECH)',
+  desc: 'Automatizaciones con IA, bots de Telegram, Discord y Twitch, agentes de IA y APIs a medida para negocios, streamers y proyectos cripto. Precio cerrado, para clientes de cualquier país, en español e inglés.',
+  short: 'Automatizaciones con IA, bots de Telegram y Twitch, agentes de IA y APIs a medida, de punta a punta. Clientes de cualquier país · Español / English.',
 };
 // aria-label y otros textos sueltos que no van en spans
 const ARIA = { Main: 'Principal', Menu: 'Menú', 'Demo alert feed': 'Feed de alertas de demo' };
