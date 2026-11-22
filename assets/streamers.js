@@ -40,24 +40,30 @@
       following: 'Siguiendo',
       a: {
         follow: ['💜', function (u) { return '<em>' + u + '</em> te sigue'; }, '¡Bienvenido a la comunidad!'],
-        sub: ['⭐', function (u) { return '<em>' + u + '</em> se suscribió'; }, 'Nivel 1 · 3 meses seguidos'],
+        sub: ['⭐', function (u) { return '<em>' + u + '</em> se suscribió'; }, 'Nivel 1 · ¡nuevo en el club!'],
+        resub: ['🔁', function (u) { return '<em>' + u + '</em> renovó su sub'; }, '8 meses · «¡No me pierdo ni un directo!»'],
         gift: ['🎁', function (u) { return '<em>' + u + '</em> regaló 5 subs'; }, '¡Gracias por tanto!'],
         bits: ['💎', function (u) { return '<em>' + u + '</em> envió 500 bits'; }, '«¡Vamos con todo, Madrid!»'],
-        raid: ['🚀', function (u) { return 'Raid de <em>' + u + '</em>'; }, 'llegan 87 espectadores']
+        raid: ['🚀', function (u) { return 'Raid de <em>' + u + '</em>'; }, 'llegan 87 espectadores'],
+        live: ['🔴', function (u) { return '<em>' + u + '</em> está en directo'; }, 'Mensaje de inicio enviado al chat']
       },
       ev: {
         follow: function (u) { return '💜 ' + u + ' acaba de seguir el canal'; },
-        sub: function (u) { return '⭐ ' + u + ' se suscribió · 3 meses'; },
+        sub: function (u) { return '⭐ ' + u + ' se suscribió con Nivel 1'; },
+        resub: function (u) { return '🔁 ' + u + ' renovó su suscripción · 8 meses'; },
         gift: function (u) { return '🎁 ' + u + ' regaló 5 suscripciones a la comunidad'; },
         bits: function (u) { return '💎 ' + u + ' envió 500 bits'; },
-        raid: function (u) { return '🚀 ¡' + u + ' hace raid con 87 espectadores!'; }
+        raid: function (u) { return '🚀 ¡' + u + ' hace raid con 87 espectadores!'; },
+        live: function () { return '🔴 ¡Empieza el directo!'; }
       },
       thanks: {
         follow: function (u) { return '¡Gracias por el follow, @' + u + '! 💜'; },
         sub: function (u) { return '¡Gracias por la suscripción, @' + u + '! Bienvenido al club ⭐'; },
+        resub: function (u) { return '¡8 meses ya, @' + u + '! Gracias por seguir aquí 💜'; },
         gift: function (u) { return '¡@' + u + ' es una leyenda! Gracias por los 5 subs 🎁'; },
         bits: function (u) { return '¡Gracias por los 500 bits, @' + u + '! 💎'; },
-        raid: function (u) { return '¡Bienvenidos los del raid de @' + u + '! Saludad en el chat 👋'; }
+        raid: function (u) { return '¡Bienvenidos los del raid de @' + u + '! Saludad en el chat 👋'; },
+        live: function () { return '¡Arrancamos! 🔴 Hoy toca IRL por Madrid. Escribe !comandos para ver todo lo que hace el bot.'; }
       },
       replies: {
         '!redes': 'Instagram, X y TikTok: @tucanal · Todo en tucanal.com',
@@ -88,24 +94,30 @@
       following: 'Following',
       a: {
         follow: ['💜', function (u) { return '<em>' + u + '</em> followed'; }, 'Welcome to the community!'],
-        sub: ['⭐', function (u) { return '<em>' + u + '</em> subscribed'; }, 'Tier 1 · 3 months in a row'],
+        sub: ['⭐', function (u) { return '<em>' + u + '</em> subscribed'; }, 'Tier 1 · new to the club!'],
+        resub: ['🔁', function (u) { return '<em>' + u + '</em> resubscribed'; }, '8 months · “Never missing a stream!”'],
         gift: ['🎁', function (u) { return '<em>' + u + '</em> gifted 5 subs'; }, 'Thank you so much!'],
         bits: ['💎', function (u) { return '<em>' + u + '</em> cheered 500 bits'; }, '“Let’s go, Madrid!”'],
-        raid: ['🚀', function (u) { return '<em>' + u + '</em> is raiding'; }, 'with 87 viewers']
+        raid: ['🚀', function (u) { return '<em>' + u + '</em> is raiding'; }, 'with 87 viewers'],
+        live: ['🔴', function (u) { return '<em>' + u + '</em> is live'; }, 'Go-live message sent to chat']
       },
       ev: {
         follow: function (u) { return '💜 ' + u + ' just followed'; },
-        sub: function (u) { return '⭐ ' + u + ' subscribed · 3 months'; },
+        sub: function (u) { return '⭐ ' + u + ' subscribed at Tier 1'; },
+        resub: function (u) { return '🔁 ' + u + ' resubscribed · 8 months'; },
         gift: function (u) { return '🎁 ' + u + ' gifted 5 subs to the community'; },
         bits: function (u) { return '💎 ' + u + ' cheered 500 bits'; },
-        raid: function (u) { return '🚀 ' + u + ' is raiding with 87 viewers!'; }
+        raid: function (u) { return '🚀 ' + u + ' is raiding with 87 viewers!'; },
+        live: function () { return '🔴 The stream is live!'; }
       },
       thanks: {
         follow: function (u) { return 'Thanks for the follow, @' + u + '! 💜'; },
         sub: function (u) { return 'Thanks for subscribing, @' + u + '! Welcome to the club ⭐'; },
+        resub: function (u) { return '8 months already, @' + u + '! Thanks for sticking around 💜'; },
         gift: function (u) { return '@' + u + ' is a legend! Thanks for the 5 subs 🎁'; },
         bits: function (u) { return 'Thanks for the 500 bits, @' + u + '! 💎'; },
-        raid: function (u) { return 'Welcome, @' + u + ' raiders! Say hi in chat 👋'; }
+        raid: function (u) { return 'Welcome, @' + u + ' raiders! Say hi in chat 👋'; },
+        live: function () { return "We're live! 🔴 Today: IRL around Madrid. Type !commands to see everything the bot does."; }
       },
       replies: {
         '!socials': 'Instagram, X and TikTok: @yourchannel · Everything at yourchannel.com',
@@ -349,14 +361,11 @@
   }
 
   // ------------------------------------------------------------------ sonido
-  // Efectos por alerta en assets/sounds/ (hechos con ElevenLabs). Se bajan recién cuando el visitante
-  // activa el sonido; hasta que cargan, o si alguno falla, suena un beep sintetizado. Cada alerta elige
-  // al azar entre sus versiones. Si la música está activada, baja de volumen mientras suena la alerta.
-  var SND = 'assets/sounds/';
-  var SFX = { follow: ['follow'], sub: ['sub'], gift: ['gift'], bits: ['bits'], raid: ['raid'] };
-  var FX_VOL = 0.85, MUSIC_VOL = 0.3, DUCK = 0.35;
-  var audio = null, fxOut = null, bufs = {}, fxAsked = false, hello = 0;
-  var musicSw = $('stMusic'), mus = { out: null, src: null, old: null, buf: null, edge: null, asked: false };
+  // Efectos hechos con ElevenLabs: assets/sounds/<alerta>-<n>.mp3, varias versiones por alerta. Se bajan
+  // recién cuando el visitante activa el sonido; hasta que cargan, o si alguno falla, suena un beep
+  // sintetizado. Cada alerta elige una versión al azar, sin repetir la anterior.
+  var SND = 'assets/sounds/', SFX = { follow: 3, sub: 3, resub: 3, gift: 3, bits: 3, raid: 3, live: 3 };
+  var audio = null, fxOut = null, bufs = {}, lastFx = {}, fxAsked = false, hello = 0;
 
   function quiet(p) { if (p && p.catch) p.catch(function () {}); }
   function ctx() {  // un solo AudioContext, creado en el primer gesto del visitante
@@ -365,7 +374,7 @@
     if (!audio) {
       try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (e) {}  // suena aunque el iPhone esté en silencio
       try { audio = new AC(); } catch (e) { return null; }
-      fxOut = audio.createGain(); fxOut.gain.value = FX_VOL; fxOut.connect(audio.destination);
+      fxOut = audio.createGain(); fxOut.gain.value = 0.85; fxOut.connect(audio.destination);
       var s = audio.createBufferSource(); s.buffer = audio.createBuffer(1, 1, 22050); s.connect(audio.destination); s.start();  // destraba iOS
     }
     if (audio.state === 'suspended') quiet(audio.resume());
@@ -382,90 +391,51 @@
     if (fxAsked) return;
     fxAsked = true;
     Object.keys(SFX).forEach(function (kind) {
-      SFX[kind].forEach(function (name) {
-        load(name, function (buf) {
-          (bufs[kind] = bufs[kind] || []).push(buf);
-          if (kind === 'follow' && hello && Date.now() - hello < 4000 && sound.checked) playFx('follow');
-          if (kind === 'follow') hello = 0;
-        });
+      for (var i = 1; i <= SFX[kind]; i++) load(kind + '-' + i, function (buf) {
+        (bufs[kind] = bufs[kind] || []).push(buf);
+        if (kind === 'follow' && hello) {  // el primer chime que llega confirma que el sonido anda
+          if (Date.now() - hello < 4000 && sound.checked) playFx('follow');
+          hello = 0;
+        }
       });
     });
-  }
-  function duck(secs) {  // baja la música mientras suena la alerta y después la vuelve a subir
-    if (!mus.src) return;
-    var g = mus.out.gain, t = audio.currentTime;
-    g.cancelScheduledValues(t); g.setValueAtTime(g.value, t);
-    g.linearRampToValueAtTime(MUSIC_VOL * DUCK, t + 0.15);
-    g.setValueAtTime(MUSIC_VOL * DUCK, t + 0.15 + secs);
-    g.linearRampToValueAtTime(MUSIC_VOL, t + 1.2 + secs);
   }
   function playFx(kind) {
     var list = bufs[kind];
     if (!list || !list.length) return false;
-    var buf = rnd(list), src = audio.createBufferSource();
-    src.buffer = buf; src.connect(fxOut); src.start();
-    duck(buf.duration);
+    var i = Math.floor(Math.random() * list.length);
+    if (list.length > 1 && i === lastFx[kind]) i = (i + 1) % list.length;
+    lastFx[kind] = i;
+    var src = audio.createBufferSource();
+    src.buffer = list[i]; src.connect(fxOut); src.start();
     return true;
   }
   function beep(kind) {  // respaldo sintetizado
-    var notes = kind === 'raid' ? [392, 523, 659, 784, 1047] : kind === 'gift' ? [523, 659, 784, 1047, 1319] : [660, 880, 1320];
+    var notes = kind === 'raid' || kind === 'live' ? [392, 523, 659, 784, 1047] : kind === 'gift' ? [523, 659, 784, 1047, 1319] : [660, 880, 1320];
     notes.forEach(function (f, i) {
       var o = audio.createOscillator(), g = audio.createGain(), t0 = audio.currentTime + i * 0.1;
       o.frequency.value = f; o.type = 'triangle';
       g.gain.setValueAtTime(0.0001, t0); g.gain.exponentialRampToValueAtTime(0.19, t0 + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, t0 + 0.3);
       o.connect(g); g.connect(fxOut); o.start(t0); o.stop(t0 + 0.35);
     });
-    duck(0.6);
   }
   function sfx(kind) {  // sonido de una alerta
     if (!sound.checked || !ctx()) return;
     try { if (!playFx(kind)) beep(kind); } catch (e) {}
   }
-  function edges(buf) {  // el MP3 puede traer relleno mudo al principio y al final: el loop lo salta
-    var d = buf.getChannelData(0), n = d.length, a = 0, b = n - 1, lim = Math.min(n >> 1, 8192);
-    while (a < lim && Math.abs(d[a]) < 1e-4) a++;
-    while (b > n - lim && Math.abs(d[b]) < 1e-4) b--;
-    return [a / buf.sampleRate, (b + 1) / buf.sampleRate];
-  }
-  function musicOn() {
-    if (!ctx()) return;
-    if (!mus.out) { mus.out = audio.createGain(); mus.out.gain.value = 0.0001; mus.out.connect(audio.destination); }
-    if (!mus.buf) {
-      if (!mus.asked) { mus.asked = true; load('music', function (buf) { mus.buf = buf; mus.edge = edges(buf); if (musicSw.checked) musicOn(); }); }
+  sound.addEventListener('change', function () {
+    if (!sound.checked) {  // apagado: el audio se suspende para no gastar batería
+      if (audio) setTimeout(function () { if (!sound.checked) quiet(audio.suspend()); }, 900);
       return;
     }
-    if (mus.src) return;
-    if (mus.old) { try { mus.old.stop(); } catch (e) {} mus.old = null; }
-    var src = mus.src = audio.createBufferSource(), g = mus.out.gain, t = audio.currentTime;
-    src.buffer = mus.buf; src.loop = true; src.loopStart = mus.edge[0]; src.loopEnd = mus.edge[1];
-    src.connect(mus.out); src.start(t, mus.edge[0]);
-    g.cancelScheduledValues(t); g.setValueAtTime(0.0001, t); g.linearRampToValueAtTime(MUSIC_VOL, t + 1.5);
-  }
-  function musicOff() {
-    if (!mus.src) return;
-    var src = mus.old = mus.src, g = mus.out.gain, t = audio.currentTime;
-    mus.src = null;
-    g.cancelScheduledValues(t); g.setValueAtTime(g.value, t); g.linearRampToValueAtTime(0.0001, t + 0.5);
-    src.stop(t + 0.55);
-  }
-  function rest() {  // con todo apagado, el audio se suspende para no gastar batería
-    setTimeout(function () {
-      if (audio && !sound.checked && !(musicSw && musicSw.checked)) quiet(audio.suspend());
-    }, 900);
-  }
-  sound.addEventListener('change', function () {
-    if (!sound.checked) return rest();
     if (!ctx()) return;
     loadFx();
-    try { if (!playFx('follow')) hello = Date.now(); } catch (e) {}  // un chime confirma que el sonido anda
-  });
-  if (musicSw) musicSw.addEventListener('change', function () {
-    if (musicSw.checked) musicOn(); else { musicOff(); rest(); }
+    try { if (!playFx('follow')) hello = Date.now(); } catch (e) {}
   });
   document.addEventListener('visibilitychange', function () {
     if (!audio) return;
     if (document.hidden) quiet(audio.suspend());
-    else if (sound.checked || (musicSw && musicSw.checked)) quiet(audio.resume());
+    else if (sound.checked) quiet(audio.resume());
   });
 
   // ------------------------------------------------------------------ alertas
@@ -499,15 +469,22 @@
     line(null, STR[lang()].ev[kind](user), { cls: 'is-event' });
     bot(STR[lang()].thanks[kind](user), 900);
     if (kind === 'follow') ticker.follow = user;
-    if (kind === 'sub') { ticker.sub = user; setGoal(goal + 1); }
+    if (kind === 'sub' || kind === 'resub') { ticker.sub = user; setGoal(goal + 1); }
+    if (kind === 'live') up = 0;  // el contador del directo arranca de cero
     if (kind === 'gift') setGoal(goal + 5);
     if (kind === 'bits') ticker.bits = user;
     if (kind === 'raid') { bumpViewers(87); setTimeout(function () { for (var i = 0; i < 4; i++) setTimeout(function () { say(rnd(NAMES), rnd(['👋👋👋', 'RAID 🚀', 'hola desde el raid!', 'raid hype 🔥'])); }, i * 450); }, 1200); }
     renderTicker();
     setTimeout(function () { alertBox.classList.remove('is-on'); setTimeout(function () { showing = false; next(); }, 500); }, 3800);
   }
+  var hints = 2;
+  function hint() {  // si prueban alertas con el sonido apagado, el interruptor late para que lo vean
+    if (sound.checked || hints <= 0) return;
+    hints--;
+    var l = sound.parentNode; l.classList.remove('is-hint'); void l.offsetWidth; l.classList.add('is-hint');
+  }
   document.querySelectorAll('[data-alert]').forEach(function (b) {
-    b.addEventListener('click', function () { trigger(b.getAttribute('data-alert')); });
+    b.addEventListener('click', function () { trigger(b.getAttribute('data-alert'), b.getAttribute('data-user')); hint(); });
   });
   var follow = $('stFollow');
   follow.addEventListener('click', function () {
@@ -582,7 +559,7 @@
       else { var u = rnd(NAMES); say(u, rnd(STR[lang()].chatter), { badges: PEOPLE[u] }); }
       if (ticks % 8 === 0 && on('timerOn')) bot(T('timer'), 900);
       if (ticks % 4 === 0) bumpViewers(Math.round(Math.random() * 14 - 5));
-      if (ticks % 13 === 0) trigger(rnd(['follow', 'follow', 'sub', 'bits']));
+      if (ticks % 13 === 0) trigger(rnd(['follow', 'follow', 'sub', 'resub', 'bits']));
     }
     setTimeout(life, (reduce ? 8000 : 2600) + Math.random() * 2600);
   }
