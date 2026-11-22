@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="es" data-lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Twitch bot demo · LCA ITECH</title>
+  <meta name="description" content="Interactive demo of a Twitch chat bot with commands, auto-moderation and OBS alerts, by LCA ITECH. Simulation in the browser.">
+  <meta name="robots" content="noindex, follow">
+  <meta name="theme-color" content="#070a10">
+  <link rel="icon" href="assets/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="assets/streamers.css">
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav__inner">
+      <a class="brand" href="./" aria-label="LCA ITECH">
+        <img class="brand__logo" src="assets/lca-logo.webp" alt="" width="42" height="42">
+        <span>LCA <b>ITECH</b></span>
+      </a>
+      <div class="nav__tools">
+        <a class="st-back" href="./"><span lang="en">← Portfolio</span><span lang="es">← Portfolio</span></a>
+        <button class="lang" id="langToggle" type="button" aria-label="Cambiar idioma / Switch language">
+          <span class="lang__opt" data-opt="en">EN</span><span class="lang__sep">/</span><span class="lang__opt" data-opt="es">ES</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container st">
+    <section class="st-hero">
+      <p class="st-kicker"><span lang="en">Interactive demo</span><span lang="es">Demo interactiva</span></p>
+      <h1><span lang="en">Your own Twitch bot, with alerts for OBS</span><span lang="es">Tu propio bot de Twitch, con alertas para OBS</span></h1>
+      <p class="st-lead">
+        <span lang="en">Type in the chat like a viewer: try <code>!socials</code>, paste a link or shout in caps. Then fire an alert and watch it appear on the stream.</span>
+        <span lang="es">Escribe en el chat como si fueras un espectador: prueba <code>!redes</code>, pega un link o grita en mayúsculas. Después lanza una alerta y mira cómo aparece en el directo.</span>
+      </p>
+      <p class="st-note"><span lang="en">Simulation in your browser: it does not connect to Twitch. The real bot does the same on your channel, 24/7.</span><span lang="es">Simulación en tu navegador: no se conecta a Twitch. El bot real hace lo mismo en tu canal, 24/7.</span></p>
+    </section>
+
+    <section class="st-demo" aria-label="Demo">
+      <div class="st-stage">
+        <div class="st-video" id="stVideo">
+          <div class="st-live"><span class="st-dot"></span>LIVE</div>
+          <div class="st-viewers" id="stViewers">128</div>
+          <div class="st-scene" aria-hidden="true">
+            <div class="st-sun"></div><div class="st-hills"></div>
+          </div>
+          <div class="st-alert" id="stAlert" role="status" aria-live="polite"></div>
+          <div class="st-obs"><span lang="en">OBS overlay (browser source)</span><span lang="es">Overlay de OBS (fuente de navegador)</span></div>
+        </div>
+        <div class="st-panel">
+          <p class="st-panel__title"><span lang="en">Fire an alert</span><span lang="es">Lanzar una alerta</span></p>
+          <div class="st-btns">
+            <button type="button" data-alert="follow"><span lang="en">New follower</span><span lang="es">Nuevo seguidor</span></button>
+            <button type="button" data-alert="sub"><span lang="en">Sub</span><span lang="es">Suscripción</span></button>
+            <button type="button" data-alert="bits">Bits</button>
+            <button type="button" data-alert="raid">Raid</button>
+          </div>
+          <label class="st-sound"><input type="checkbox" id="stSound"> <span lang="en">Sound</span><span lang="es">Sonido</span></label>
+        </div>
+      </div>
+
+      <div class="st-chat">
+        <div class="st-chat__head">
+          <span><span lang="en">Stream chat</span><span lang="es">Chat del directo</span></span>
+          <span class="st-chat__bot">🤖 LCABot</span>
+        </div>
+        <ol class="st-log" id="stLog" aria-live="polite"></ol>
+        <form class="st-form" id="stForm" autocomplete="off">
+          <input id="stInput" maxlength="200" aria-label="Chat message">
+          <button type="submit"><span lang="en">Send</span><span lang="es">Enviar</span></button>
+        </form>
+        <div class="st-try" id="stTry"></div>
+      </div>
+    </section>
+
+    <section class="st-cmd" aria-label="Panel">
+      <h2><span lang="en">The panel: create a command without code</span><span lang="es">El panel: crea un comando sin tocar código</span></h2>
+      <p class="st-lead"><span lang="en">In the real panel you log in with your Twitch account and change commands, timers, moderation rules and alerts. Try it: the new command works in the chat above right away.</span><span lang="es">En el panel real entras con tu cuenta de Twitch y cambias comandos, mensajes automáticos, reglas de moderación y alertas. Pruébalo: el comando nuevo funciona al momento en el chat de arriba.</span></p>
+      <form class="st-new" id="stNew" autocomplete="off">
+        <label><span lang="en">Command</span><span lang="es">Comando</span>
+          <input id="stNewName" placeholder="!tiktok" maxlength="20" required>
+        </label>
+        <label><span lang="en">Reply</span><span lang="es">Respuesta</span>
+          <input id="stNewText" placeholder="TikTok: tiktok.com/@tucanal" maxlength="120" required>
+        </label>
+        <button type="submit" class="btn btn--primary"><span lang="en">Save command</span><span lang="es">Guardar comando</span></button>
+      </form>
+      <ul class="st-list" id="stList"></ul>
+    </section>
+
+    <section class="st-what">
+      <h2><span lang="en">What the real system includes</span><span lang="es">Qué incluye el sistema real</span></h2>
+      <div class="st-cards">
+        <article>
+          <h3><span lang="en">Chat bot 24/7</span><span lang="es">Bot de chat 24/7</span></h3>
+          <p><span lang="en">Custom commands, timed messages and auto-moderation (links, spam, banned words, caps). It runs on a server, so it works even when you stream IRL from your phone.</span><span lang="es">Comandos personalizados, mensajes automáticos y moderación automática (links, spam, palabras prohibidas, mayúsculas). Corre en un servidor, así que funciona aunque transmitas IRL desde el móvil.</span></p>
+        </article>
+        <article>
+          <h3><span lang="en">Alerts for OBS</span><span lang="es">Alertas para OBS</span></h3>
+          <p><span lang="en">Follows, subs, bits and raids with your own images, sounds and texts. You paste one link in OBS as a browser source.</span><span lang="es">Follows, subs, bits y raids con tus imágenes, sonidos y textos. Pegas un link en OBS como fuente de navegador y listo.</span></p>
+        </article>
+        <article>
+          <h3><span lang="en">Everything in your name</span><span lang="es">Todo a tu nombre</span></h3>
+          <p><span lang="en">Your domain, your server and your code. If we ever stop working together, everything keeps running.</span><span lang="es">Tu dominio, tu servidor y tu código. Si algún día dejamos de trabajar juntos, todo sigue funcionando.</span></p>
+        </article>
+      </div>
+      <div class="st-cta">
+        <a class="btn btn--primary" href="https://t.me/leandroLCA" target="_blank" rel="noopener"><span lang="en">Talk on Telegram</span><span lang="es">Hablar por Telegram</span></a>
+        <a class="btn btn--ghost" href="mailto:itech.lca@gmail.com">itech.lca@gmail.com</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p>© 2026 Leandro Buchter · LCA ITECH · Buenos Aires, Argentina</p>
+      <a href="./"><span lang="en">Back to the portfolio</span><span lang="es">Volver al portfolio</span></a>
+    </div>
+  </footer>
+
+  <script src="assets/streamers.js"></script>
+</body>
+</html>
