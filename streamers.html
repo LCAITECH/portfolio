@@ -4,15 +4,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Twitch bot demo · LCA ITECH</title>
-  <meta name="description" content="Interactive demo of a Twitch chat bot with commands, auto-moderation and OBS alerts, by LCA ITECH. Simulation in the browser.">
+  <meta name="description" content="Interactive demo of a Twitch chat bot with commands, auto-moderation, OBS alerts and a control panel, by LCA ITECH. Simulation in the browser.">
   <meta name="robots" content="noindex, follow">
-  <meta name="theme-color" content="#070a10">
+  <meta name="theme-color" content="#0e0e10">
   <link rel="icon" href="assets/favicon-32.png" type="image/png" sizes="32x32">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="assets/streamers.css">
 </head>
-<body>
+<body class="stx">
   <header class="nav">
     <div class="container nav__inner">
       <a class="brand" href="./" aria-label="LCA ITECH">
@@ -28,89 +28,143 @@
     </div>
   </header>
 
-  <main class="container st">
-    <section class="st-hero">
-      <p class="st-kicker"><span lang="en">Interactive demo</span><span lang="es">Demo interactiva</span></p>
-      <h1><span lang="en">Your own Twitch bot, with alerts for OBS</span><span lang="es">Tu propio bot de Twitch, con alertas para OBS</span></h1>
+  <main class="st">
+    <section class="container st-hero">
+      <p class="st-kicker"><span class="st-kdot"></span><span lang="en">Live demo · try it</span><span lang="es">Demo en vivo · pruébala</span></p>
+      <h1><span lang="en">Your channel, your bot, your alerts.</span><span lang="es">Tu canal, tu bot, tus alertas.</span></h1>
       <p class="st-lead">
-        <span lang="en">Type in the chat like a viewer: try <code>!socials</code>, paste a link or shout in caps. Then fire an alert and watch it appear on the stream.</span>
-        <span lang="es">Escribe en el chat como si fueras un espectador: prueba <code>!redes</code>, pega un link o grita en mayúsculas. Después lanza una alerta y mira cómo aparece en el directo.</span>
+        <span lang="en">This is what your stream looks like with your own system. Chat like a viewer, hit Follow, fire alerts and switch moderation rules in the panel. Everything reacts live.</span>
+        <span lang="es">Así se ve tu directo con un sistema propio. Chatea como un espectador, dale a Seguir, lanza alertas y cambia las reglas de moderación en el panel. Todo reacciona en directo.</span>
       </p>
-      <p class="st-note"><span lang="en">Simulation in your browser: it does not connect to Twitch. The real bot does the same on your channel, 24/7.</span><span lang="es">Simulación en tu navegador: no se conecta a Twitch. El bot real hace lo mismo en tu canal, 24/7.</span></p>
     </section>
 
-    <section class="st-demo" aria-label="Demo">
-      <div class="st-stage">
+    <section class="container st-theater" aria-label="Demo">
+      <div class="st-main">
         <div class="st-video" id="stVideo">
-          <div class="st-live"><span class="st-dot"></span>LIVE</div>
-          <div class="st-viewers" id="stViewers">128</div>
-          <div class="st-scene" aria-hidden="true">
-            <div class="st-sun"></div><div class="st-hills"></div>
+          <canvas class="st-scene" id="stScene" aria-hidden="true"></canvas>
+          <canvas class="st-fx" id="stFx" aria-hidden="true"></canvas>
+
+          <div class="st-ov st-ov--tl">
+            <span class="st-live"><span class="st-dot"></span>LIVE</span>
+            <span class="st-pill" id="stUptime">1:24:07</span>
           </div>
+
+          <div class="st-ov st-goal" id="stGoal">
+            <div class="st-goal__top"><span><span lang="en">Sub goal</span><span lang="es">Meta de subs</span></span><b id="stGoalNum">37 / 50</b></div>
+            <div class="st-goal__bar"><i id="stGoalBar"></i></div>
+          </div>
+
+          <div class="st-cam" aria-hidden="true">
+            <svg viewBox="0 0 120 90" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="camBg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2a1d4a"/><stop offset="1" stop-color="#0f2a3d"/></linearGradient></defs><rect width="120" height="90" fill="url(#camBg)"/><circle cx="60" cy="38" r="17" fill="#e6c3a8"/><path d="M43 33c2-14 32-16 35 0-6-6-27-7-35 0z" fill="#3b2a22"/><path d="M28 92c4-24 60-24 64 0z" fill="#9146ff"/><rect x="47" y="34" width="11" height="6" rx="2" fill="none" stroke="#111" stroke-width="1.6"/><rect x="62" y="34" width="11" height="6" rx="2" fill="none" stroke="#111" stroke-width="1.6"/><path d="M58 37h4" stroke="#111" stroke-width="1.4"/></svg>
+            <span class="st-cam__tag">IRL · Madrid</span>
+          </div>
+
           <div class="st-alert" id="stAlert" role="status" aria-live="polite"></div>
-          <div class="st-obs"><span lang="en">OBS overlay (browser source)</span><span lang="es">Overlay de OBS (fuente de navegador)</span></div>
-        </div>
-        <div class="st-panel">
-          <p class="st-panel__title"><span lang="en">Fire an alert</span><span lang="es">Lanzar una alerta</span></p>
-          <div class="st-btns">
-            <button type="button" data-alert="follow"><span lang="en">New follower</span><span lang="es">Nuevo seguidor</span></button>
-            <button type="button" data-alert="sub"><span lang="en">Sub</span><span lang="es">Suscripción</span></button>
-            <button type="button" data-alert="bits">Bits</button>
-            <button type="button" data-alert="raid">Raid</button>
+
+          <div class="st-ov st-ticker">
+            <span class="st-ticker__lab"><span lang="en">Latest</span><span lang="es">Último</span></span>
+            <span id="stTicker">💜 luciaplays · ⭐ NachoGG · 💎 MarGamer ×300</span>
           </div>
-          <label class="st-sound"><input type="checkbox" id="stSound"> <span lang="en">Sound</span><span lang="es">Sonido</span></label>
+        </div>
+
+        <div class="st-bar">
+          <div class="st-chan">
+            <span class="st-chan__av" aria-hidden="true">TC<i></i></span>
+            <div class="st-chan__txt">
+              <p class="st-chan__name">TuCanal <span class="st-chan__tick" aria-hidden="true">✔</span></p>
+              <p class="st-chan__title"><span lang="en">IRL walk through Madrid at night 🌆 | !socials !discord</span><span lang="es">Paseo IRL por Madrid de noche 🌆 | !redes !discord</span></p>
+              <p class="st-chan__tags"><span>IRL</span><span lang="en">Just chatting</span><span lang="es">Charlando</span><span lang="en">Spanish</span><span lang="es">Español</span></p>
+            </div>
+          </div>
+          <div class="st-chan__act">
+            <span class="st-viewers"><svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M10 3C5 3 1.7 7 1 10c.7 3 4 7 9 7s8.3-4 9-7c-.7-3-4-7-9-7zm0 11a4 4 0 110-8 4 4 0 010 8z"/></svg><b id="stViewers">1.284</b></span>
+            <button type="button" class="st-follow" id="stFollow"><svg viewBox="0 0 20 20" width="15" height="15" aria-hidden="true"><path fill="currentColor" d="M10 17.5l-1.2-1.1C4.4 12.5 1.5 9.9 1.5 6.7 1.5 4.1 3.5 2 6.1 2c1.5 0 2.9.7 3.9 1.8C11 2.7 12.4 2 13.9 2c2.6 0 4.6 2.1 4.6 4.7 0 3.2-2.9 5.8-7.3 9.7z"/></svg><span class="st-follow__t"><span lang="en">Follow</span><span lang="es">Seguir</span></span></button>
+            <button type="button" class="st-subbtn" data-alert="sub"><span lang="en">Subscribe</span><span lang="es">Suscribirse</span></button>
+          </div>
+        </div>
+
+        <div class="st-tests">
+          <p class="st-tests__lab"><span lang="en">Test alerts</span><span lang="es">Probar alertas</span></p>
+          <div class="st-tests__btns">
+            <button type="button" data-alert="follow">💜 <span lang="en">Follow</span><span lang="es">Seguidor</span></button>
+            <button type="button" data-alert="sub">⭐ Sub</button>
+            <button type="button" data-alert="gift">🎁 <span lang="en">5 gift subs</span><span lang="es">5 subs regalo</span></button>
+            <button type="button" data-alert="bits">💎 Bits</button>
+            <button type="button" data-alert="raid">🚀 Raid</button>
+          </div>
+          <label class="st-switch"><input type="checkbox" id="stSound"><span class="st-switch__ui"></span><span lang="en">Sound</span><span lang="es">Sonido</span></label>
         </div>
       </div>
 
-      <div class="st-chat">
-        <div class="st-chat__head">
-          <span><span lang="en">Stream chat</span><span lang="es">Chat del directo</span></span>
-          <span class="st-chat__bot">🤖 LCABot</span>
-        </div>
+      <aside class="st-chat" aria-label="Chat">
+        <div class="st-chat__head"><span lang="en">Stream chat</span><span lang="es">Chat del directo</span></div>
+        <div class="st-pin" id="stPin"></div>
         <ol class="st-log" id="stLog" aria-live="polite"></ol>
+        <div class="st-try" id="stTry"></div>
         <form class="st-form" id="stForm" autocomplete="off">
           <input id="stInput" maxlength="200" aria-label="Chat message">
-          <button type="submit"><span lang="en">Send</span><span lang="es">Enviar</span></button>
+          <button type="submit"><span lang="en">Chat</span><span lang="es">Chatear</span></button>
         </form>
-        <div class="st-try" id="stTry"></div>
+      </aside>
+    </section>
+
+    <section class="container st-dash" aria-label="Panel">
+      <div class="st-dash__intro">
+        <h2><span lang="en">Your control panel</span><span lang="es">Tu panel de control</span></h2>
+        <p class="st-lead"><span lang="en">You log in with your Twitch account and change everything without code. Try it here: the chat above obeys these settings right away.</span><span lang="es">Entras con tu cuenta de Twitch y cambias todo sin tocar código. Pruébalo aquí: el chat de arriba obedece estos ajustes al momento.</span></p>
+      </div>
+      <div class="st-dash__app">
+        <nav class="st-dash__side" aria-label="Panel sections">
+          <p class="st-dash__brand">⚙ <span lang="en">Panel</span><span lang="es">Panel</span></p>
+          <button type="button" class="is-on" data-tab="cmd"><span lang="en">Commands</span><span lang="es">Comandos</span></button>
+          <button type="button" data-tab="mod"><span lang="en">Moderation</span><span lang="es">Moderación</span></button>
+          <button type="button" data-tab="timer"><span lang="en">Timers</span><span lang="es">Mensajes automáticos</span></button>
+        </nav>
+        <div class="st-dash__body">
+          <div class="st-tab" data-pane="cmd">
+            <form class="st-new" id="stNew" autocomplete="off">
+              <label for="stNewName"><span lang="en">Command</span><span lang="es">Comando</span></label>
+              <input id="stNewName" placeholder="!tiktok" maxlength="20" required>
+              <label for="stNewText"><span lang="en">Reply</span><span lang="es">Respuesta</span></label>
+              <input id="stNewText" placeholder="TikTok: tiktok.com/@tucanal" maxlength="120" required>
+              <button type="submit" class="btn btn--primary"><span lang="en">Save command</span><span lang="es">Guardar comando</span></button>
+            </form>
+            <ul class="st-list" id="stList"></ul>
+          </div>
+          <div class="st-tab" data-pane="mod" hidden>
+            <label class="st-switch st-switch--row"><input type="checkbox" id="modLinks" checked><span class="st-switch__ui"></span><span><span lang="en">Delete links</span><span lang="es">Borrar links</span></span></label>
+            <label class="st-switch st-switch--row"><input type="checkbox" id="modCaps" checked><span class="st-switch__ui"></span><span><span lang="en">Delete messages in caps</span><span lang="es">Borrar mensajes en mayúsculas</span></span></label>
+            <label class="st-switch st-switch--row"><input type="checkbox" id="modWords" checked><span class="st-switch__ui"></span><span><span lang="en">Banned words (scam, free followers…)</span><span lang="es">Palabras prohibidas (estafa, seguidores gratis…)</span></span></label>
+            <label class="st-switch st-switch--row"><input type="checkbox" id="modRepeat" checked><span class="st-switch__ui"></span><span><span lang="en">Delete repeated messages</span><span lang="es">Borrar mensajes repetidos</span></span></label>
+          </div>
+          <div class="st-tab" data-pane="timer" hidden>
+            <label class="st-switch st-switch--row"><input type="checkbox" id="timerOn" checked><span class="st-switch__ui"></span><span><span lang="en">Remind viewers to follow every few minutes</span><span lang="es">Recordar que sigan el canal cada pocos minutos</span></span></label>
+            <button type="button" class="btn btn--ghost" id="timerNow"><span lang="en">Send it now</span><span lang="es">Enviarlo ahora</span></button>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="st-cmd" aria-label="Panel">
-      <h2><span lang="en">The panel: create a command without code</span><span lang="es">El panel: crea un comando sin tocar código</span></h2>
-      <p class="st-lead"><span lang="en">In the real panel you log in with your Twitch account and change commands, timers, moderation rules and alerts. Try it: the new command works in the chat above right away.</span><span lang="es">En el panel real entras con tu cuenta de Twitch y cambias comandos, mensajes automáticos, reglas de moderación y alertas. Pruébalo: el comando nuevo funciona al momento en el chat de arriba.</span></p>
-      <form class="st-new" id="stNew" autocomplete="off">
-        <label><span lang="en">Command</span><span lang="es">Comando</span>
-          <input id="stNewName" placeholder="!tiktok" maxlength="20" required>
-        </label>
-        <label><span lang="en">Reply</span><span lang="es">Respuesta</span>
-          <input id="stNewText" placeholder="TikTok: tiktok.com/@tucanal" maxlength="120" required>
-        </label>
-        <button type="submit" class="btn btn--primary"><span lang="en">Save command</span><span lang="es">Guardar comando</span></button>
-      </form>
-      <ul class="st-list" id="stList"></ul>
-    </section>
-
-    <section class="st-what">
-      <h2><span lang="en">What the real system includes</span><span lang="es">Qué incluye el sistema real</span></h2>
+    <section class="container st-what">
       <div class="st-cards">
         <article>
           <h3><span lang="en">Chat bot 24/7</span><span lang="es">Bot de chat 24/7</span></h3>
-          <p><span lang="en">Custom commands, timed messages and auto-moderation (links, spam, banned words, caps). It runs on a server, so it works even when you stream IRL from your phone.</span><span lang="es">Comandos personalizados, mensajes automáticos y moderación automática (links, spam, palabras prohibidas, mayúsculas). Corre en un servidor, así que funciona aunque transmitas IRL desde el móvil.</span></p>
+          <p><span lang="en">Runs on a server, so it keeps working while you stream IRL from your phone.</span><span lang="es">Corre en un servidor, así que sigue funcionando mientras transmites IRL desde el móvil.</span></p>
         </article>
         <article>
           <h3><span lang="en">Alerts for OBS</span><span lang="es">Alertas para OBS</span></h3>
-          <p><span lang="en">Follows, subs, bits and raids with your own images, sounds and texts. You paste one link in OBS as a browser source.</span><span lang="es">Follows, subs, bits y raids con tus imágenes, sonidos y textos. Pegas un link en OBS como fuente de navegador y listo.</span></p>
+          <p><span lang="en">Your images, sounds and texts. One link pasted in OBS as a browser source.</span><span lang="es">Tus imágenes, sonidos y textos. Un link pegado en OBS como fuente de navegador.</span></p>
         </article>
         <article>
           <h3><span lang="en">Everything in your name</span><span lang="es">Todo a tu nombre</span></h3>
-          <p><span lang="en">Your domain, your server and your code. If we ever stop working together, everything keeps running.</span><span lang="es">Tu dominio, tu servidor y tu código. Si algún día dejamos de trabajar juntos, todo sigue funcionando.</span></p>
+          <p><span lang="en">Your domain, your server, your code. Nobody can take it away from you.</span><span lang="es">Tu dominio, tu servidor, tu código. Nadie te lo puede quitar.</span></p>
         </article>
       </div>
       <div class="st-cta">
         <a class="btn btn--primary" href="https://t.me/leandroLCA" target="_blank" rel="noopener"><span lang="en">Talk on Telegram</span><span lang="es">Hablar por Telegram</span></a>
         <a class="btn btn--ghost" href="mailto:itech.lca@gmail.com">itech.lca@gmail.com</a>
       </div>
+      <p class="st-note"><span lang="en">Simulation in your browser: it does not connect to Twitch. Twitch is a trademark of Twitch Interactive, Inc.; this demo is not affiliated with it.</span><span lang="es">Simulación en tu navegador: no se conecta a Twitch. Twitch es una marca de Twitch Interactive, Inc.; esta demo no está afiliada.</span></p>
     </section>
   </main>
 
