@@ -6,7 +6,7 @@
   var lang = function () { return root.getAttribute('data-lang') === 'es' ? 'es' : 'en'; };
   var T = {
     en: { req: 'Required.', email: 'Enter a valid email.', link: 'Enter a web, X or LinkedIn link.', need: 'Please add a bit more detail (20+ characters).', consent: 'Please accept to continue.', sending: 'Sending…', ok: 'Thanks! Your inquiry was sent. I will review it and reply by email.', err: 'Could not send right now. Please email itech.lca@gmail.com instead.', fix: 'Please check the highlighted fields.' },
-    es: { req: 'Obligatorio.', email: 'Ingresá un email válido.', link: 'Ingresá un link web, de X o LinkedIn.', need: 'Contame un poco más (20+ caracteres).', consent: 'Aceptá para continuar.', sending: 'Enviando…', ok: '¡Gracias! Tu consulta se envió. La reviso y te respondo por email.', err: 'No se pudo enviar ahora. Escribime a itech.lca@gmail.com.', fix: 'Revisá los campos marcados.' }
+    es: { req: 'Obligatorio.', email: 'Ingresa un email válido.', link: 'Ingresa un link web, de X o LinkedIn.', need: 'Cuéntame un poco más (20+ caracteres).', consent: 'Acepta para continuar.', sending: 'Enviando…', ok: '¡Gracias! Tu consulta se envió. La reviso y te respondo por email.', err: 'No se pudo enviar ahora. Escríbeme a itech.lca@gmail.com.', fix: 'Revisa los campos marcados.' }
   };
   // Opciones de <select> bilingües (data-en / data-es)
   function syncOptions() {
