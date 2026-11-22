@@ -12,16 +12,16 @@
   const T = {
     es: {
       fab: 'Asistente IA', open: 'Abrir el asistente virtual', close: 'Cerrar el asistente', reset: 'Nueva conversación',
-      title: 'Asistente de Leandro', sub: 'IA · servicios, proyectos y contacto', subOff: 'Sin conexión · acá tenés sus contactos',
+      title: 'Asistente de Leandro', sub: 'IA · servicios, proyectos y contacto', subOff: 'Sin conexión · aquí tienes sus contactos',
       welcome: '¡Hola! 👋 Soy el asistente virtual de Leandro (LCA ITECH). Te cuento sobre sus servicios, proyectos y experiencia, o cómo contratarlo. ¿En qué te ayudo?',
       chips: ['¿Qué servicios ofrece Leandro?', '¿Cuánto cuesta un bot de Telegram para mi comunidad?', '¿Qué es ATH Intelligence?', '¿Cómo funciona el armador de proyectos?', '¿Cómo lo contrato?'],
-      placeholder: 'Escribí tu pregunta…', label: 'Tu mensaje', send: 'Enviar', typing: 'El asistente está escribiendo…',
+      placeholder: 'Escribe tu pregunta…', label: 'Tu mensaje', send: 'Enviar', typing: 'El asistente está escribiendo…',
       disclaimer: 'IA: puede errar y no es asesoramiento financiero. Tus mensajes se envían a un servidor y a un proveedor de IA.',
-      offline: 'El asistente no está disponible en este momento. Podés contactar a Leandro directamente:',
-      error: 'No me pude conectar. Probá de nuevo en un rato o escribile a Leandro:',
+      offline: 'El asistente no está disponible en este momento. Puedes contactar a Leandro directamente:',
+      error: 'No me pude conectar. Inténtalo de nuevo en un momento o escríbele a Leandro:',
       tooLong: 'Tu mensaje es muy largo (máximo ' + MAX_CHARS + ' caracteres).',
       slow: 'Está tardando un poco más de lo normal…',
-      cut: '(La respuesta se cortó. Si necesitás más detalle, escribile a Leandro.)',
+      cut: '(La respuesta se cortó. Si necesitas más detalle, escríbele a Leandro.)',
       contacts: 'Contacto',
     },
     en: {

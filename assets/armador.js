@@ -24,7 +24,7 @@
       plat: ['telegram'], brain: 'fixed' },
     { id: 'business', ico: '⚙️', skin: 'screen', pk: 'P0 · P6',
       n: { en: 'Automate your business', es: 'Automatizar tu negocio' },
-      d: { en: 'Emails and forms sorted by AI, Google Sheets, reports and alerts, without manual work.', es: 'Mails y formularios clasificados con IA, Google Sheets, reportes y avisos, sin trabajo manual.' },
+      d: { en: 'Emails and forms sorted by AI, Google Sheets, reports and alerts, without manual work.', es: 'Correos y formularios clasificados con IA, Google Sheets, reportes y avisos, sin trabajo manual.' },
       head: { en: 'Your business panel', es: 'Panel de tu negocio' }, plat: ['telegram'], brain: 'basic' },
     { id: 'assistant', ico: '🧠', skin: 'phone', pk: 'P4 · P7',
       n: { en: 'AI assistant', es: 'Asistente con IA' },
@@ -33,7 +33,7 @@
       plat: ['telegram', 'discord'], brain: 'basic' },
     { id: 'dashboard', ico: '📈', skin: 'screen', pk: 'P2 · S2 · P8',
       n: { en: 'Crypto dashboard', es: 'Dashboard cripto' },
-      d: { en: 'Market data, wallets you follow and alerts to Telegram, on your own web dashboard.', es: 'Datos de mercado, wallets que seguís y alertas a Telegram, en tu propio dashboard web.' },
+      d: { en: 'Market data, wallets you follow and alerts to Telegram, on your own web dashboard.', es: 'Datos de mercado, wallets que sigues y alertas a Telegram, en tu propio dashboard web.' },
       head: { en: 'Crypto dashboard', es: 'Dashboard cripto' }, plat: ['web', 'telegram'], brain: 'fixed' }
   ];
   // t: s = S1–S3 (rango y combo) · p = paquete "desde" · auto = automatización (1 → P0, 2–3 → P6) · q = a cotizar
@@ -42,7 +42,7 @@
   var MODS = {
     community: [
       { id: 's1', tag: 'S1', ico: '?', t: 's', pr: [100, 150], days: D(3, 5), n: { en: 'FAQ bot', es: 'Preguntas frecuentes' }, d: { en: 'Answers how to buy, links, rules', es: 'Responde cómo comprar, links, reglas' },
-        how: { en: 'Answers your community\u2019s frequent questions (how to buy, links, rules, guides) in the group or by DM, with your own texts and commands. You edit the answers; nothing is improvised.', es: 'Responde las preguntas frecuentes de tu comunidad (cómo comprar, links, reglas, guías) en el grupo o por privado, con tus textos y comandos. Las respuestas las definís vos: no improvisa.' } },
+        how: { en: 'Answers your community\u2019s frequent questions (how to buy, links, rules, guides) in the group or by DM, with your own texts and commands. You edit the answers; nothing is improvised.', es: 'Responde las preguntas frecuentes de tu comunidad (cómo comprar, links, reglas, guías) en el grupo o por privado, con tus textos y comandos. Las respuestas las defines tú: no improvisa.' } },
       { id: 's2', tag: 'S2', ico: '₿', t: 's', cov: 'p1', pr: [100, 150], days: D(2, 4), n: { en: 'Price alerts', es: 'Alertas de precio' }, d: { en: 'Crypto alerts at your levels', es: 'Alertas cripto en tus niveles' },
         how: { en: 'Posts an alert in your Telegram group or channel when an asset crosses the levels you choose, with the data source in every message.', es: 'Publica una alerta en tu grupo o canal de Telegram cuando un activo cruza los niveles que elijas, con la fuente del dato en cada mensaje.' } },
       { id: 's3', tag: 'S3', ico: '⛨', t: 's', pr: [120, 180], days: D(4, 6), n: { en: 'Moderation', es: 'Moderación' }, d: { en: 'Deletes spam and seed-phrase scams', es: 'Borra spam y estafas de seed phrase' },
@@ -55,22 +55,22 @@
         how: { en: 'Grants access to private channels once a payment is confirmed. Depends on the payment method you use, so it is quoted in writing.', es: 'Habilita el acceso a canales privados cuando se confirma un pago. Depende del medio de pago que uses, por eso se cotiza por escrito.' } }
     ],
     business: [
-      { id: 'gmail', tag: 'Gmail', ico: '✉', t: 'auto', n: { en: 'Gmail: emails sorted by AI', es: 'Gmail: mails clasificados con IA' }, d: { en: 'Each email tagged and routed', es: 'Cada mail etiquetado y derivado' },
-        how: { en: 'Reads incoming emails, classifies them with AI (sales, support, invoices…) and routes or answers them with your templates.', es: 'Lee los mails que entran, los clasifica con IA (ventas, soporte, facturas…) y los deriva o responde con tus plantillas.' } },
-      { id: 'forms', tag: '+', ico: '☑', t: 'auto', n: { en: 'Forms to your sheet or CRM', es: 'Formularios a tu planilla o CRM' }, d: { en: 'Every form, classified and saved', es: 'Cada formulario, clasificado y guardado' },
-        how: { en: 'Each form your clients send is classified with AI and saved in your sheet or CRM, without copying by hand.', es: 'Cada formulario que mandan tus clientes se clasifica con IA y se guarda en tu planilla o CRM, sin copiar a mano.' } },
-      { id: 'sheets', tag: 'Sheets', ico: '▦', t: 'auto', n: { en: 'Google Sheets automation', es: 'Automatización de Google Sheets' }, d: { en: 'Forms and orders into your sheet', es: 'Formularios y pedidos a tu planilla' },
-        how: { en: 'Orders, emails and forms land as rows in your Google Sheet, with status and date, ready to filter.', es: 'Pedidos, mails y formularios caen como filas en tu Google Sheets, con estado y fecha, listos para filtrar.' } },
-      { id: 'reports', tag: '+', ico: '▤', t: 'auto', n: { en: 'Automatic reports', es: 'Reportes automáticos' }, d: { en: 'Weekly summary by email', es: 'Resumen semanal por mail' },
-        how: { en: 'Builds a weekly summary from your data and emails it on the day and time you choose.', es: 'Arma un resumen semanal con tus datos y te lo manda por mail el día y la hora que elijas.' } },
-      { id: 'notify', tag: '+', ico: '🔔', t: 'auto', n: { en: 'Alerts by Telegram or email', es: 'Avisos por Telegram o mail' }, d: { en: 'When something needs attention', es: 'Cuando algo necesita atención' },
-        how: { en: 'Sends you an alert on Telegram or by email when something needs attention: an urgent email, a big order, a late task.', es: 'Te avisa por Telegram o por mail cuando algo necesita atención: un mail urgente, un pedido grande, una tarea atrasada.' } }
+      { id: 'gmail', tag: 'Gmail', ico: '✉', t: 'auto', n: { en: 'Gmail: emails sorted by AI', es: 'Gmail: correos clasificados con IA' }, d: { en: 'Each email tagged and routed', es: 'Cada correo etiquetado y derivado' },
+        how: { en: 'Reads incoming emails, classifies them with AI (sales, support, invoices…) and routes or answers them with your templates.', es: 'Lee los correos que entran, los clasifica con IA (ventas, soporte, facturas…) y los deriva o responde con tus plantillas.' } },
+      { id: 'forms', tag: '+', ico: '☑', t: 'auto', n: { en: 'Forms to your sheet or CRM', es: 'Formularios a tu hoja de cálculo o CRM' }, d: { en: 'Every form, classified and saved', es: 'Cada formulario, clasificado y guardado' },
+        how: { en: 'Each form your clients send is classified with AI and saved in your sheet or CRM, without copying by hand.', es: 'Cada formulario que mandan tus clientes se clasifica con IA y se guarda en tu hoja de cálculo o CRM, sin copiar a mano.' } },
+      { id: 'sheets', tag: 'Sheets', ico: '▦', t: 'auto', n: { en: 'Google Sheets automation', es: 'Automatización de Google Sheets' }, d: { en: 'Forms and orders into your sheet', es: 'Formularios y pedidos a tu hoja de cálculo' },
+        how: { en: 'Orders, emails and forms land as rows in your Google Sheet, with status and date, ready to filter.', es: 'Pedidos, correos y formularios llegan como filas en tu Google Sheets, con estado y fecha, listos para filtrar.' } },
+      { id: 'reports', tag: '+', ico: '▤', t: 'auto', n: { en: 'Automatic reports', es: 'Reportes automáticos' }, d: { en: 'Weekly summary by email', es: 'Resumen semanal por correo' },
+        how: { en: 'Builds a weekly summary from your data and emails it on the day and time you choose.', es: 'Arma un resumen semanal con tus datos y te lo envía por correo el día y la hora que elijas.' } },
+      { id: 'notify', tag: '+', ico: '🔔', t: 'auto', n: { en: 'Alerts by Telegram or email', es: 'Avisos por Telegram o correo' }, d: { en: 'When something needs attention', es: 'Cuando algo necesita atención' },
+        how: { en: 'Sends you an alert on Telegram or by email when something needs attention: an urgent email, a big order, a late task.', es: 'Te avisa por Telegram o por correo cuando algo necesita atención: un correo urgente, un pedido grande, una tarea atrasada.' } }
     ],
     assistant: [
       { id: 'kb', tag: 'P4', ico: '📄', t: 'p', from: 1500, days: D(14, 28), cf: 'P4 AI Support Agent', n: { en: 'Knowledge base', es: 'Base de conocimiento' }, d: { en: 'Answers from your docs, with sources', es: 'Responde desde tus docs, con fuente' },
         how: { en: 'AI agent for Telegram/Discord that answers from your own documentation and shows where each answer comes from.', es: 'Agente de IA para Telegram/Discord que responde desde tu propia documentación y muestra de dónde sale cada respuesta.' } },
       { id: 'langs', tag: '+', ico: '🌐', t: 'incl', inc: 'kb', n: { en: 'ES / EN / PT', es: 'ES / EN / PT' }, d: { en: 'Answers in your user\u2019s language', es: 'Responde en el idioma de cada usuario' },
-        how: { en: 'Detects the language of each question and answers in Spanish, English or Portuguese from the same docs.', es: 'Detecta el idioma de cada pregunta y responde en castellano, inglés o portugués desde los mismos documentos.' } },
+        how: { en: 'Detects the language of each question and answers in Spanish, English or Portuguese from the same docs.', es: 'Detecta el idioma de cada pregunta y responde en español, inglés o portugués desde los mismos documentos.' } },
       { id: 'guard', tag: '+', ico: '🛡', t: 'incl', inc: 'kb', n: { en: 'Anti-scam protections', es: 'Protecciones anti-scam' }, d: { en: 'Never asks for keys or funds', es: 'Nunca pide claves ni fondos' },
         how: { en: 'Refuses to ask for or accept seed phrases, keys or payments, and warns the user when a message looks like a scam.', es: 'Nunca pide ni acepta seed phrases, claves o pagos, y avisa al usuario cuando un mensaje parece una estafa.' } },
       { id: 'handoff', tag: '+', ico: '🙋', t: 'incl', inc: 'kb', n: { en: 'Handoff to a human', es: 'Derivación a un humano' }, d: { en: 'Passes hard cases to your team', es: 'Pasa los casos difíciles a tu equipo' },
@@ -89,7 +89,7 @@
         how: { en: 'Custom market data pipeline, database, REST API and web dashboard, built for your data sources.', es: 'Pipeline de datos de mercado a medida, base de datos, API REST y dashboard web, construido para tus fuentes de datos.' } },
       { id: 'api', tag: '+', ico: '⌁', t: 'incl', inc: 'prices', n: { en: 'Your own REST API', es: 'Tu propia API REST' }, d: { en: 'Your data, ready for other apps', es: 'Tus datos, listos para otras apps' },
         how: { en: 'The same data from the dashboard, exposed in your own REST API so your bots and apps can use it.', es: 'Los mismos datos del dashboard, en tu propia API REST para que los usen tus bots y apps.' } },
-      { id: 'wallets', tag: '+', ico: '◈', t: 'q', n: { en: 'Wallet tracking', es: 'Seguimiento de wallets' }, d: { en: 'Wallets you follow, with movements', es: 'Wallets que seguís, con movimientos' },
+      { id: 'wallets', tag: '+', ico: '◈', t: 'q', n: { en: 'Wallet tracking', es: 'Seguimiento de wallets' }, d: { en: 'Wallets you follow, with movements', es: 'Wallets que sigues, con movimientos' },
         how: { en: 'Watches the wallets you choose and shows their movements. Depends on the chains and data sources, so it is quoted in writing.', es: 'Vigila las wallets que elijas y muestra sus movimientos. Depende de las redes y fuentes de datos, por eso se cotiza por escrito.' } },
       { id: 'alerts', tag: 'S2', ico: '🔔', t: 's', pr: [100, 150], days: D(2, 4), n: { en: 'Alerts to Telegram', es: 'Alertas a Telegram' }, d: { en: 'Price alerts at your levels', es: 'Alertas de precio en tus niveles' },
         how: { en: 'Posts an alert in your Telegram group or channel when an asset crosses the levels you choose, with the data source in every message.', es: 'Publica una alerta en tu grupo o canal de Telegram cuando un activo cruza los niveles que elijas, con la fuente del dato en cada mensaje.' } },
@@ -100,17 +100,17 @@
   // Casos reales: SOLO cosas que existen y se ven en este sitio o funcionan hoy.
   var CASES = {
     community: [
-      { ico: '🤖', href: 'https://t.me/lcaitech_demo_bot?start=comunidad', n: { en: 'Telegram demo bot', es: 'Bot demo de Telegram' }, s: { en: '@lcaitech_demo_bot · try it now', es: '@lcaitech_demo_bot · probalo ahora' } },
+      { ico: '🤖', href: 'https://t.me/lcaitech_demo_bot?start=comunidad', n: { en: 'Telegram demo bot', es: 'Bot demo de Telegram' }, s: { en: '@lcaitech_demo_bot · try it now', es: '@lcaitech_demo_bot · pruébalo ahora' } },
       { ico: '📡', href: '#live', n: { en: 'Live demo', es: 'Demo en vivo' }, s: { en: 'Real prices and Fear & Greed on this site', es: 'Precios reales y Fear & Greed en este sitio' } },
       { ico: '👥', href: '#projects', n: { en: 'LCA Trading', es: 'LCA Trading' }, s: { en: 'My own community since 2022, where I test bots and referrals', es: 'Mi comunidad desde 2022, donde pruebo bots y referidos' } }
     ],
     business: [
-      { ico: '✉', href: '#contact', n: { en: 'This site\u2019s contact form', es: 'El formulario de este sitio' }, s: { en: 'Each request reaches me by email automatically', es: 'Cada pedido me llega por mail automáticamente' } },
+      { ico: '✉', href: '#contact', n: { en: 'This site\u2019s contact form', es: 'El formulario de este sitio' }, s: { en: 'Each request reaches me by email automatically', es: 'Cada pedido me llega por correo automáticamente' } },
       { ico: '🧩', href: '#templates', n: { en: 'Grok Bot templates', es: 'Plantillas para Grok Bot' }, s: { en: 'Bots I use every day, free to copy', es: 'Bots que uso todos los días, gratis' } },
       { ico: '🎬', href: '#clients', n: { en: 'Ingeniería Gabriel Gomez SRL', es: 'Ingeniería Gabriel Gomez SRL' }, s: { en: 'Real client · video production', es: 'Cliente real · producción de video' } }
     ],
     assistant: [
-      { ico: '💬', act: 'assistant', n: { en: 'This site\u2019s virtual assistant', es: 'El asistente virtual de este sitio' }, s: { en: 'Answers from my knowledge base · open it', es: 'Responde desde mi base de conocimiento · abrilo' } },
+      { ico: '💬', act: 'assistant', n: { en: 'This site\u2019s virtual assistant', es: 'El asistente virtual de este sitio' }, s: { en: 'Answers from my knowledge base · open it', es: 'Responde desde mi base de conocimiento · ábrelo' } },
       { ico: '⚡', href: '#projects', n: { en: 'LCA-GPT', es: 'LCA-GPT' }, s: { en: 'Internal multi-provider AI chat with auto-routing (under evaluation)', es: 'Chat de IA interno multi-proveedor con auto-routing (en evaluación)' } },
       { ico: '🧭', href: 'https://github.com/LCAITECH/model-compass', n: { en: 'Model Compass', es: 'Model Compass' }, s: { en: 'Open-source model decision engine', es: 'Motor de decisión de modelos open source' } },
       { ico: '🧩', href: '#templates', n: { en: 'Grok Bot templates', es: 'Plantillas para Grok Bot' }, s: { en: 'Bots I use every day, free to copy', es: 'Bots que uso todos los días, gratis' } }
@@ -126,7 +126,7 @@
     { id: 'telegram', n: 'Telegram' }, { id: 'discord', n: 'Discord' }, { id: 'web', n: 'Web' }
   ];
   var BRAINS = [
-    { id: 'fixed', n: { en: 'Fixed answers', es: 'Respuestas fijas' }, d: { en: 'Commands and texts you define', es: 'Comandos y textos que vos definís' } },
+    { id: 'fixed', n: { en: 'Fixed answers', es: 'Respuestas fijas' }, d: { en: 'Commands and texts you define', es: 'Comandos y textos que tú defines' } },
     { id: 'basic', n: { en: 'Basic AI', es: 'IA básica' }, d: { en: 'Understands free-form questions', es: 'Entiende preguntas escritas libremente' } },
     { id: 'advanced', n: { en: 'Advanced AI with memory', es: 'IA avanzada con memoria' }, d: { en: 'Context, memory and tools', es: 'Contexto, memoria y herramientas' } }
   ];
@@ -142,13 +142,13 @@
       info: 'How it works', tTime: 'Delivery', tPrice: 'Price', inclIn: 'included in', noPkg: 'without it: to be quoted', withPkg: 'with', saved: 'You save', autoMore: 'more than 3 tasks: to be quoted',
       cases: 'Real cases · systems running today', open: 'Open', deal: 'Quantity discount', inclFree: 'included at no extra cost', autoTime: '~1 week (P0) · 1–3 weeks (P6)', inclTime: 'within the package time' },
     es: { quote: 'a cotizar', aquote: 'a cotizar', from: 'desde', incl: 'incluido', days: 'días', weeks: 'semanas', approx: '≈',
-      empty: 'Prendé un módulo para verlo funcionar.', bot: 'LCA Bot', typing: 'LCA Bot está escribiendo…', deleted: 'Mensaje eliminado por el bot',
+      empty: 'Activa un módulo para verlo funcionar.', bot: 'LCA Bot', typing: 'LCA Bot está escribiendo…', deleted: 'Mensaje eliminado por el bot',
       auto1: '1 = P0 desde USD 250 · 2–3 = P6 desde USD 800', dev: 'en desarrollo', combo2: 'Combo de 2 módulos (S1–S3): −15%', combo3: 'Pack Comunidad S1 + S2 + S3: ~25% menos',
       total: 'Total estimado', time: 'Tiempo estimado', mods: 'Módulos', plat: 'Plataforma', brain: 'Inteligencia', plus: ' + a cotizar', tbd: ' + a definir',
       adv: '50% de anticipo para empezar. Alcance y precio final por escrito antes de arrancar.', note: 'Precios "desde" en USD, los mismos de Servicios. "A cotizar": te paso el precio por escrito.',
-      order: 'Pedir este proyecto', edit: 'Editar', pick: 'Elegí una opción para seguir', pickMod: 'Prendé al menos un módulo', step: 'Paso', of: 'de', drop: 'Soltalo acá para prenderlo',
+      order: 'Pedir este proyecto', edit: 'Editar', pick: 'Elige una opción para continuar', pickMod: 'Activa al menos un módulo', step: 'Paso', of: 'de', drop: 'Suéltalo aquí para activarlo',
       msg: 'Armador de proyectos', about: 'Sobre mi proyecto: ', est: 'Estimado que vi en la web: ', cat: 'Tipo',
-      info: 'Cómo funciona', tTime: 'Plazo', tPrice: 'Precio', inclIn: 'incluido en', noPkg: 'sin ese paquete: a cotizar', withPkg: 'con', saved: 'Ahorrás', autoMore: 'más de 3 tareas: a cotizar',
+      info: 'Cómo funciona', tTime: 'Plazo', tPrice: 'Precio', inclIn: 'incluido en', noPkg: 'sin ese paquete: a cotizar', withPkg: 'con', saved: 'Ahorras', autoMore: 'más de 3 tareas: a cotizar',
       cases: 'Casos reales · sistemas funcionando hoy', open: 'Abrir', deal: 'Descuento por cantidad', inclFree: 'incluidos sin costo extra', autoTime: '~1 semana (P0) · 1–3 semanas (P6)', inclTime: 'dentro del plazo del paquete' }
   };
 
@@ -353,10 +353,10 @@
   function dealText(q) {
     var es = L() === 'es', c = S.cat, n = q.sCount, sv = q.save ? 'USD ' + q.save[0] + '–' + q.save[1] : '';
     if (c === 'community') {
-      if (n === 0) return es ? 'Sumá módulos S1–S3: 2 módulos −15% · los 3 = Pack Comunidad USD 250–350.' : 'Add S1–S3 modules: any 2 −15% · all 3 = Community Pack USD 250–350.';
-      if (n === 1) return es ? 'Sumá otro módulo S y ahorrás 15%.' : 'Add another S module and save 15%.';
-      if (n === 2) return (es ? '✓ −15% por 2 módulos S · ahorrás ' : '✓ −15% for 2 S modules · you save ') + sv + (es ? '. Sumá el tercero: Pack Comunidad.' : '. Add the third: Community Pack.');
-      return (es ? '✓ Pack Comunidad: USD 250–350 · ahorrás ' : '✓ Community Pack: USD 250–350 · you save ') + sv + '.';
+      if (n === 0) return es ? 'Suma módulos S1–S3: 2 módulos −15% · los 3 = Pack Comunidad USD 250–350.' : 'Add S1–S3 modules: any 2 −15% · all 3 = Community Pack USD 250–350.';
+      if (n === 1) return es ? 'Suma otro módulo S y ahorra 15%.' : 'Add another S module and save 15%.';
+      if (n === 2) return (es ? '✓ −15% por 2 módulos S · ahorras ' : '✓ −15% for 2 S modules · you save ') + sv + (es ? '. Suma el tercero: Pack Comunidad.' : '. Add the third: Community Pack.');
+      return (es ? '✓ Pack Comunidad: USD 250–350 · ahorras ' : '✓ Community Pack: USD 250–350 · you save ') + sv + '.';
     }
     if (c === 'business') {
       var a = q.autos;
@@ -368,8 +368,8 @@
     var inc = q.incl.length, pend = q.lines.filter(function (ln) { return ln.m.t === 'incl' && ln.q; }).length;
     var pkg = c === 'assistant' ? 'P4 / P7' : 'P2';
     if (inc && !pend) return '✓ ' + inc + ' ' + (es ? 'módulo(s) ' : 'module(s) ') + T[L()].inclFree + '.';
-    if (pend) return es ? 'Hay módulos incluidos en ' + pkg + ': prendé el paquete y no suman precio.' : 'Some modules are included in ' + pkg + ': turn the package on and they add no cost.';
-    return es ? 'Los módulos marcados «incluido en ' + pkg + '» no suman precio si prendés el paquete.' : 'Modules marked “included in ' + pkg + '” add no cost when the package is on.';
+    if (pend) return es ? 'Hay módulos incluidos en ' + pkg + ': activa el paquete y no suman precio.' : 'Some modules are included in ' + pkg + ': turn the package on and they add no cost.';
+    return es ? 'Los módulos marcados «incluido en ' + pkg + '» no suman precio si activas el paquete.' : 'Modules marked “included in ' + pkg + '” add no cost when the package is on.';
   }
   function renderDeal() {
     if (!S.cat) { deal.hidden = true; return; }
@@ -460,7 +460,7 @@
       if (m.cov === id && a.indexOf(m.id) >= 0) {
         a.splice(a.indexOf(m.id), 1); removeMod(m.id);
         var c = $('armMods').querySelector('[data-mod="' + m.id + '"]'); if (c) c.classList.remove('is-on');
-        covNote = L() === 'es' ? m.tag + ' se apagó: las alertas de precio ya vienen en ' + mod(id).tag + ', así no lo pagás dos veces.' : m.tag + ' was turned off: price alerts already come with ' + mod(id).tag + ', so you don\u2019t pay twice.';
+        covNote = L() === 'es' ? m.tag + ' se desactivó: las alertas de precio ya vienen en ' + mod(id).tag + ', así no lo pagas dos veces.' : m.tag + ' was turned off: price alerts already come with ' + mod(id).tag + ', so you don\u2019t pay twice.';
       }
     });
     i = a.indexOf(id);
@@ -560,16 +560,16 @@
     switch (id) {
       case 's1': return [
         { who: 'Ana', c: 'msg--u1', text: es ? '¿cómo compro?' : 'how do I buy?' }, { typing: 700 },
-        { who: 'bot', text: es ? '¡Hola Ana! 👋 Para comprar: 1) creá tu cuenta en el exchange, 2) verificá tu identidad, 3) seguí la guía fijada con /guia. Nadie del equipo te va a pedir tu seed phrase.' : 'Hi Ana! 👋 To buy: 1) create your exchange account, 2) verify your identity, 3) follow the pinned guide with /guide. Nobody on the team will ever ask for your seed phrase.' }];
+        { who: 'bot', text: es ? '¡Hola Ana! 👋 Para comprar: 1) crea tu cuenta en el exchange, 2) verifica tu identidad, 3) sigue la guía fijada con /guia. Nadie del equipo te va a pedir tu seed phrase.' : 'Hi Ana! 👋 To buy: 1) create your exchange account, 2) verify your identity, 3) follow the pinned guide with /guide. Nobody on the team will ever ask for your seed phrase.' }];
       case 's2': return [{ typing: 500 },
         { who: 'bot', alert: true, text: es ? '🔔 Alerta BTC: cruzó el nivel que configuraste' + (px ? ' · ahora ' + px + ' (dato en vivo)' : '') + '. Fuente: CoinGecko.' : '🔔 BTC alert: price crossed the level you set' + (px ? ' · now ' + px + ' (live data)' : '') + '. Source: CoinGecko.' }];
       case 's3': return [
-        { who: es ? 'Soporte_Oficial' : 'Official_Support', c: 'msg--u2', spam: true, text: es ? '¡Hola! Soy del soporte 🛠 Mandame tu seed phrase por privado para verificar tu wallet 🔑' : 'Hi! I am from support 🛠 DM me your seed phrase to verify your wallet 🔑' },
+        { who: es ? 'Soporte_Oficial' : 'Official_Support', c: 'msg--u2', spam: true, text: es ? '¡Hola! Soy del soporte 🛠 Envíame tu seed phrase por privado para verificar tu wallet 🔑' : 'Hi! I am from support 🛠 DM me your seed phrase to verify your wallet 🔑' },
         { wait: 1100 }, { del: true }, { typing: 500 },
         { who: 'bot', warn: true, text: es ? '⚠️ Borré un mensaje que pedía una seed phrase y silencié al usuario. Nunca la compartas con nadie.' : '⚠️ I deleted a message asking for a seed phrase and muted the user. Never share it with anyone.' }];
       case 'onb': return [
         { sys: es ? '👋 Leo se unió al grupo' : '👋 Leo joined the group' }, { typing: 600 },
-        { who: 'bot', text: es ? '¡Bienvenido Leo! Elegí cómo empezar:' : 'Welcome Leo! Choose how to start:', btns: es ? ['📘 Guía', '🔗 Mi link de referido', '✅ Verificar UID'] : ['📘 Guide', '🔗 My referral link', '✅ Verify UID'] }];
+        { who: 'bot', text: es ? '¡Bienvenido Leo! Elige cómo empezar:' : 'Welcome Leo! Choose how to start:', btns: es ? ['📘 Guía', '🔗 Mi link de referido', '✅ Verificar UID'] : ['📘 Guide', '🔗 My referral link', '✅ Verify UID'] }];
       case 'p1': return [{ typing: 600 },
         { who: 'bot', alert: true, text: es ? '📰 Resumen del día · BTC ' + (px || 'en vivo') + ' · distancia al ATH, Fear & Greed, unlocks y ballenas. Fuentes: CoinGecko, alternative.me.' : '📰 Daily summary · BTC ' + (px || 'live') + ' · distance to ATH, Fear & Greed, unlocks and whales. Sources: CoinGecko, alternative.me.' }];
       case 'pay': return [
@@ -577,26 +577,26 @@
         { who: 'bot', text: es ? '⭐ Pago confirmado. Te habilité el acceso al canal VIP (demo).' : '⭐ Payment confirmed. VIP channel access granted (demo).', btns: es ? ['Entrar al VIP'] : ['Open VIP'] }];
       case 'kb': return [
         { who: 'Marta', c: 'msg--u1', text: es ? '¿Cuál es la política de devoluciones?' : 'What is the return policy?' }, { typing: 800 },
-        { who: 'bot', text: es ? 'Tenés 30 días para devolver el producto sin uso, con el comprobante. 📄 Fuente: politicas.pdf, sección 4.' : 'You have 30 days to return an unused product with the receipt. 📄 Source: policies.pdf, section 4.' }];
+        { who: 'bot', text: es ? 'Tienes 30 días para devolver el producto sin uso, con el comprobante. 📄 Fuente: politicas.pdf, sección 4.' : 'You have 30 days to return an unused product with the receipt. 📄 Source: policies.pdf, section 4.' }];
       case 'langs': return [
         { who: 'João', c: 'msg--u2', text: 'Qual é a política de trocas?' }, { typing: 700 },
         { who: 'bot', text: 'Você tem 30 dias para trocar o produto sem uso, com o comprovante. 📄 Fonte: politicas.pdf' }];
       case 'guard': return [
         { who: 'Marta', c: 'msg--u1', text: es ? 'Me escribió un "admin" por privado pidiendo mi clave, ¿es real?' : 'An "admin" DM\u2019d me asking for my key, is it real?' }, { typing: 700 },
-        { who: 'bot', warn: true, text: es ? '🛡 No. Nadie del equipo te va a pedir claves, seed phrase ni fondos. Bloquealo y reportalo.' : '🛡 No. Nobody on the team will ever ask for keys, a seed phrase or funds. Block and report them.' }];
+        { who: 'bot', warn: true, text: es ? '🛡 No. Nadie del equipo te va a pedir claves, seed phrase ni fondos. Bloquéalo y repórtalo.' : '🛡 No. Nobody on the team will ever ask for keys, a seed phrase or funds. Block and report them.' }];
       case 'handoff': return [
         { who: 'Marta', c: 'msg--u1', text: es ? 'Quiero hablar con una persona' : 'I want to talk to a person' }, { typing: 600 },
-        { who: 'bot', text: es ? '🙋 Listo: le pasé tu consulta al equipo con todo el contexto. Te responden por acá.' : '🙋 Done: I passed your question to the team with all the context. They\u2019ll reply here.' }];
-      case 'models': return [{ card: { ico: '🧭', h: 'Model Compass', rows: es ? ['Caso: soporte en castellano · presupuesto bajo', '→ recomendado: modelo rápido y barato para el 80% de las consultas', '→ modelo grande solo para las difíciles'] : ['Case: Spanish support · low budget', '→ recommended: fast, cheap model for 80% of requests', '→ large model only for the hard ones'] } }];
+        { who: 'bot', text: es ? '🙋 Hecho: le pasé tu consulta al equipo con todo el contexto. Te responderán por aquí.' : '🙋 Done: I passed your question to the team with all the context. They\u2019ll reply here.' }];
+      case 'models': return [{ card: { ico: '🧭', h: 'Model Compass', rows: es ? ['Caso: soporte en español · presupuesto bajo', '→ recomendado: modelo rápido y barato para el 80% de las consultas', '→ modelo grande solo para las difíciles'] : ['Case: Spanish support · low budget', '→ recommended: fast, cheap model for 80% of requests', '→ large model only for the hard ones'] } }];
       case 'mem': return [
         { who: 'Marta', c: 'msg--u1', text: es ? 'Hola de nuevo' : 'Hi again' }, { typing: 700 },
-        { who: 'bot', text: es ? '¡Hola Marta! La última vez me consultaste por un cambio de talle. ¿Seguimos con eso? 🧠' : 'Hi Marta! Last time you asked about a size exchange. Shall we continue? 🧠' }];
+        { who: 'bot', text: es ? '¡Hola Marta! La última vez me consultaste por un cambio de talla. ¿Seguimos con eso? 🧠' : 'Hi Marta! Last time you asked about a size exchange. Shall we continue? 🧠' }];
       case 'multi': return [
         { sys: es ? '⇄ Misma conversación desde Telegram, Discord y la web' : '⇄ Same conversation from Telegram, Discord and the web' }, { typing: 500 },
-        { who: 'bot', text: es ? 'Vi que empezaste por la web: sigo acá con tu consulta, sin repetir nada.' : 'You started on the web: I continue here with your question, no need to repeat.' }];
+        { who: 'bot', text: es ? 'Vi que empezaste por la web: sigo aquí con tu consulta, sin repetir nada.' : 'You started on the web: I continue here with your question, no need to repeat.' }];
       case 'inner': return [
-        { who: es ? 'Equipo' : 'Team', c: 'msg--u2', text: es ? 'Resumime este contrato en 5 puntos' : 'Summarize this contract in 5 points' }, { typing: 800 },
-        { who: 'bot', text: es ? '⚖ Mandé la consulta al modelo más barato que la resuelve bien. Acá van los 5 puntos…' : '⚖ I sent this to the cheapest model that handles it well. Here are the 5 points…' }];
+        { who: es ? 'Equipo' : 'Team', c: 'msg--u2', text: es ? 'Resúmeme este contrato en 5 puntos' : 'Summarize this contract in 5 points' }, { typing: 800 },
+        { who: 'bot', text: es ? '⚖ Mandé la consulta al modelo más barato que la resuelve bien. Aquí van los 5 puntos…' : '⚖ I sent this to the cheapest model that handles it well. Here are the 5 points…' }];
       case 'gmail': return [{ card: { ico: '✉', h: 'Gmail', rows: es ? ['Nuevo mail: "Quiero un presupuesto"', '→ clasificado con IA: Ventas ✓', '→ derivado a ventas@ y respondido con plantilla'] : ['New email: "I want a quote"', '→ sorted by AI: Sales ✓', '→ routed to sales@ and answered with a template'] } }];
       case 'sheets': return [{ card: { ico: '▦', h: 'Google Sheets', k: 'scard--sheet', rows: es ? ['+ fila: Cliente A · Pedido web · Nuevo', '+ fila: Cliente B · Formulario · En curso', '+ fila: Cliente C · Mail · Respondido'] : ['+ row: Client A · Web order · New', '+ row: Client B · Form · In progress', '+ row: Client C · Email · Answered'] } }];
       case 'forms': return [{ card: { ico: '☑', h: es ? 'Formulario nuevo' : 'New form', k: 'scard--sheet', rows: es ? ['Cliente D · "Necesito 20 unidades"', '→ clasificado con IA: Pedido mayorista ✓', '→ guardado en la planilla / CRM'] : ['Client D · "I need 20 units"', '→ sorted by AI: Wholesale order ✓', '→ saved to the sheet / CRM'] } }];
@@ -606,7 +606,7 @@
       case 'api': return [{ card: { ico: '⌁', h: 'API REST', rows: ['GET /v1/prices?asset=BTC', '200 OK · { "price": ' + (px ? '"' + px + '"' : '…') + ', "source": "CoinGecko" }'] } }];
       case 'wallets': return [{ card: { ico: '◈', h: es ? 'Wallets' : 'Wallets', rows: es ? ['0x7a3…f19 · vigilada', '→ movimiento detectado: salida a un exchange'] : ['0x7a3…f19 · watched', '→ movement detected: transfer to an exchange'] } }];
       case 'alerts': return [{ card: { ico: '🔔', h: es ? 'Alerta enviada a Telegram' : 'Alert sent to Telegram', k: 'scard--alert', rows: [es ? 'BTC cruzó el nivel que configuraste' + (px ? ' · ' + px : '') : 'BTC crossed the level you set' + (px ? ' · ' + px : '')] } }];
-      case 'signals': return [{ card: { ico: '∿', h: es ? 'Señal (en desarrollo)' : 'Signal (in development)', k: 'scard--dev', rows: es ? ['Paper trading: entrada, stop y take profit', 'con la justificación de la IA. La ejecución la decidís vos.'] : ['Paper trading: entry, stop and take profit', 'with the AI reasoning. You decide on execution.'] } }];
+      case 'signals': return [{ card: { ico: '∿', h: es ? 'Señal (en desarrollo)' : 'Signal (in development)', k: 'scard--dev', rows: es ? ['Paper trading: entrada, stop y take profit', 'con la justificación de la IA. La ejecución la decides tú.'] : ['Paper trading: entry, stop and take profit', 'with the AI reasoning. You decide on execution.'] } }];
     }
     return [];
   }
