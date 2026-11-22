@@ -3,29 +3,44 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Leandro Buchter · LCA ITECH — Systems builder: crypto bots, APIs, AI automation</title>
-  <meta name="description" content="Leandro Buchter (LCA ITECH), Buenos Aires: systems builder for crypto data platforms, Telegram bots, REST APIs and AI automation, end to end. Site available in English and Spanish.">
+  <title>AI Automation, Telegram &amp; Twitch Bots, APIs · Leandro Buchter (LCA ITECH)</title>
+  <meta name="description" content="AI automation, Telegram, Discord and Twitch bots, AI agents and custom APIs for businesses, streamers and crypto projects. Fixed-price packages for clients worldwide, in English and Spanish.">
   <meta name="author" content="Leandro Buchter">
-  <meta property="og:title" content="Leandro Buchter · LCA ITECH — Systems builder: crypto bots, APIs, AI automation">
-  <meta property="og:description" content="Crypto bots, market data APIs and AI automation — full systems, end to end. English / Español.">
-  <meta property="og:type" content="website">
+  <meta name="robots" content="index, follow, max-image-preview:large">
   <link rel="canonical" href="https://portfolio.lcaitech.com/">
+  <link rel="alternate" hreflang="en" href="https://portfolio.lcaitech.com/">
+  <link rel="alternate" hreflang="es" href="https://portfolio.lcaitech.com/es/">
+  <link rel="alternate" hreflang="x-default" href="https://portfolio.lcaitech.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="LCA ITECH">
+  <meta property="og:title" content="AI Automation, Telegram &amp; Twitch Bots, APIs · Leandro Buchter (LCA ITECH)">
+  <meta property="og:description" content="AI automation, Telegram and Twitch bots, AI agents and custom APIs, end to end. Clients worldwide · English / Español.">
   <meta property="og:url" content="https://portfolio.lcaitech.com/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="es_LA">
   <meta property="og:image" content="https://portfolio.lcaitech.com/assets/og.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:site_name" content="LCA ITECH">
-  <meta property="og:locale" content="en_US">
-  <meta property="og:locale:alternate" content="es_AR">
-  <meta property="og:image:alt" content="Leandro Buchter · LCA ITECH — Systems builder: crypto bots, APIs, AI automation">
+  <meta property="og:image:alt" content="AI Automation, Telegram &amp; Twitch Bots, APIs · Leandro Buchter (LCA ITECH)">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@LCA_ITECH">
-  <meta name="twitter:title" content="Leandro Buchter · LCA ITECH — Systems builder: crypto bots, APIs, AI automation">
-  <meta name="twitter:description" content="Crypto bots, market data APIs and AI automation — full systems, end to end. English / Español.">
   <meta name="twitter:creator" content="@LCA_ITECH">
-  <meta name="twitter:image:alt" content="Leandro Buchter · LCA ITECH — Systems builder: crypto bots, APIs, AI automation">
-  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="twitter:title" content="AI Automation, Telegram &amp; Twitch Bots, APIs · Leandro Buchter (LCA ITECH)">
+  <meta name="twitter:description" content="AI automation, Telegram and Twitch bots, AI agents and custom APIs, end to end. Clients worldwide · English / Español.">
   <meta name="twitter:image" content="https://portfolio.lcaitech.com/assets/og.jpg">
+  <meta name="twitter:image:alt" content="AI Automation, Telegram &amp; Twitch Bots, APIs · Leandro Buchter (LCA ITECH)">
+  <script>
+    // Idioma: / = inglés, /es/ = español. En la portada en inglés, quien tiene el navegador en español
+    // (o eligió español antes) pasa a /es/ conservando el #ancla. ?lang=es|en sigue andando (links viejos).
+    (function () {
+      var page = document.documentElement.getAttribute('data-lang') === 'es' ? 'es' : 'en', want = null, s = null;
+      var q = new URLSearchParams(location.search).get('lang');
+      try { s = localStorage.getItem('lca-lang'); } catch (e) {}
+      if (q === 'es' || q === 'en') { want = q; try { localStorage.setItem('lca-lang', q); } catch (e) {} }
+      else if (page === 'en') want = s === 'es' || s === 'en' ? s : ((navigator.language || 'en').toLowerCase().indexOf('es') === 0 ? 'es' : 'en');
+      if (want && want !== page) location.replace((want === 'es' ? '/es/' : '/') + location.hash);
+    })();
+  </script>
   <meta name="theme-color" content="#070a10">
   <link rel="icon" href="assets/favicon-32.png" type="image/png" sizes="32x32">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
@@ -55,12 +70,15 @@
         "es"
       ],
       "knowsAbout": [
-        "Crypto market data",
-        "Telegram bots",
-        "AI agents",
         "AI automation",
+        "Business process automation",
+        "Telegram bots",
+        "Discord bots",
+        "Twitch bots",
+        "Chatbots",
+        "AI agents",
         "REST APIs",
-        "Automation",
+        "Crypto market data",
         "Google Cloud",
         "Decentralized finance"
       ],
@@ -103,10 +121,27 @@
       ],
       "sameAs": [
         "https://github.com/LCAITECH",
-        "https://x.com/LCA_ITECH"
+        "https://x.com/LCA_ITECH",
+        "https://t.me/leandroLCA"
       ],
       "hasOfferCatalog": {
         "@id": "https://portfolio.lcaitech.com/#services"
+      },
+      "description": "AI automation, Telegram, Discord and Twitch bots, AI agents and custom APIs for businesses, streamers and crypto projects. Fixed-price packages, worldwide, in English and Spanish.",
+      "knowsLanguage": [
+        "en",
+        "es"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "sales",
+        "email": "itech.lca@gmail.com",
+        "url": "https://portfolio.lcaitech.com/#contact",
+        "availableLanguage": [
+          "English",
+          "Spanish"
+        ],
+        "areaServed": "Worldwide"
       }
     },
     {
@@ -279,6 +314,21 @@
       "about": {
         "@id": "https://portfolio.lcaitech.com/#leandro"
       }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://portfolio.lcaitech.com/#webpage",
+      "url": "https://portfolio.lcaitech.com/",
+      "name": "AI Automation, Telegram & Twitch Bots, APIs · Leandro Buchter (LCA ITECH)",
+      "description": "AI automation, Telegram, Discord and Twitch bots, AI agents and custom APIs for businesses, streamers and crypto projects. Fixed-price packages for clients worldwide, in English and Spanish.",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://portfolio.lcaitech.com/#website"
+      },
+      "about": {
+        "@id": "https://portfolio.lcaitech.com/#org"
+      },
+      "primaryImageOfPage": "https://portfolio.lcaitech.com/assets/og.jpg"
     }
   ]
 }
@@ -311,9 +361,9 @@
         <a href="#contact" class="nav__cta"><span lang="en">Contact</span><span lang="es">Contacto</span></a>
       </nav>
       <div class="nav__tools">
-        <button class="lang" id="langToggle" type="button" aria-label="Cambiar idioma / Switch language">
+        <a class="lang" id="langToggle" href="/es/" hreflang="es" aria-label="Ver en español / Switch to Spanish">
           <span class="lang__opt" data-opt="en">EN</span><span class="lang__sep">/</span><span class="lang__opt" data-opt="es">ES</span>
-        </button>
+        </a>
         <button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
           <span></span><span></span><span></span>
         </button>
@@ -331,7 +381,7 @@
           </p>
           <h1>Leandro Buchter <span class="muted">/ LCA ITECH</span></h1>
           <p class="hero__tags">
-            <span>Crypto</span><i>+</i><span>AI</span><i>+</i><span>APIs</span><i>+</i><span>Automation</span><i>+</i><span>Cloud</span>
+            <span><span lang="en">Crypto</span><span lang="es">Cripto</span></span><i>+</i><span><span lang="en">AI</span><span lang="es">IA</span></span><i>+</i><span>APIs</span><i>+</i><span><span lang="en">Automation</span><span lang="es">Automatización</span></span><i>+</i><span>Cloud</span>
           </p>
           <p class="lead">
             <span lang="en">I build complete systems for crypto projects and tech teams: market data, Telegram bots, AI agents and automations — from the data source to the server where it runs.</span>
@@ -1059,8 +1109,8 @@
           <p class="kicker">08 · <span lang="en">Contact</span><span lang="es">Contacto</span></p>
           <h2><span lang="en">Have a project in mind?</span><span lang="es">¿Tienes un proyecto en mente?</span></h2>
           <p class="section__sub">
-            <span lang="en">Tell me about your project. I review every request and reply by email with questions or a first idea.</span>
-            <span lang="es">Cuéntame sobre tu proyecto. Reviso cada consulta y te respondo por email con preguntas o una primera idea.</span>
+            <span lang="en">Tell me about your project. I work with clients in any country, in English or Spanish. I review every request and reply in writing with questions or a first idea.</span>
+            <span lang="es">Cuéntame sobre tu proyecto. Trabajo con clientes de cualquier país, en español o en inglés. Reviso cada consulta y te respondo por escrito con preguntas o una primera idea.</span>
           </p>
           <div class="contact__layout">
           <form class="cf" id="contactForm" novalidate action="https://formsubmit.co/itech.lca@gmail.com" method="POST">
@@ -1075,16 +1125,31 @@
               <div class="cf__f"><label for="cfBudget"><span lang="en">Approximate budget</span><span lang="es">Presupuesto aproximado</span></label><select id="cfBudget" name="budget"><option value="" data-en="— select —" data-es="— elige —">— select —</option><option value="<500 USD" data-en="&lt; USD 500" data-es="&lt; USD 500">&lt; USD 500</option><option value="500-1500 USD" data-en="USD 500–1,500" data-es="USD 500–1.500">USD 500–1,500</option><option value="1500-3000 USD" data-en="USD 1,500–3,000" data-es="USD 1.500–3.000">USD 1,500–3,000</option><option value="3000+ USD" data-en="USD 3,000+" data-es="USD 3.000+">USD 3,000+</option><option value="Not sure" data-en="Not sure" data-es="No estoy seguro">Not sure</option></select></div>
               <div class="cf__f"><label for="cfTime"><span lang="en">Timeline</span><span lang="es">Plazo</span></label><select id="cfTime" name="timeline"><option value="" data-en="— select —" data-es="— elige —">— select —</option><option value="ASAP (<2 weeks)" data-en="ASAP (&lt; 2 weeks)" data-es="Urgente (&lt; 2 semanas)">ASAP (&lt; 2 weeks)</option><option value="Within 1 month" data-en="Within 1 month" data-es="En 1 mes">Within 1 month</option><option value="1-3 months" data-en="1–3 months" data-es="1–3 meses">1–3 months</option><option value="Just exploring" data-en="Just exploring" data-es="Solo explorando">Just exploring</option></select></div>
               <div class="cf__f"><label for="cfLang"><span lang="en">Preferred language</span><span lang="es">Idioma preferido</span></label><select id="cfLang" name="preferred_language"><option value="Español">Español</option><option value="English">English</option><option value="Português">Português</option></select></div>
+              <div class="cf__f"><label for="cfCountry"><span lang="en">Country</span><span lang="es">País</span> <small class="cf__opt"><span lang="en">(optional)</span><span lang="es">(opcional)</span></small></label><input id="cfCountry" name="country" type="text" autocomplete="country-name" maxlength="80"></div>
+              <div class="cf__f"><label for="cfTg"><span lang="en">Telegram, if you prefer it</span><span lang="es">Telegram, si lo prefieres</span> <small class="cf__opt"><span lang="en">(optional)</span><span lang="es">(opcional)</span></small></label><input id="cfTg" name="telegram" type="text" maxlength="40" placeholder="@usuario" autocomplete="off"><small class="cf__err" id="cfTgErr"></small></div>
+              <input type="hidden" name="visitor_timezone" id="cfTz" value="">
               <div class="cf__f cf__f--full cf__consent"><label><input type="checkbox" id="cfConsent" name="consent" value="yes" required> <span lang="en">I agree that Leandro stores this info only to answer my inquiry.</span><span lang="es">Acepto que Leandro guarde estos datos solo para responder mi consulta.</span></label><small class="cf__err" id="cfConsentErr"></small></div>
             </div>
             <div class="cf__actions">
               <button class="btn btn--primary" type="submit" id="cfSubmit"><span lang="en">Send inquiry</span><span lang="es">Enviar consulta</span></button>
-              <a class="link cf__mail" href="mailto:itech.lca@gmail.com?subject=Project%20inquiry"><span lang="en">or email itech.lca@gmail.com</span><span lang="es">o escribe a itech.lca@gmail.com</span></a>
+              <a class="link cf__mail" href="mailto:itech.lca@gmail.com?subject=Project%20inquiry" data-subject-es="Consulta%20de%20proyecto"><span lang="en">or email itech.lca@gmail.com</span><span lang="es">o escribe a itech.lca@gmail.com</span></a>
             </div>
             <p class="cf__status" id="cfStatus" role="status" aria-live="polite" hidden></p>
-            <p class="cf__privacy"><span lang="en">Sent via FormSubmit to my inbox. Used only to reply; never shared. I review every request and reply in writing.</span><span lang="es">Se envía por FormSubmit a mi correo. Solo lo uso para responderte; no se comparte. Reviso cada consulta y te respondo por escrito.</span></p>
+            <p class="cf__privacy"><span lang="en">Sent via FormSubmit to my inbox; you get a confirmation email. Used only to reply; never shared.</span><span lang="es">Se envía por FormSubmit a mi correo y te llega un correo de confirmación. Solo lo uso para responderte; no se comparte.</span></p>
           </form>
           <aside class="contact__side">
+            <div class="cx">
+              <h3 class="cx__title"><span lang="en">Prefer to write directly?</span><span lang="es">¿Prefieres escribir directo?</span></h3>
+              <ul class="cx__list">
+                <li><a href="mailto:itech.lca@gmail.com"><b>Email</b> itech.lca@gmail.com</a><button class="cx__copy" type="button" data-copy="itech.lca@gmail.com"><span lang="en">Copy</span><span lang="es">Copiar</span></button></li>
+              </ul>
+              <dl class="cx__facts">
+                <dt><span lang="en">Languages</span><span lang="es">Idiomas</span></dt><dd>English · Español</dd>
+                <dt><span lang="en">Time zone</span><span lang="es">Zona horaria</span></dt><dd>Buenos Aires (UTC−3)<span class="cx__clock" id="cxClock" hidden></span></dd>
+                <dt><span lang="en">Clients</span><span lang="es">Clientes</span></dt><dd><span lang="en">Any country · payment in USDC/USDT or bank transfer</span><span lang="es">Cualquier país · pago en USDC/USDT o transferencia</span></dd>
+              </dl>
+              <p class="cx__note"><span lang="en">Everything is handled in writing, so the time difference is not a problem.</span><span lang="es">Todo se trabaja por escrito, así que la diferencia horaria no es un problema.</span></p>
+            </div>
             <p class="qr__hint"><span lang="en">On desktop? Scan with your phone:</span><span lang="es">¿Estás en una computadora? Escanea con tu teléfono:</span></p>
             <ul class="qr">
               <li><a href="https://t.me/lcaitech_demo_bot" target="_blank" rel="noopener"><img class="qr__img" src="assets/qr/demo-bot.svg" alt="QR https://t.me/lcaitech_demo_bot" width="96" height="96" loading="lazy"><span class="qr__lbl"><span lang="en">Demo bot</span><span lang="es">Bot demo</span> <small>@lcaitech_demo_bot</small></span></a></li>

@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://portfolio.lcaitech.com/</loc>
-    <lastmod>2026-10-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://portfolio.lcaitech.com/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://portfolio.lcaitech.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://portfolio.lcaitech.com/"/>
+    <lastmod>2026-11-22</lastmod>
+  </url>
+  <url>
+    <loc>https://portfolio.lcaitech.com/es/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://portfolio.lcaitech.com/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://portfolio.lcaitech.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://portfolio.lcaitech.com/"/>
+    <lastmod>2026-11-22</lastmod>
   </url>
   <url>
     <loc>https://portfolio.lcaitech.com/assets/Leandro_Buchter_CV_EN.pdf</loc>
     <lastmod>2026-10-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
   </url>
 </urlset>

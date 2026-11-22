@@ -123,7 +123,7 @@
   const btnReset = el('button', { class: 'asst-icon', type: 'button' }, [svg(ICON_RESET)]);
   const btnClose = el('button', { class: 'asst-icon', type: 'button' }, [svg(ICON_X)]);
   const head = el('div', { class: 'asst-head' }, [
-    el('img', { src: 'assets/lca-logo.webp', alt: '', width: '36', height: '36' }),
+    el('img', { src: '/assets/lca-logo.webp', alt: '', width: '36', height: '36' }),
     el('div', { class: 'asst-head__txt' }, [title, sub]), btnReset, btnClose,
   ]);
   const log = el('div', { class: 'asst-log', role: 'log', 'aria-live': 'polite', 'aria-relevant': 'additions', tabindex: '0' });

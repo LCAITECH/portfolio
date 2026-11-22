@@ -3,35 +3,18 @@
   var root = document.documentElement;
   root.classList.add('js');
 
-  // ---- Idioma: ?lang=es|en > localStorage > idioma del navegador > en
+  // ---- Idioma: cada idioma tiene su URL (/ = inglés, /es/ = español, generada con
+  // .github/scripts/build-es.mjs). La redirección inicial está en un script chico del <head>.
   var KEY = 'lca-lang';
-  function pick() {
-    var q = new URLSearchParams(location.search).get('lang');
-    if (q === 'es' || q === 'en') return q;
-    try { var s = localStorage.getItem(KEY); if (s === 'es' || s === 'en') return s; } catch (e) {}
-    return (navigator.language || 'en').toLowerCase().indexOf('es') === 0 ? 'es' : 'en';
-  }
-  // <title> y meta description: el inglés se lee del HTML; el español vive acá.
-  var descMeta = document.querySelector('meta[name="description"]');
-  var META = {
-    en: { title: document.title, desc: descMeta ? descMeta.getAttribute('content') : '' },
-    es: {
-      title: 'Leandro Buchter · LCA ITECH — Constructor de sistemas: bots cripto, APIs, automatización con IA',
-      desc: 'Leandro Buchter (LCA ITECH): construyo plataformas de datos cripto, bots de Telegram, agentes de IA, APIs y automatizaciones — de punta a punta, desde la fuente de datos hasta el deploy. Buenos Aires, Argentina.'
-    }
-  };
-  function setLang(l) {
-    root.setAttribute('data-lang', l);
-    root.setAttribute('lang', l);
-    document.title = META[l].title;
-    if (descMeta) descMeta.setAttribute('content', META[l].desc);
-    try { localStorage.setItem(KEY, l); } catch (e) {}
-  }
-  setLang(pick());
+  var pageLang = root.getAttribute('data-lang') === 'es' ? 'es' : 'en';
+  var HOME = { en: '/', es: '/es/' };
+  function remember(l) { try { localStorage.setItem(KEY, l); } catch (e) {} }
   var toggle = document.getElementById('langToggle');
-  if (toggle) toggle.addEventListener('click', function () {
-    setLang(root.getAttribute('data-lang') === 'es' ? 'en' : 'es');
-    fitNav(); // el español es más largo: puede cambiar si el menú entra
+  if (toggle) toggle.addEventListener('click', function (e) {
+    var other = pageLang === 'es' ? 'en' : 'es';
+    remember(other);
+    e.preventDefault();
+    location.href = HOME[other] + location.hash;
   });
 
   // ---- Menú mobile

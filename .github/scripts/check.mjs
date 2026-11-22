@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execFileSync } from 'node:child_process';
+import { buildEs } from './build-es.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(process.env.SITE_ROOT || path.join(here, '..', '..'));
@@ -91,6 +92,22 @@ else {
   }
   if (!exists('robots.txt')) fail('falta robots.txt');
   else if (!read('robots.txt').includes(`Sitemap: ${new URL('sitemap.xml', canonical).href}`)) fail('robots.txt no apunta al sitemap.xml');
+}
+// versión en español (/es/): generada desde index.html, con hreflang en las dos y en el sitemap
+if (!exists('es/index.html')) fail('falta es/index.html: corre  node .github/scripts/build-es.mjs');
+else {
+  let esHtml = null;
+  try { esHtml = buildEs(html); } catch (e) { fail(`build-es: ${e.message}`); }
+  if (esHtml !== null && read('es/index.html') !== esHtml) fail('es/index.html no está al día con index.html: corre  node .github/scripts/build-es.mjs');
+  const es = read('es/index.html');
+  if (/<span lang="en"/.test(es)) fail('es/index.html todavía tiene textos en inglés');
+  if (!es.includes('<link rel="canonical" href="https://portfolio.lcaitech.com/es/">')) fail('es/index.html: el canonical tiene que ser /es/');
+  for (const [name, page] of [['index.html', html], ['es/index.html', es]]) {
+    for (const [hl, href] of [['en', '/'], ['es', '/es/'], ['x-default', '/']]) {
+      if (!page.includes(`<link rel="alternate" hreflang="${hl}" href="https://portfolio.lcaitech.com${href}">`)) fail(`${name}: falta hreflang ${hl}`);
+    }
+  }
+  if (exists('sitemap.xml') && !read('sitemap.xml').includes('<loc>https://portfolio.lcaitech.com/es/</loc>')) fail('sitemap.xml no lista /es/');
 }
 for (const f of ['og.jpg']) if (!exists(`assets/${f}`)) fail(`falta assets/${f} (imagen para compartir)`);
 
